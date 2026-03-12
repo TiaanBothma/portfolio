@@ -1,0 +1,4 @@
+Copyright (c) 2025 Tiaan van Zyl Bothma. All rights reserved.
+
+This source code is for viewing purposes only.
+Redistribution or reuse of any kind is not permitted without explicit written permission.
