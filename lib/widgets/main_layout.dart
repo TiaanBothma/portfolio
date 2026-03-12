@@ -16,7 +16,6 @@ class MainLayout extends StatelessWidget {
           const TopBar(),
           Expanded(child: child),
           const Taskbar(),
-          const SizedBox(height: 10),
         ],
       ),
     );

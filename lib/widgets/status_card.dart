@@ -12,16 +12,27 @@ class StatusCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.deepBlue.withValues(alpha: 0.55),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.blue.withValues(alpha: 0.5), width: 1),
+        border: Border.all(
+          color: AppColors.blue.withValues(alpha: 0.5),
+          width: 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildHeader(),
-          const _Divider(),
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: AppColors.blue.withValues(alpha: 0.3),
+          ),
           _buildStatusRows(),
-          const _Divider(),
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: AppColors.blue.withValues(alpha: 0.3),
+          ),
           _buildSkillBars(),
         ],
       ),
@@ -46,7 +57,12 @@ class StatusCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Text('ONLINE', style: AppTextStyles.label.copyWith(color: const Color(0xFF00FF88))),
+              Text(
+                'ONLINE',
+                style: AppTextStyles.label.copyWith(
+                  color: const Color(0xFF00FF88),
+                ),
+              ),
             ],
           ),
         ],
@@ -60,7 +76,7 @@ class StatusCard extends StatelessWidget {
       child: Column(
         children: [
           _buildRow('Developer', 'Flutter / Full Stack'),
-          _buildRow('University', 'NWU — BSc IT'),
+          _buildRow('University', 'NWU - BSc IT'),
           _buildRow('Experience', '3+ Years'),
           _buildRow('Location', 'South Africa'),
           _buildRow('Remote', 'Available'),
@@ -105,10 +121,7 @@ class StatusCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(
-            width: 70,
-            child: Text(skill, style: AppTextStyles.label),
-          ),
+          SizedBox(width: 70, child: Text(skill, style: AppTextStyles.label)),
           Expanded(
             child: Stack(
               children: [
@@ -143,19 +156,6 @@ class StatusCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Divider extends StatelessWidget {
-  const _Divider();
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      height: 1,
-      thickness: 1,
-      color: AppColors.blue.withValues(alpha: 0.3),
     );
   }
 }

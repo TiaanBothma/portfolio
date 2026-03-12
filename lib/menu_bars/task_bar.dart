@@ -1,35 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:portfolio/themes/colors.dart';
+import 'package:portfolio/controllers/desktop_conroller.dart';
+import 'package:portfolio/themes/text_style.dart';
 
 class Taskbar extends StatelessWidget {
   const Taskbar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100),
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.7),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                PhosphorIconsBold.house,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
-          ],
-        ),
+    final controller = Get.find<DesktopController>();
+
+    return Container(
+      height: 60,
+      width: double.infinity,
+      color: Colors.black.withValues(alpha: 0.3),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _DockIcon(
+            icon: PhosphorIconsRegular.terminalWindow,
+            label: 'Terminal',
+            onTap: controller.toggleTerminal,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DockIcon extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const _DockIcon({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: Colors.white, size: 28),
+          const SizedBox(height: 2),
+          Text(label, style: AppTextStyles.label),
+        ],
       ),
     );
   }

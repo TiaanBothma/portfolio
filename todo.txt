@@ -1,4 +1,3 @@
-Make wallpaper stretch entire screen for transparent view on top and task bar
 Finish top bar
 
 Start Work on the terminal application
