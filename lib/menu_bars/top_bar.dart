@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/themes/colors.dart';
+import 'package:portfolio/themes/text_style.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
@@ -9,23 +10,13 @@ class TopBar extends StatelessWidget {
     return Container(
       height: 28,
       width: double.infinity,
-      color: AppColors.black.withValues(alpha: 0.85),
+      color: AppColors.black.withValues(alpha: 0.7),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Tiaan Bothma OS',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            _currentTime(),
-            style: const TextStyle(color: Colors.white, fontSize: 13),
-          ),
+          Text('Tiaan Bothma OS', style: AppTextStyles.label),
+          Text(_currentTime(), style: AppTextStyles.label),
         ],
       ),
     );

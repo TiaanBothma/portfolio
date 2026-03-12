@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/themes/colors.dart';
 
 class Taskbar extends StatelessWidget {
@@ -12,15 +13,20 @@ class Taskbar extends StatelessWidget {
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.85),
+          color: AppColors.deepBlue.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.house, color: Colors.white, size: 40),
+              icon: Icon(
+                PhosphorIconsBold.house,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
           ],
         ),

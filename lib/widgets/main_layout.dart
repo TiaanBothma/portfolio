@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/menu_bars/task_bar.dart';
 import 'package:portfolio/menu_bars/top_bar.dart';
-import 'package:portfolio/themes/colors.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -11,7 +10,7 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
           const TopBar(),
