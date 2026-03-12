@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/controllers/desktop_conroller.dart';
-import 'package:portfolio/terminal/terminal_window.dart';
+import 'package:portfolio/os_windows/terminal/terminal_window.dart';
 import 'package:portfolio/widgets/main_layout.dart';
 import 'package:portfolio/widgets/status_card.dart';
 

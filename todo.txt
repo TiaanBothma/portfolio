@@ -1,3 +1,7 @@
-Finish top bar
+Next:
+typing in terminal
+notes window
+able to close system status
 
-Start Work on the terminal application
+Features:
+hover over close ('x') button turns red
