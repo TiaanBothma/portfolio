@@ -1,7 +1,16 @@
 Next:
-typing in terminal
 notes window
 able to close system status
+Chrome window to view github and linkedin
 
 Features:
+
+!! Windows
 hover over close ('x') button turns red
+
+!! Terminal
+When pressing ARROW_UP in terminal, it copies the last command that was typed
+tab for completing string in terminal window
+Command in terminal gives quick description
+Command --all gives all the data possible
+bar cursor in terminal

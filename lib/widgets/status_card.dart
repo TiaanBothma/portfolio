@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 
@@ -98,23 +99,21 @@ class StatusCard extends StatelessWidget {
     );
   }
 
-  Widget _buildSkillBars() {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('STACK', style: AppTextStyles.label),
-          const SizedBox(height: 8),
-          _buildBar('Flutter', 0.95),
-          _buildBar('Firebase', 0.80),
-          _buildBar('Docker', 0.60),
-          _buildBar('Python', 0.70),
-          _buildBar('Unity', 0.50),
-        ],
-      ),
-    );
-  }
+ Widget _buildSkillBars() {
+  return Padding(
+    padding: const EdgeInsets.all(12),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('STACK', style: AppTextStyles.label),
+        const SizedBox(height: 8),
+        ...PortfolioData.skills.map(
+          (s) => _buildBar(s['name'] as String, s['level'] as double),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildBar(String skill, double value) {
     return Padding(
