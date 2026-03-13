@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/home_page.dart';
+import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 
 void main() {
   Get.put(DesktopController());
   Get.put(TerminalController());
+  Get.put(BrowserController());
   runApp(const MyApp());
 }
 
@@ -24,8 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         textTheme: GoogleFonts.oxaniumTextTheme(),
       ),
-      shortcuts: {},
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

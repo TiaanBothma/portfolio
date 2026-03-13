@@ -25,10 +25,10 @@ class Taskbar extends StatelessWidget {
             onTap: controller.toggleTerminal,
           ),
           _DockIcon(
-            icon: PhosphorIconsBold.googleChromeLogo,
-            label: 'Google',
+            icon: PhosphorIconsBold.browser,
+            label: 'Browser',
             onTap: () {
-              //
+              Get.find<DesktopController>().toggleWindow('browser');
             },
           ),
         ],

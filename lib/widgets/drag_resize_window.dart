@@ -16,16 +16,18 @@ class DraggableResizableWindow extends StatelessWidget {
     this.minHeight = 200,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.find<DesktopController>();
+@override
+Widget build(BuildContext context) {
+  final controller = Get.find<DesktopController>();
 
-    return Obx(() {
-      final state = controller.getWindow(windowId);
+  return Obx(() {
+    final state = controller.getWindowRx(windowId).value;
 
-      return Positioned(
-        left: state.offset.dx,
-        top: state.offset.dy,
+    return Positioned(
+      left: state.offset.dx,
+      top: state.offset.dy,
+      child: Visibility(
+        visible: state.isOpen,
         child: SizedBox(
           width: state.size.width,
           height: state.size.height,
@@ -36,9 +38,10 @@ class DraggableResizableWindow extends StatelessWidget {
             ],
           ),
         ),
-      );
-    });
-  }
+      ),
+    );
+  });
+}
 
   Widget _buildResizeHandle(DesktopController controller) {
     return Positioned(
@@ -46,12 +49,7 @@ class DraggableResizableWindow extends StatelessWidget {
       bottom: 0,
       child: GestureDetector(
         onPanUpdate: (details) {
-          controller.resizeWindow(
-            windowId,
-            details.delta,
-            minWidth,
-            minHeight,
-          );
+          controller.resizeWindow(windowId, details.delta, minWidth, minHeight);
         },
         child: MouseRegion(
           cursor: SystemMouseCursors.resizeUpLeftDownRight,
