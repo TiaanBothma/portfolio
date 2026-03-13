@@ -1,11 +1,7 @@
 Next:
-Step 1 would be Create browser window, with tab logic
-
-then step 2 would be a home page within in the browser that would show 
-(like in opera GX a Essential List / Pin Website List on the front page of the browser showing the sites the user can visit
-(Github, LinkedIn, Fiverr))
-
 then step 3 would be to build those sites
+(Github -> Linkedin -> Fiverr)
+- Button in those sites that lets you go to actual website (make tab in main browser)
 
 then step 4 would be to open those sites that i built inside the browser 
 (easy just display the widget inside the browser tree / widget)

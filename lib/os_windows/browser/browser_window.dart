@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/window_state.dart';
+import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'browser_controller.dart';
@@ -215,21 +216,17 @@ class _BrowserContent extends StatelessWidget {
 
       switch (url) {
         case 'home':
-          return const _HomePagePlaceholder();
+          return const BrowserHomePage();
+        case 'github':
+          return const Center(child: Text('GitHub — coming soon'));
+        case 'linkedin':
+          return const Center(child: Text('LinkedIn — coming soon'));
+        case 'fiverr':
+          return const Center(child: Text('Fiverr — coming soon'));
         default:
-          return Center(child: Text('Page: $url', style: AppTextStyles.body));
+          return const BrowserHomePage();
       }
     });
   }
 }
 
-class _HomePagePlaceholder extends StatelessWidget {
-  const _HomePagePlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Browser Home — coming soon', style: AppTextStyles.body),
-    );
-  }
-}
