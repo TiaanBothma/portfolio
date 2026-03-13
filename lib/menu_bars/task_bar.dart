@@ -20,9 +20,16 @@ class Taskbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _DockIcon(
-            icon: PhosphorIconsRegular.terminalWindow,
+            icon: PhosphorIconsBold.terminalWindow,
             label: 'Terminal',
             onTap: controller.toggleTerminal,
+          ),
+          _DockIcon(
+            icon: PhosphorIconsBold.googleChromeLogo,
+            label: 'Google',
+            onTap: () {
+              //
+            },
           ),
         ],
       ),
@@ -43,17 +50,20 @@ class _DockIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 28),
-            const SizedBox(height: 2),
-            Text(label, style: AppTextStyles.label),
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 28),
+              const SizedBox(height: 2),
+              Text(label, style: AppTextStyles.label),
+            ],
+          ),
         ),
       ),
     );

@@ -1,11 +1,11 @@
 Next:
-Drag terminal around and resize
 notes window
 able to close system status
 Chrome window to view github and linkedin
 
-
+=========
 Features:
+=========
 
 !! Windows
 hover over close ('x') button turns red
@@ -16,3 +16,11 @@ tab for completing string in terminal window
 Command in terminal gives quick description
 Command --all gives all the data possible
 bar cursor in terminal
+
+============
+Later Fixes:
+============
+
+!! Windows
+Drag icon going past max size (maybe delta var issue)
+There shouldn't be a max size for windows

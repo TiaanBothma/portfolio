@@ -57,7 +57,7 @@ class TerminalWindow extends StatelessWidget {
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
                 onTap: () => desktop.toggleTerminal(),
-                child: const Icon(
+                child: Icon(
                   PhosphorIconsRegular.minus,
                   color: Colors.white54,
                   size: 14,
