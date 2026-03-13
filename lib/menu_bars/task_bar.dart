@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:portfolio/controllers/desktop_conroller.dart';
+import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/themes/text_style.dart';
 
 class Taskbar extends StatelessWidget {

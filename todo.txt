@@ -1,7 +1,9 @@
 Next:
+Drag terminal around and resize
 notes window
 able to close system status
 Chrome window to view github and linkedin
+
 
 Features:
 

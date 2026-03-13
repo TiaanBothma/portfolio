@@ -95,10 +95,9 @@ class PortfolioData {
   // Skills
   static const List<Map<String, dynamic>> skills = [
     {'name': 'Flutter', 'level': 0.95},
-    {'name': 'Firebase', 'level': 0.80},
+    {'name': 'Firebase', 'level': 0.95},
     {'name': 'Docker', 'level': 0.60},
     {'name': 'Python', 'level': 0.70},
-    {'name': 'Unity', 'level': 0.50},
   ];
 
   // Certifications

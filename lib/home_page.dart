@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio/controllers/desktop_conroller.dart';
+import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
+import 'package:portfolio/widgets/drag_resize_window.dart';
 import 'package:portfolio/widgets/main_layout.dart';
 import 'package:portfolio/widgets/status_card.dart';
 
@@ -27,8 +28,13 @@ class _HomePageState extends State<HomePage> {
           child: Stack(
             children: [
               Obx(
-                () => controller.terminalOpen.value
-                    ? const Center(child: TerminalWindow())
+                () => controller.terminalOpen
+                    ? DraggableResizableWindow(
+                        windowId: 'terminal',
+                        minWidth: 400,
+                        minHeight: 250,
+                        child: const TerminalWindow(),
+                      )
                     : const SizedBox.shrink(),
               ),
             ],
