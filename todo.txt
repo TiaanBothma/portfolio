@@ -1,8 +1,12 @@
+!! NEXT STEP:
+Start working on the FEATURES that i want to implement
+
 Github page:
 Check if there is any API that i could use to display any real information?
 remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
 Make the tabs inside github work
 Make the 'Follow' button go to my actual github
+Improve any section of the page that you think needs improvement
 
 Linkedin page:
 'Connect' button should go to actual linkedin site
@@ -10,34 +14,48 @@ Remove and replace buttons that have no use and that could be replaced by more p
 Make the Message button message me
 make more button also go to actual linkedin site
 My banner from linkedin should display here
+Improve any section of the page that you think needs improvement
 
 Fiverr page:
 same as github and linkedin issues
+Improve any section of the page that you think needs improvement
+
+Next Step:
+Wallpaper for the operating system
+OS icon (like windows icon)
+OS icon on the taskbar, when click on it, then popup with recommended apps should show up (Github, File Explorer, Browser, etc)
+Right click on browser gets a popup that can take you to Github page, fiverr page, etc.
+Start hosting website
+File explorer that has folders (certifications folder, projects folder, etc.)
+
 
 =========
 Features:
 =========
 
+Cannot access site from phone, needs to access from laptop or desktop error message
+
 !! Windows
 hover over close ('x') button turns red
+Drag icon going past max size (maybe delta var issue)
+There shouldn't be a max size for windows
 
 !! Browser
 Make the current active tab underline blue like the other tabs
+More pages inside the browser
 
 !! Terminal
+'neofetch' in terminal (Host: Tiaan Bothma then Packages: {Skills} for example)
 When pressing ARROW_UP in terminal, it pastes the last command that was typed
 tab for completing string in terminal window
 Command --all gives all the data possible
 bar cursor in terminal
 'contact' command then the user must be able to type in something like ssh contact-linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
 
-============
-Later Fixes:
-============
 
-!! Windows
-Drag icon going past max size (maybe delta var issue)
-There shouldn't be a max size for windows
+===============
+Later Features:
+===============
 
 !! Terminal
 hidden commands inside the terminal
