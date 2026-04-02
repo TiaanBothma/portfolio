@@ -9,6 +9,12 @@ remove Pull requests, issues, marketplace and explore button in the top right (m
 Make the tabs inside github work
 Make the 'Follow' button go to my actual github
 
+Linkedin page:
+'Connect' button should go to actual linkedin site
+Remove and replace buttons that have no use and that could be replaced by more practical buttons and features
+Make the Message button message me
+make more button also go to actual linkedin site
+My banner from linkedin should display here
 
 =========
 Features:
