@@ -1,8 +1,3 @@
-Next:
-then step 3 would be to build those sites
-(Github -> Linkedin -> Fiverr)
-- Button in those sites that lets you go to actual website (make tab in main browser)
-
 Github page:
 Check if there is any API that i could use to display any real information?
 remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
@@ -15,6 +10,9 @@ Remove and replace buttons that have no use and that could be replaced by more p
 Make the Message button message me
 make more button also go to actual linkedin site
 My banner from linkedin should display here
+
+Fiverr page:
+same as github and linkedin issues
 
 =========
 Features:
@@ -29,9 +27,9 @@ Make the current active tab underline blue like the other tabs
 !! Terminal
 When pressing ARROW_UP in terminal, it pastes the last command that was typed
 tab for completing string in terminal window
-Command in terminal gives quick description
 Command --all gives all the data possible
 bar cursor in terminal
+'contact' command then the user must be able to type in something like ssh contact-linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
 
 ============
 Later Fixes:
@@ -40,3 +38,6 @@ Later Fixes:
 !! Windows
 Drag icon going past max size (maybe delta var issue)
 There shouldn't be a max size for windows
+
+!! Terminal
+hidden commands inside the terminal

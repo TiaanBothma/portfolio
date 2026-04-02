@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
+import 'package:portfolio/pages/fiverr_page.dart';
 import 'package:portfolio/pages/github_page.dart';
 import 'package:portfolio/pages/linkedin_page.dart';
 import 'package:portfolio/themes/colors.dart';
@@ -224,7 +225,7 @@ class _BrowserContent extends StatelessWidget {
         case 'linkedin':
           return const LinkedInPage();
         case 'fiverr':
-          return const Center(child: Text('Fiverr — coming soon'));
+          return const FiverrPage();
         default:
           return const BrowserHomePage();
       }
