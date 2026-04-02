@@ -11,6 +11,7 @@ void main() {
   Get.put(DesktopController());
   Get.put(TerminalController());
   Get.put(BrowserController());
+
   runApp(const MyApp());
 }
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         textTheme: GoogleFonts.oxaniumTextTheme(),
       ),
+
       home: HomePage(),
     );
   }

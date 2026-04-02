@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
+import 'package:portfolio/pages/github_page.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'browser_controller.dart';
@@ -218,7 +219,7 @@ class _BrowserContent extends StatelessWidget {
         case 'home':
           return const BrowserHomePage();
         case 'github':
-          return const Center(child: Text('GitHub — coming soon'));
+          return const GitHubPage();
         case 'linkedin':
           return const Center(child: Text('LinkedIn — coming soon'));
         case 'fiverr':
@@ -229,4 +230,3 @@ class _BrowserContent extends StatelessWidget {
     });
   }
 }
-
