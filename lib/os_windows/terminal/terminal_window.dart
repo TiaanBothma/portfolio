@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:portfolio/widgets/minimize_button.dart';
 
 class TerminalWindow extends StatelessWidget {
   const TerminalWindow({super.key});
@@ -53,17 +53,7 @@ class TerminalWindow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('terminal', style: AppTextStyles.label),
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => desktop.toggleTerminal(),
-                child: Icon(
-                  PhosphorIconsRegular.minus,
-                  color: Colors.white54,
-                  size: 14,
-                ),
-              ),
-            ),
+            MinimizeButton(onTap: () => desktop.toggleWindow('terminal')),
           ],
         ),
       ),

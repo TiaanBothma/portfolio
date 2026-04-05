@@ -9,6 +9,7 @@ import 'package:portfolio/os_windows/browser/browser_pages.dart/github_page.dart
 import 'package:portfolio/os_windows/browser/browser_pages.dart/linkedin_page.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:portfolio/widgets/minimize_button.dart';
 import 'browser_controller.dart';
 
 class BrowserWindow extends StatelessWidget {
@@ -55,14 +56,7 @@ class BrowserWindow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('browser', style: AppTextStyles.label),
-            GestureDetector(
-              onTap: () => desktop.toggleWindow('browser'),
-              child: const Icon(
-                PhosphorIconsRegular.x,
-                color: Colors.white54,
-                size: 14,
-              ),
-            ),
+            MinimizeButton(onTap: () => desktop.toggleWindow('browser')),
           ],
         ),
       ),
