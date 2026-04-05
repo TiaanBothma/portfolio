@@ -42,8 +42,6 @@ class DesktopController extends GetxController {
   WindowState getWindow(String id) => _windows[id]!.value;
 
   void toggleWindow(String id) {
-    print('$id isOpen before: ${_windows[id]!.value.isOpen}');
-
     final isCurrentlyOpen = _windows[id]!.value.isOpen;
 
     for (final key in _windows.keys) {
@@ -63,8 +61,6 @@ class DesktopController extends GetxController {
         isOpen: true,
       );
     }
-
-    print('$id isOpen after: ${_windows[id]!.value.isOpen}');
   }
 
   void dragWindow(String id, Offset delta) {

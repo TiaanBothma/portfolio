@@ -1,8 +1,10 @@
 Next Step:
 OS icon on the taskbar, when click on it, then popup with recommended apps should show up (Github, File Explorer, Browser, etc)
 Right click on browser gets a popup that can take you to Github page, fiverr page, etc.
+Work on *Features*
 Start hosting website
 File explorer that has folders (certifications folder, projects folder, etc.)
+
 
 Github page:
 Check if there is any API that i could use to display any real information?
@@ -29,7 +31,6 @@ Features:
 =========
 
 !! Windows
-hover over close ('x') button turns red
 Drag icon going past max size (maybe delta var issue)
 There shouldn't be a max size for windows
 
@@ -55,3 +56,4 @@ hidden commands inside the terminal
 
 !! Change wallpaper feature
 !! Settings app
+!! What would have done different and how to improve

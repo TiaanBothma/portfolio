@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/window_state.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
@@ -11,6 +12,7 @@ void main() {
   Get.put(DesktopController());
   Get.put(TerminalController());
   Get.put(BrowserController());
+  Get.put(StartMenuController());
 
   runApp(const MyApp());
 }
