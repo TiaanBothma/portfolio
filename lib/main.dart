@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/controllers/window_state.dart';
-import 'package:portfolio/home_page.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:portfolio/themes/colors.dart';
+import 'package:portfolio/widgets/device_guard.dart';
 
 void main() {
   Get.put(DesktopController());
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.oxaniumTextTheme(),
       ),
 
-      home: HomePage(),
+      home: const DeviceGuard(),
     );
   }
 }
