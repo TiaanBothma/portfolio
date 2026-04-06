@@ -1,6 +1,6 @@
 // os_windows/browser/browser_controller.dart
 import 'package:get/get.dart';
-import 'package:portfolio/controllers/window_state.dart';
+import 'package:portfolio/controllers/desktop_controller.dart';
 
 class BrowserTab {
   final String id;

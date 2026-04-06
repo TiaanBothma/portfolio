@@ -1,8 +1,7 @@
-// os_windows/browser/browser_window.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:portfolio/controllers/window_state.dart';
+import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/fiverr_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/github_page.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio/controllers/window_state.dart';
+import 'package:portfolio/controllers/desktop_controller.dart';
 
 class DraggableResizableWindow extends StatelessWidget {
   final Widget child;

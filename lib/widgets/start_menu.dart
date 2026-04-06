@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
-import 'package:portfolio/controllers/window_state.dart';
+import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/themes/colors.dart';
