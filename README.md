@@ -71,7 +71,7 @@ Every app window is draggable, resizable, and remembers its last position and si
 | Google Fonts | Oxanium (UI) + JetBrains Mono (terminal) |
 | Phosphor Icons | OS-style thin line icons |
 
-No backend. No database. No external APIs. Everything is self-contained intentionally as using a database or API for the data would not been practical.
+No backend. No database. No external APIs. Everything is self-contained intentionally as using a database or API for the data would not have been practical.
 Please visit my client project: https://clientzone.mo27.co.za/ as this is more backend and API focussed.
 
 ---
@@ -151,7 +151,7 @@ Copyright © 2026 Tiaan Bothma. All rights reserved.
 
 ## Contact
 
-- **GitHub** — github.com/TiaanBothma
-- **LinkedIn** — linkedin.com/in/tiaan-bothma-0b1bb3283/
+- **GitHub** — https://github.com/TiaanBothma
+- **LinkedIn** — https://linkedin.com/in/tiaan-bothma-0b1bb3283/
 
 *Or just open the terminal on the site and type `contact`.*
