@@ -1,5 +1,4 @@
 Next Step:
-Readme . md file
 Start hosting website
 
 Github page:

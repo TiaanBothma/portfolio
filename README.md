@@ -39,14 +39,14 @@ I am a Flutter developer. Building my portfolio in Flutter Web means the portfol
 A real working terminal with commands that return my actual CV data:
 
 ```bash
-whoami              # name, role, bio, availability
-cv --view           # full CV output
-projects --list     # all projects with descriptions
-experience --list   # work history
-education --list    # education background
-skills --list       # skills with ASCII progress bars
-certifications --list
-contact             # LinkedIn, GitHub, Fiverr
+whoami                 # name, role, bio, availability
+cv --view              # full CV output
+projects --list        # all projects with descriptions
+experience --list      # work history
+education --list       # education background
+skills --list          # skills with ASCII progress bars
+certifications --list  # certifications
+contact                # LinkedIn, GitHub, Fiverr
 clear
 ```
 
