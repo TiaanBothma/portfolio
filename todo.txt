@@ -1,5 +1,4 @@
 Next Step:
-Start hosting website
 
 Github page:
 Check if there is any API that i could use to display any real information?
@@ -24,8 +23,8 @@ Start menu:
 Buttons should work
 Make logo better the logo is ahh
 
-Updates files:
-Model classes, file system data in portfolio_data.dart
+Update file versions:
+Model classes, file system data in
 File explorer window + notepad window -> wire together
 File explorer that has folders (certifications folder, projects folder, etc.)
 
