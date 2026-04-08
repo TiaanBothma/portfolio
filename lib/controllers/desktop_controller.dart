@@ -25,11 +25,11 @@ class DesktopController extends GetxController {
     super.onInit();
     _registerWindow(
       'terminal',
-      WindowState(offset: Offset(200, 200), size: const Size(700, 500)),
+      WindowState(offset: Offset(350, 200), size: const Size(700, 500)),
     );
     _registerWindow(
       'browser',
-      WindowState(offset: const Offset(50, 50), size: const Size(1000, 800)),
+      WindowState(offset: const Offset(10, 10), size: const Size(1900, 870)),
     );
   }
 

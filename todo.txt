@@ -1,4 +1,8 @@
 Next Step:
+No max size terminal (for example terminal drag icon going past)
+File explorer that has folders (certifications folder, projects folder, etc.)
+Notes app
+File explorer window + notes window -> wire together
 
 Github page:
 Check if there is any API that i could use to display any real information?
@@ -21,12 +25,9 @@ Improve any section of the page that you think needs improvement
 
 Start menu:
 Buttons should work
-Make logo better the logo is ahh
 
-Update file versions:
+Update file versions
 Model classes, file system data in
-File explorer window + notepad window -> wire together
-File explorer that has folders (certifications folder, projects folder, etc.)
 
 =========
 Features:
@@ -60,3 +61,4 @@ hidden commands inside the terminal
 !! Change wallpaper feature
 !! Settings app
 !! What would have done different and how to improve
+!! Improve logo and wallpaper
