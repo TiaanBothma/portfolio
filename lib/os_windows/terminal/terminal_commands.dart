@@ -24,6 +24,8 @@ class TerminalCommands {
         return _skills();
       case 'certifications --list':
         return _certifications();
+      case 'neofetch':
+        return _neofetch();
       default:
         return [
           TerminalLine(
@@ -37,6 +39,7 @@ class TerminalCommands {
   static List<TerminalLine> _help() => [
     _out('Available commands:'),
     _out('  whoami                — who am I'),
+    _out('  neofetch              — system information'),
     _out('  cv --view             — full CV summary'),
     _out('  projects --list       — list my projects'),
     _out('  experience --list     — work experience'),
@@ -128,6 +131,46 @@ class TerminalCommands {
     ..._certifications(),
     ..._contact(),
   ];
+
+  static List<TerminalLine> _neofetch() {
+    const logo = [
+      '           √√√√√√√                ',
+      '          √       √               ',
+      '          √       √               ',
+      '           √√√ √√√                ',
+      '              √                   ',
+      '    √√√√√√√√√√√√√√√√√√√√√         ',
+      '    √          √          √       ',
+      '√√√√√√√√√  √√√√√√√√√  √√√√√√√√√   ',
+      '√       √  √       √  √       √   ',
+      '√       √  √       √  √       √   ',
+      '√√√√√√√√√  √√√√√√√√√  √√√√√√√√√   ',
+    ];
+
+    final info = [
+      '${PortfolioData.name} @ Portfolio OS',
+      '─────────────────────────────',
+      'OS       Tiaan Bothma OS v1.0',
+      'Shell    terminal v1.0',
+      'Theme    Midnight',
+      'Font     Oxanium / JetBrains Mono',
+      'Stack    Flutter · Firebase · Dart',
+      'Role     ${PortfolioData.role}',
+      'Uni      ${PortfolioData.university}',
+      'Status   ${PortfolioData.status}',
+    ];
+
+    final lines = <TerminalLine>[];
+    final maxLines = logo.length > info.length ? logo.length : info.length;
+
+    for (int i = 0; i < maxLines; i++) {
+      final logoLine = i < logo.length ? logo[i] : ''.padRight(23);
+      final infoLine = i < info.length ? info[i] : '';
+      lines.add(TerminalLine('$logoLine  $infoLine', TerminalLineType.output));
+    }
+
+    return lines;
+  }
 
   static TerminalLine _out(String text) =>
       TerminalLine(text, TerminalLineType.output);
