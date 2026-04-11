@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/os_windows/terminal/terminal_commands.dart';
 
@@ -9,12 +10,26 @@ class TerminalController extends GetxController {
 
   final outputLines = <TerminalLine>[].obs;
   final currentInput = ''.obs;
+  final _commandHistory = <String>[];
+  int _historyIndex = -1;
 
   final String prompt = "tiaan@portfolio:~\$";
 
   @override
   void onInit() {
     super.onInit();
+    focusNode.onKeyEvent = (node, event) {
+      if (event is KeyDownEvent) {
+        if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+          navigateHistory(true);
+          return KeyEventResult.handled;
+        } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+          navigateHistory(false);
+          return KeyEventResult.handled;
+        }
+      }
+      return KeyEventResult.ignored;
+    };
     _printWelcome();
   }
 
@@ -47,12 +62,34 @@ class TerminalController extends GetxController {
     outputLines.add(TerminalLine('$prompt $command', TerminalLineType.command));
 
     if (command.isNotEmpty) {
+      _commandHistory.add(command);
+      _historyIndex = _commandHistory.length;
       _processCommand(command);
     }
 
     inputController.clear();
     currentInput.value = '';
     _scrollToBottom();
+  }
+
+  void navigateHistory(bool up) {
+    if (_commandHistory.isEmpty) return;
+
+    if (up) {
+      _historyIndex = (_historyIndex - 1).clamp(0, _commandHistory.length - 1);
+    } else {
+      _historyIndex = (_historyIndex + 1).clamp(0, _commandHistory.length);
+    }
+
+    final value = _historyIndex < _commandHistory.length
+        ? _commandHistory[_historyIndex]
+        : '';
+
+    inputController.value = TextEditingValue(
+      text: value,
+      selection: TextSelection.collapsed(offset: value.length),
+    );
+    currentInput.value = value;
   }
 
   void _processCommand(String command) {

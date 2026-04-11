@@ -41,7 +41,6 @@ Make the 'close tab button' and the 'open tab button' glow when hover (just like
 More pages inside the browser
 
 !! Terminal
-'neofetch' in terminal (Host: Tiaan Bothma then Packages: {Skills} for example)
 When pressing ARROW_UP in terminal, it pastes the last command that was typed
 'tab button' for completing string in terminal window
 Command 'force --all' gives all the data possible (maybe use recursion to go through portfolio_data) (this command should not be in the help function, i want to add secret commands)
