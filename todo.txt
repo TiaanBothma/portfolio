@@ -1,4 +1,5 @@
 Next Step:
+Global version variable (maybe pub . dev dependancy) so that we can showcase os version (ie. v1.0.1) on UI
 File explorer that has folders (certifications folder, projects folder, etc.)
 Notes app
 File explorer window + notes window -> wire together
@@ -41,12 +42,13 @@ Make the 'close tab button' and the 'open tab button' glow when hover (just like
 More pages inside the browser
 
 !! Terminal
-When pressing ARROW_UP in terminal, it pastes the last command that was typed
 'tab button' for completing string in terminal window
-Command 'force --all' gives all the data possible (maybe use recursion to go through portfolio_data) (this command should not be in the help function, i want to add secret commands)
+'man' prefix to most of the commands
+change '--list' to '-list'
+add '--all' command to most of the commands to get even more data
+'--web' or '--site' (or something like that) to go to the actual site for example 'linkedin --web' will take the user to the actual site
 bar cursor in terminal
 'contact' command then the user must be able to type in something like ssh contact --linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
-
 
 !! File Explorer
 Update file versions
@@ -63,3 +65,16 @@ hidden commands inside the terminal
 !! Settings app
 !! What would have done different and how to improve
 !! Improve logo and wallpaper
+
+
+================
+Version History:
+================
+V1.2.3
+
+1 = version (Big update)
+2 = small feature update
+3 = bug fix
+
+V1.0.0 Browser and terminal with basic commands
+V1.1.0 window size improvement, introducing neofetch command, more terminal features

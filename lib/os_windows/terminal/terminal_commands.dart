@@ -150,8 +150,8 @@ class TerminalCommands {
     final info = [
       '${PortfolioData.name} @ Portfolio OS',
       '─────────────────────────────',
-      'OS       Tiaan Bothma OS v1.0',
-      'Shell    terminal v1.0',
+      'OS       Tiaan Bothma OS ${PortfolioData.version}',
+      'Shell    terminal',
       'Theme    Midnight',
       'Font     Oxanium / JetBrains Mono',
       'Stack    Flutter · Firebase · Dart',

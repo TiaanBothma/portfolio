@@ -98,24 +98,29 @@ class StartMenu extends StatelessWidget {
               shape: BoxShape.circle,
               color: AppColors.purple.withValues(alpha: 0.4),
               border: Border.all(
-                  color: AppColors.blue.withValues(alpha: 0.5), width: 1),
+                color: AppColors.blue.withValues(alpha: 0.5),
+                width: 1,
+              ),
             ),
             child: ClipOval(
-              child: Image.asset(
-                'assets/logo.png',
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset('assets/logo.png', fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(PortfolioData.name,
-                  style: AppTextStyles.body.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
-              Text(PortfolioData.role,
-                  style: AppTextStyles.label.copyWith(color: Colors.white54)),
+              Text(
+                PortfolioData.name,
+                style: AppTextStyles.body.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                PortfolioData.role,
+                style: AppTextStyles.label.copyWith(color: Colors.white54),
+              ),
             ],
           ),
         ],
@@ -131,11 +136,14 @@ class StartMenu extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Text(title,
-                style: AppTextStyles.label.copyWith(
-                    color: Colors.white30,
-                    fontSize: 10,
-                    letterSpacing: 1.5)),
+            child: Text(
+              title,
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white30,
+                fontSize: 10,
+                letterSpacing: 1.5,
+              ),
+            ),
           ),
           ...items,
         ],
@@ -166,9 +174,12 @@ class StartMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Tiaan Bothma OS',
+            'Tiaan Bothma OS ${PortfolioData.version}',
             style: AppTextStyles.label.copyWith(
-                color: Colors.white24, fontSize: 11, letterSpacing: 1),
+              color: Colors.white24,
+              fontSize: 11,
+              letterSpacing: 1,
+            ),
           ),
         ],
       ),
@@ -210,13 +221,19 @@ class _StartMenuItemState extends State<_StartMenuItem> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Row(
             children: [
-              Icon(widget.icon,
-                  color: _hovered ? Colors.white : Colors.white60, size: 16),
+              Icon(
+                widget.icon,
+                color: _hovered ? Colors.white : Colors.white60,
+                size: 16,
+              ),
               const SizedBox(width: 12),
-              Text(widget.label,
-                  style: AppTextStyles.body.copyWith(
-                      color: _hovered ? Colors.white : Colors.white70,
-                      fontSize: 13)),
+              Text(
+                widget.label,
+                style: AppTextStyles.body.copyWith(
+                  color: _hovered ? Colors.white : Colors.white70,
+                  fontSize: 13,
+                ),
+              ),
             ],
           ),
         ),
