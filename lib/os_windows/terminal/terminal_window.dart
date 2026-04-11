@@ -14,8 +14,8 @@ class TerminalWindow extends StatelessWidget {
     final terminal = Get.find<TerminalController>();
 
     return Container(
-      width: 700,
-      height: 500,
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.black.withValues(alpha: 0.92),
         borderRadius: BorderRadius.circular(8),

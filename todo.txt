@@ -1,5 +1,4 @@
 Next Step:
-No max size terminal (for example terminal drag icon going past)
 File explorer that has folders (certifications folder, projects folder, etc.)
 Notes app
 File explorer window + notes window -> wire together
@@ -8,6 +7,7 @@ Github page:
 Check if there is any API that i could use to display any real information?
 remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
 Make the tabs inside github work
+
 Make the 'Follow' button go to my actual github
 Improve any section of the page that you think needs improvement
 
@@ -26,8 +26,6 @@ Improve any section of the page that you think needs improvement
 Start menu:
 Buttons should work
 
-Update file versions
-Model classes, file system data in
 
 =========
 Features:
@@ -49,6 +47,10 @@ When pressing ARROW_UP in terminal, it pastes the last command that was typed
 Command 'force --all' gives all the data possible (maybe use recursion to go through portfolio_data) (this command should not be in the help function, i want to add secret commands)
 bar cursor in terminal
 'contact' command then the user must be able to type in something like ssh contact --linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
+
+
+!! File Explorer
+Update file versions
 
 
 ===============
