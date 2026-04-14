@@ -29,7 +29,7 @@ class DesktopController extends GetxController {
     );
     _registerWindow(
       'browser',
-      WindowState(offset: const Offset(10, 10), size: const Size(1900, 870)),
+      WindowState(offset: const Offset(10, 10), size: Size(1300, 770)),
     );
   }
 

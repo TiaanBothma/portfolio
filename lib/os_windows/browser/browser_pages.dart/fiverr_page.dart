@@ -1,3 +1,4 @@
+// lib/pages/fiverr_page.dart
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/portfolio_data.dart';
@@ -12,7 +13,6 @@ class FiverrPage extends StatelessWidget {
   static const _textPrimary = Color(0xFFE4E6EB);
   static const _textMuted = Color(0xFF8A8D91);
   static const _fiverrGreen = Color(0xFF1DBF73);
-  // static const _fiverrGreenDark = Color(0xFF19A463);
   static const _starColor = Color(0xFFFFBD2E);
 
   @override
@@ -52,19 +52,24 @@ class FiverrPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Row(
         children: [
-          // Fiverr Logo
           Row(
             children: [
-              Text('fiverr',
-                  style: AppTextStyles.heading.copyWith(
-                      color: _textPrimary,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold)),
-              Text('.',
-                  style: AppTextStyles.heading.copyWith(
-                      color: _fiverrGreen,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold)),
+              Text(
+                'fiverr',
+                style: AppTextStyles.heading.copyWith(
+                  color: _textPrimary,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '.',
+                style: AppTextStyles.heading.copyWith(
+                  color: _fiverrGreen,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           const SizedBox(width: 24),
@@ -79,12 +84,19 @@ class FiverrPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 children: [
-                  const Icon(PhosphorIconsRegular.magnifyingGlass,
-                      color: _textMuted, size: 14),
+                  const Icon(
+                    PhosphorIconsRegular.magnifyingGlass,
+                    color: _textMuted,
+                    size: 14,
+                  ),
                   const SizedBox(width: 8),
-                  Text('Find services',
-                      style: AppTextStyles.label
-                          .copyWith(color: _textMuted, fontSize: 13)),
+                  Text(
+                    'Find services',
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 13,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -101,11 +113,14 @@ class FiverrPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Center(
-              child: Text('Join Fiverr',
-                  style: AppTextStyles.label.copyWith(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold)),
+              child: Text(
+                'Join Fiverr',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
@@ -116,9 +131,10 @@ class FiverrPage extends StatelessWidget {
   Widget _navItem(String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Text(label,
-          style: AppTextStyles.label
-              .copyWith(color: _textPrimary, fontSize: 13)),
+      child: Text(
+        label,
+        style: AppTextStyles.label.copyWith(color: _textPrimary, fontSize: 13),
+      ),
     );
   }
 
@@ -144,7 +160,6 @@ class FiverrPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Avatar
           Container(
             width: 80,
             height: 80,
@@ -153,56 +168,65 @@ class FiverrPage extends StatelessWidget {
               color: _fiverrGreen.withValues(alpha: 0.2),
               border: Border.all(color: _fiverrGreen, width: 2),
             ),
-            child: const Icon(PhosphorIconsRegular.user,
-                color: _textMuted, size: 36),
+            child: const Icon(
+              PhosphorIconsRegular.user,
+              color: _textMuted,
+              size: 36,
+            ),
           ),
           const SizedBox(height: 12),
-          Text(PortfolioData.name,
-              style: AppTextStyles.body.copyWith(
-                  color: _textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16)),
+          Text(
+            PortfolioData.name,
+            style: AppTextStyles.body.copyWith(
+              color: _textPrimary,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
           const SizedBox(height: 2),
-          Text('@tiaanbothma',
-              style: AppTextStyles.label
-                  .copyWith(color: _textMuted, fontSize: 13)),
+          Text(
+            '@tiaanbothma',
+            style: AppTextStyles.label.copyWith(
+              color: _textMuted,
+              fontSize: 13,
+            ),
+          ),
           const SizedBox(height: 12),
-
-          // Stars
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ...List.generate(
-                  5,
-                  (i) => const Icon(PhosphorIconsFill.star,
-                      color: _starColor, size: 14)),
+                5,
+                (i) => const Icon(
+                  PhosphorIconsFill.star,
+                  color: _starColor,
+                  size: 14,
+                ),
+              ),
               const SizedBox(width: 6),
-              Text('5.0',
-                  style: AppTextStyles.label.copyWith(
-                      color: _starColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13)),
-              const SizedBox(width: 4),
-              Text('(12)',
-                  style: AppTextStyles.label
-                      .copyWith(color: _textMuted, fontSize: 13)),
+              Text(
+                '5.0',
+                style: AppTextStyles.label.copyWith(
+                  color: _starColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
           const Divider(color: _borderColor, height: 1),
           const SizedBox(height: 16),
-
-          // Stats
           _statRow(PhosphorIconsRegular.mapPin, 'From', PortfolioData.location),
           const SizedBox(height: 10),
-          _statRow(PhosphorIconsRegular.clockCountdown, 'Member since', 'Dec 2022'),
+          _statRow(
+            PhosphorIconsRegular.clockCountdown,
+            'Member since',
+            'Dec 2022',
+          ),
           const SizedBox(height: 10),
           _statRow(PhosphorIconsRegular.clock, 'Avg. response time', '1 hour'),
-          const SizedBox(height: 10),
-          _statRow(PhosphorIconsRegular.checkCircle, 'Last delivery', '1 day'),
           const SizedBox(height: 16),
-
-          // Contact button
           Container(
             width: double.infinity,
             height: 36,
@@ -211,11 +235,14 @@ class FiverrPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Center(
-              child: Text('Contact Me',
-                  style: AppTextStyles.label.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13)),
+              child: Text(
+                'Contact Me',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
             ),
           ),
         ],
@@ -231,24 +258,32 @@ class FiverrPage extends StatelessWidget {
           children: [
             Icon(icon, color: _textMuted, size: 14),
             const SizedBox(width: 6),
-            Text(label,
-                style: AppTextStyles.label
-                    .copyWith(color: _textMuted, fontSize: 12)),
+            Text(
+              label,
+              style: AppTextStyles.label.copyWith(
+                color: _textMuted,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
-        Text(value,
-            style: AppTextStyles.label
-                .copyWith(color: _textPrimary, fontSize: 12)),
+        Text(
+          value,
+          style: AppTextStyles.label.copyWith(
+            color: _textPrimary,
+            fontSize: 12,
+          ),
+        ),
       ],
     );
   }
 
   Widget _buildLanguagesCard() {
-    return _card(
+    return _sideCard(
       title: 'Languages',
       child: Column(
         children: [
-          _languageRow('English', 'Conversational'),
+          _languageRow('English', 'Native / Bilingual'),
           const SizedBox(height: 8),
           _languageRow('Afrikaans', 'Native / Bilingual'),
         ],
@@ -260,35 +295,67 @@ class FiverrPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(lang,
-            style: AppTextStyles.label
-                .copyWith(color: _textPrimary, fontSize: 13)),
-        Text(level,
-            style: AppTextStyles.label
-                .copyWith(color: _textMuted, fontSize: 12)),
+        Text(
+          lang,
+          style: AppTextStyles.label.copyWith(
+            color: _textPrimary,
+            fontSize: 13,
+          ),
+        ),
+        Text(
+          level,
+          style: AppTextStyles.label.copyWith(color: _textMuted, fontSize: 12),
+        ),
       ],
     );
   }
 
   Widget _buildSkillsCard() {
-    return _card(
+    // Only show technical skills — filter out soft skills
+    final technicalSkills = [
+      'Flutter',
+      'Dart',
+      'Firebase',
+      'Cloud Firestore',
+      'Docker',
+      'Python',
+      'Linux',
+      'HTML',
+      'SQL',
+      'Git / GitHub',
+      'Web Development',
+      'Full-Stack Development',
+      'Server Management',
+      'Networking',
+      'Cybersecurity',
+    ];
+
+    return _sideCard(
       title: 'Skills',
       child: Wrap(
         spacing: 8,
         runSpacing: 8,
-        children: PortfolioData.skills
-            .map((s) => Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: _bgColor,
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: _borderColor),
+        children: technicalSkills
+            .map(
+              (s) => Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: _bgColor,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: _borderColor),
+                ),
+                child: Text(
+                  s,
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 12,
                   ),
-                  child: Text(s['name'] as String,
-                      style: AppTextStyles.label
-                          .copyWith(color: _textPrimary, fontSize: 12)),
-                ))
+                ),
+              ),
+            )
             .toList(),
       ),
     );
@@ -302,135 +369,248 @@ class FiverrPage extends StatelessWidget {
         const SizedBox(height: 24),
         _buildGigsSection(),
         const SizedBox(height: 24),
-        _buildReviewsSection(),
+        _buildWhatIOfferSection(),
       ],
     );
   }
 
   Widget _buildAboutSection() {
-    return _card(
+    return _mainCard(
       title: 'About Me',
-      child: Text(PortfolioData.bio,
-          style: AppTextStyles.body
-              .copyWith(color: _textPrimary, fontSize: 14, height: 1.6)),
+      child: Text(
+        PortfolioData.bio,
+        style: AppTextStyles.body.copyWith(
+          color: _textPrimary,
+          fontSize: 14,
+          height: 1.6,
+        ),
+      ),
     );
   }
 
   Widget _buildGigsSection() {
     final gigs = [
       {
-        'title': 'I will build your Flutter mobile or web app',
+        'title': 'I will build, develop and publish your Flutter application',
         'price': 'From \$50',
-        'rating': '5.0',
-        'reviews': '8',
         'tag': 'Flutter',
-      },
-      {
-        'title': 'I will develop a Firebase backend for your app',
-        'price': 'From \$40',
-        'rating': '5.0',
-        'reviews': '4',
-        'tag': 'Firebase',
-      },
-      {
-        'title': 'I will build a Python script or automation tool',
-        'price': 'From \$20',
-        'rating': '5.0',
-        'reviews': '3',
-        'tag': 'Python',
+        'icon': PhosphorIconsRegular.deviceMobile,
+        'description':
+            'Full Flutter app development for mobile and web using Flutter and Cloud Firestore.',
       },
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('My Gigs',
-            style: AppTextStyles.heading
-                .copyWith(color: _textPrimary, fontSize: 18)),
-        const SizedBox(height: 16),
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: gigs.map((g) => _buildGigCard(g)).toList(),
+        Text(
+          'My Gigs',
+          style: AppTextStyles.heading.copyWith(
+            color: _textPrimary,
+            fontSize: 18,
+          ),
         ),
+        const SizedBox(height: 16),
+        ...gigs.map((g) => _buildGigCard(g)),
       ],
     );
   }
 
-  Widget _buildGigCard(Map<String, String> gig) {
+  Widget _buildGigCard(Map<String, dynamic> gig) {
     return Container(
-      width: 240,
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: _cardColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: _borderColor),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          // Gig image placeholder
           Container(
-            height: 130,
+            width: 140,
+            height: 110,
             decoration: BoxDecoration(
               color: _fiverrGreen.withValues(alpha: 0.1),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
               ),
             ),
             child: Center(
-              child: Icon(PhosphorIconsRegular.code,
-                  color: _fiverrGreen.withValues(alpha: 0.5), size: 40),
+              child: Icon(
+                gig['icon'] as IconData,
+                color: _fiverrGreen.withValues(alpha: 0.6),
+                size: 40,
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    gig['title'] as String,
+                    style: AppTextStyles.body.copyWith(
+                      color: _textPrimary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    gig['description'] as String,
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _fiverrGreen.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          gig['tag'] as String,
+                          style: AppTextStyles.label.copyWith(
+                            color: _fiverrGreen,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        gig['price'] as String,
+                        style: AppTextStyles.body.copyWith(
+                          color: _textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWhatIOfferSection() {
+    final offerings = [
+      {
+        'icon': PhosphorIconsRegular.deviceMobile,
+        'title': 'Mobile & Web Apps',
+        'description':
+            'Full Flutter applications for Android, iOS and Web with clean UI and solid architecture.',
+      },
+      {
+        'icon': PhosphorIconsRegular.database,
+        'title': 'Firebase Backend',
+        'description':
+            'Cloud Firestore database design, Firebase Auth, Storage and real-time data handling.',
+      },
+      {
+        'icon': PhosphorIconsRegular.paintBrush,
+        'title': 'UI / UX Design',
+        'description':
+            'Clean, modern interfaces designed for usability with attention to detail and user experience.',
+      },
+      {
+        'icon': PhosphorIconsRegular.rocket,
+        'title': 'Publishing & Deployment',
+        'description':
+            'App Store, Google Play and Firebase Web Hosting deployment handled end to end.',
+      },
+      {
+        'icon': PhosphorIconsRegular.wrench,
+        'title': 'Maintenance & Support',
+        'description':
+            'Bug fixes, feature additions and ongoing support for existing Flutter applications.',
+      },
+      {
+        'icon': PhosphorIconsRegular.gitBranch,
+        'title': 'Clean Code & Architecture',
+        'description':
+            'Scalable project structure, state management with GetX, and maintainable codebases.',
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'What I Offer',
+          style: AppTextStyles.heading.copyWith(
+            color: _textPrimary,
+            fontSize: 18,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: offerings.map((o) => _buildOfferingCard(o)).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildOfferingCard(Map<String, dynamic> offering) {
+    return Container(
+      width: 270,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: _cardColor,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: _borderColor),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: _fiverrGreen.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Icon(
+              offering['icon'] as IconData,
+              color: _fiverrGreen,
+              size: 18,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(gig['title'] ?? '',
-                    style: AppTextStyles.label.copyWith(
-                        color: _textPrimary, fontSize: 13, height: 1.4),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(PhosphorIconsFill.star,
-                        color: _starColor, size: 12),
-                    const SizedBox(width: 4),
-                    Text(gig['rating'] ?? '',
-                        style: AppTextStyles.label.copyWith(
-                            color: _starColor, fontSize: 12)),
-                    const SizedBox(width: 2),
-                    Text('(${gig['reviews']})',
-                        style: AppTextStyles.label
-                            .copyWith(color: _textMuted, fontSize: 12)),
-                  ],
+                Text(
+                  offering['title'] as String,
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(height: 8),
-                const Divider(color: _borderColor, height: 1),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: _fiverrGreen.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(gig['tag'] ?? '',
-                          style: AppTextStyles.label.copyWith(
-                              color: _fiverrGreen, fontSize: 11)),
-                    ),
-                    Text(gig['price'] ?? '',
-                        style: AppTextStyles.label.copyWith(
-                            color: _textPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13)),
-                  ],
+                const SizedBox(height: 4),
+                Text(
+                  offering['description'] as String,
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                    height: 1.5,
+                  ),
                 ),
               ],
             ),
@@ -440,54 +620,9 @@ class FiverrPage extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewsSection() {
-    final reviews = [
-      {
-        'name': 'Client A',
-        'review': 'Excellent work! Delivered a clean Flutter app ahead of schedule.',
-        'rating': 5,
-      },
-      {
-        'name': 'Client B',
-        'review': 'Very professional, great communication throughout the project.',
-        'rating': 5,
-      },
-      {
-        'name': 'Client C',
-        'review': 'Built exactly what I needed. Will definitely hire again.',
-        'rating': 5,
-      },
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text('Reviews',
-                style: AppTextStyles.heading
-                    .copyWith(color: _textPrimary, fontSize: 18)),
-            const SizedBox(width: 12),
-            const Icon(PhosphorIconsFill.star, color: _starColor, size: 16),
-            const SizedBox(width: 4),
-            Text('5.0',
-                style: AppTextStyles.body.copyWith(
-                    color: _starColor, fontWeight: FontWeight.bold)),
-            const SizedBox(width: 4),
-            Text('(12)',
-                style:
-                    AppTextStyles.label.copyWith(color: _textMuted)),
-          ],
-        ),
-        const SizedBox(height: 16),
-        ...reviews.map((r) => _buildReviewCard(r)),
-      ],
-    );
-  }
-
-  Widget _buildReviewCard(Map<String, dynamic> review) {
+  Widget _sideCard({required String title, required Widget child}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: _cardColor,
@@ -497,48 +632,22 @@ class FiverrPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 36,
-                height: 36,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF374151),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(PhosphorIconsRegular.user,
-                    color: _textMuted, size: 16),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(review['name'],
-                      style: AppTextStyles.label.copyWith(
-                          color: _textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13)),
-                  Row(
-                    children: List.generate(
-                      review['rating'] as int,
-                      (i) => const Icon(PhosphorIconsFill.star,
-                          color: _starColor, size: 11),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          Text(
+            title,
+            style: AppTextStyles.body.copyWith(
+              color: _textPrimary,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          const SizedBox(height: 10),
-          Text(review['review'],
-              style: AppTextStyles.label.copyWith(
-                  color: _textPrimary, fontSize: 13, height: 1.5)),
+          const SizedBox(height: 12),
+          child,
         ],
       ),
     );
   }
 
-  Widget _card({required String title, required Widget child}) {
+  Widget _mainCard({required String title, required Widget child}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -550,9 +659,13 @@ class FiverrPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: AppTextStyles.heading
-                  .copyWith(color: _textPrimary, fontSize: 18)),
+          Text(
+            title,
+            style: AppTextStyles.heading.copyWith(
+              color: _textPrimary,
+              fontSize: 18,
+            ),
+          ),
           const SizedBox(height: 12),
           child,
         ],

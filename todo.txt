@@ -1,5 +1,4 @@
 Next Step:
-Global version variable (maybe pub . dev dependancy) so that we can showcase os version (ie. v1.0.1) on UI
 File explorer that has folders (certifications folder, projects folder, etc.)
 Notes app
 File explorer window + notes window -> wire together
@@ -10,7 +9,6 @@ remove Pull requests, issues, marketplace and explore button in the top right (m
 Make the tabs inside github work
 
 Make the 'Follow' button go to my actual github
-Improve any section of the page that you think needs improvement
 
 Linkedin page:
 'Connect' button should go to actual linkedin site
@@ -18,23 +16,22 @@ Remove and replace buttons that have no use and that could be replaced by more p
 Make the Message button message me
 make more button also go to actual linkedin site
 My banner from linkedin should display here
-Improve any section of the page that you think needs improvement
 
 Fiverr page:
-same as github and linkedin issues
-Improve any section of the page that you think needs improvement
+Fix 'Gig' container phone icon not left centered
+Fix 'What I Offer' -> 'Publishing and deployment' container not same size
+Fix search bar and buttons not working
 
 Start menu:
 Buttons should work
+When click outside the range of the start menu popup then it should pop / delete / go away
 
+Status card:
+Remove the Stack section
 
 =========
 Features:
 =========
-
-!! Windows
-Drag icon going past max size (maybe delta var issue)
-There shouldn't be a max size for windows
 
 !! Browser
 Make the current active tab underline blue like the other tabs
@@ -64,7 +61,6 @@ hidden commands inside the terminal
 !! Change wallpaper feature
 !! Settings app
 !! What would have done different and how to improve
-!! Improve logo and wallpaper
 
 
 ================

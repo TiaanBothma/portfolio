@@ -99,7 +99,7 @@ class TerminalCommands {
       final filled = (percent / 10).round();
       final bar = '${'█' * filled}${'░' * (10 - filled)}';
       lines.add(
-        _out('  ${s['name'].toString().padRight(10)} [$bar] $percent%'),
+        _out('  ${s['name'].toString().padRight(22)} [$bar] $percent%'),
       );
     }
     return lines;
@@ -154,7 +154,7 @@ class TerminalCommands {
       'Shell    terminal',
       'Theme    Midnight',
       'Font     Oxanium / JetBrains Mono',
-      'Stack    Flutter · Firebase · Dart',
+      'Stack    Flutter - Firebase - CyberSecurity',
       'Role     ${PortfolioData.role}',
       'Uni      ${PortfolioData.university}',
       'Status   ${PortfolioData.status}',
