@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 
@@ -29,12 +28,7 @@ class StatusCard extends StatelessWidget {
             color: AppColors.blue.withValues(alpha: 0.3),
           ),
           _buildStatusRows(),
-          Divider(
-            height: 1,
-            thickness: 1,
-            color: AppColors.blue.withValues(alpha: 0.3),
-          ),
-          _buildSkillBars(),
+        
         ],
       ),
     );
@@ -99,62 +93,5 @@ class StatusCard extends StatelessWidget {
     );
   }
 
- Widget _buildSkillBars() {
-  return Padding(
-    padding: const EdgeInsets.all(12),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('STACK', style: AppTextStyles.label),
-        const SizedBox(height: 8),
-        ...PortfolioData.skills.map(
-          (s) => _buildBar(s['name'] as String, s['level'] as double),
-        ),
-      ],
-    ),
-  );
-}
 
-  Widget _buildBar(String skill, double value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
-      child: Row(
-        children: [
-          SizedBox(width: 70, child: Text(skill, style: AppTextStyles.label)),
-          Expanded(
-            child: Stack(
-              children: [
-                Container(
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: AppColors.purple.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                FractionallySizedBox(
-                  widthFactor: value,
-                  child: Container(
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.blue,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          SizedBox(
-            width: 30,
-            child: Text(
-              '${(value * 100).toInt()}%',
-              style: AppTextStyles.label,
-              textAlign: TextAlign.right,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

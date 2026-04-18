@@ -1,7 +1,7 @@
 class PortfolioData {
   PortfolioData._();
 
-  static const String version = 'v1.1.0';
+  static const String version = 'v1.2.0';
   // Personal
   static const String name = 'Tiaan Bothma';
   static const String role = 'Flutter Full Stack Developer';

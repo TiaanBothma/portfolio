@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:web/web.dart' as web;
 
 class LinkedInPage extends StatelessWidget {
   const LinkedInPage({super.key});
@@ -32,8 +33,7 @@ class LinkedInPage extends StatelessWidget {
                     children: [
                       Expanded(flex: 3, child: _buildMainColumn()),
                       const SizedBox(width: 24),
-                      SizedBox(
-                          width: 240, child: _buildRightColumn()),
+                      SizedBox(width: 240, child: _buildRightColumn()),
                     ],
                   ),
                 ),
@@ -52,8 +52,11 @@ class LinkedInPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Row(
         children: [
-          const Icon(PhosphorIconsFill.linkedinLogo,
-              color: _linkedInBlue, size: 34),
+          const Icon(
+            PhosphorIconsFill.linkedinLogo,
+            color: _linkedInBlue,
+            size: 34,
+          ),
           const SizedBox(width: 8),
           Container(
             width: 220,
@@ -65,12 +68,19 @@ class LinkedInPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
-                const Icon(PhosphorIconsRegular.magnifyingGlass,
-                    color: _textMuted, size: 14),
+                const Icon(
+                  PhosphorIconsRegular.magnifyingGlass,
+                  color: _textMuted,
+                  size: 14,
+                ),
                 const SizedBox(width: 8),
-                Text('Search',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textMuted, fontSize: 13)),
+                Text(
+                  'Search',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 13,
+                  ),
+                ),
               ],
             ),
           ),
@@ -89,9 +99,13 @@ class LinkedInPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Center(
-              child: Text('Premium',
-                  style: AppTextStyles.label.copyWith(
-                      color: _linkedInLightBlue, fontSize: 13)),
+              child: Text(
+                'Premium',
+                style: AppTextStyles.label.copyWith(
+                  color: _linkedInLightBlue,
+                  fontSize: 13,
+                ),
+              ),
             ),
           ),
         ],
@@ -107,9 +121,13 @@ class LinkedInPage extends StatelessWidget {
         children: [
           Icon(icon, color: _textMuted, size: 20),
           const SizedBox(height: 2),
-          Text(label,
-              style: AppTextStyles.label
-                  .copyWith(color: _textMuted, fontSize: 11)),
+          Text(
+            label,
+            style: AppTextStyles.label.copyWith(
+              color: _textMuted,
+              fontSize: 11,
+            ),
+          ),
         ],
       ),
     );
@@ -170,8 +188,11 @@ class LinkedInPage extends StatelessWidget {
                       color: const Color(0xFF374151),
                       border: Border.all(color: _cardColor, width: 3),
                     ),
-                    child: const Icon(PhosphorIconsRegular.user,
-                        color: _textMuted, size: 36),
+                    child: const Icon(
+                      PhosphorIconsRegular.user,
+                      color: _textMuted,
+                      size: 36,
+                    ),
                   ),
                 ),
                 Transform.translate(
@@ -179,27 +200,58 @@ class LinkedInPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(PortfolioData.name,
-                          style: AppTextStyles.heading
-                              .copyWith(color: _textPrimary, fontSize: 20)),
+                      Text(
+                        PortfolioData.name,
+                        style: AppTextStyles.heading.copyWith(
+                          color: _textPrimary,
+                          fontSize: 20,
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text(PortfolioData.role,
-                          style: AppTextStyles.body
-                              .copyWith(color: _textPrimary, fontSize: 14)),
+                      Text(
+                        PortfolioData.role,
+                        style: AppTextStyles.body.copyWith(
+                          color: _textPrimary,
+                          fontSize: 14,
+                        ),
+                      ),
                       const SizedBox(height: 4),
                       Text(
                         '${PortfolioData.university} · ${PortfolioData.location}',
-                        style: AppTextStyles.label
-                            .copyWith(color: _textMuted, fontSize: 13),
+                        style: AppTextStyles.label.copyWith(
+                          color: _textMuted,
+                          fontSize: 13,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Row(
                         children: [
-                          _profileButton('Connect', filled: true),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+
+                            child: GestureDetector(
+                              onTap: () {
+                                web.window.open(
+                                  'https://${PortfolioData.linkedin}',
+                                  '_blank',
+                                );
+                              },
+                              child: _profileButton('Connect', filled: true),
+                            ),
+                          ),
                           const SizedBox(width: 8),
-                          _profileButton('Message'),
-                          const SizedBox(width: 8),
-                          _profileButton('More'),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                web.window.open(
+                                  'https://${PortfolioData.linkedin}',
+                                  '_blank',
+                                );
+                              },
+                              child: _profileButton('Message'),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -220,16 +272,17 @@ class LinkedInPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: filled ? _linkedInBlue : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-            color: filled ? _linkedInBlue : _linkedInLightBlue),
+        border: Border.all(color: filled ? _linkedInBlue : _linkedInLightBlue),
       ),
       child: Center(
-        child: Text(label,
-            style: AppTextStyles.label.copyWith(
-              color: filled ? Colors.white : _linkedInLightBlue,
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-            )),
+        child: Text(
+          label,
+          style: AppTextStyles.label.copyWith(
+            color: filled ? Colors.white : _linkedInLightBlue,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -241,9 +294,14 @@ class LinkedInPage extends StatelessWidget {
         children: [
           _cardTitle('About'),
           const SizedBox(height: 12),
-          Text(PortfolioData.bio,
-              style: AppTextStyles.body
-                  .copyWith(color: _textPrimary, fontSize: 14, height: 1.6)),
+          Text(
+            PortfolioData.bio,
+            style: AppTextStyles.body.copyWith(
+              color: _textPrimary,
+              fontSize: 14,
+              height: 1.6,
+            ),
+          ),
         ],
       ),
     );
@@ -275,28 +333,38 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.briefcase,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.briefcase,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(e['title'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
+                Text(
+                  e['title'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
                 Text(
                   '${e['company']} · ${e['type']}',
-                  style: AppTextStyles.label
-                      .copyWith(color: _textPrimary, fontSize: 13),
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
                 ),
                 Text(
                   '${e['period']} · ${e['location']}',
-                  style: AppTextStyles.label
-                      .copyWith(color: _textMuted, fontSize: 12),
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
@@ -332,29 +400,47 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.graduationCap,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.graduationCap,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(e['institution'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
-                Text(e['qualification'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textPrimary, fontSize: 13)),
-                Text(e['period'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textMuted, fontSize: 12)),
+                Text(
+                  e['institution'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  e['qualification'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  e['period'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
+                ),
                 if (e['note'] != null)
-                  Text(e['note']!,
-                      style: AppTextStyles.label
-                          .copyWith(color: _textMuted, fontSize: 12)),
+                  Text(
+                    e['note']!,
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -390,9 +476,13 @@ class LinkedInPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: _linkedInBlue.withValues(alpha: 0.4)),
       ),
-      child: Text(skill,
-          style: AppTextStyles.label
-              .copyWith(color: _linkedInLightBlue, fontSize: 13)),
+      child: Text(
+        skill,
+        style: AppTextStyles.label.copyWith(
+          color: _linkedInLightBlue,
+          fontSize: 13,
+        ),
+      ),
     );
   }
 
@@ -422,25 +512,39 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.certificate,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.certificate,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(c['title'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
-                Text(c['issuer'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textPrimary, fontSize: 13)),
-                Text('Issued ${c['date']}',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textMuted, fontSize: 12)),
+                Text(
+                  c['title'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  c['issuer'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  'Issued ${c['date']}',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
           ),
@@ -474,9 +578,13 @@ class LinkedInPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
           const SizedBox(height: 8),
-          Text('All-Star',
-              style: AppTextStyles.label
-                  .copyWith(color: _linkedInLightBlue, fontSize: 13)),
+          Text(
+            'All-Star',
+            style: AppTextStyles.label.copyWith(
+              color: _linkedInLightBlue,
+              fontSize: 13,
+            ),
+          ),
         ],
       ),
     );
@@ -504,18 +612,24 @@ class LinkedInPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text('Open to work',
-                  style: AppTextStyles.body.copyWith(
-                      color: _textPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14)),
+              Text(
+                'Open to work',
+                style: AppTextStyles.body.copyWith(
+                  color: _textPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             'Flutter Developer · Full Stack · Remote',
-            style: AppTextStyles.label
-                .copyWith(color: _textMuted, fontSize: 13, height: 1.5),
+            style: AppTextStyles.label.copyWith(
+              color: _textMuted,
+              fontSize: 13,
+              height: 1.5,
+            ),
           ),
         ],
       ),
@@ -536,8 +650,9 @@ class LinkedInPage extends StatelessWidget {
   }
 
   Widget _cardTitle(String title) {
-    return Text(title,
-        style: AppTextStyles.heading
-            .copyWith(color: _textPrimary, fontSize: 18));
+    return Text(
+      title,
+      style: AppTextStyles.heading.copyWith(color: _textPrimary, fontSize: 18),
+    );
   }
 }

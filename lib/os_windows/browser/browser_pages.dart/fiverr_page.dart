@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:web/web.dart' as web;
 
 class FiverrPage extends StatelessWidget {
   const FiverrPage({super.key});
@@ -227,20 +228,28 @@ class FiverrPage extends StatelessWidget {
           const SizedBox(height: 10),
           _statRow(PhosphorIconsRegular.clock, 'Avg. response time', '1 hour'),
           const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            height: 36,
-            decoration: BoxDecoration(
-              color: _fiverrGreen,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Center(
-              child: Text(
-                'Contact Me',
-                style: AppTextStyles.label.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
+                web.window.open('https://${PortfolioData.fiverr}', '_blank');
+              },
+              child: Container(
+                width: double.infinity,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: _fiverrGreen,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: Text(
+                    'Contact Me',
+                    style: AppTextStyles.label.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -418,6 +427,7 @@ class FiverrPage extends StatelessWidget {
 
   Widget _buildGigCard(Map<String, dynamic> gig) {
     return Container(
+      padding: const EdgeInsets.only(left: 5),
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: _cardColor,
@@ -431,10 +441,7 @@ class FiverrPage extends StatelessWidget {
             height: 110,
             decoration: BoxDecoration(
               color: _fiverrGreen.withValues(alpha: 0.1),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Icon(
@@ -568,8 +575,8 @@ class FiverrPage extends StatelessWidget {
 
   Widget _buildOfferingCard(Map<String, dynamic> offering) {
     return Container(
-      width: 270,
-      padding: const EdgeInsets.all(16),
+      width: 280,
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: _cardColor,
         borderRadius: BorderRadius.circular(8),

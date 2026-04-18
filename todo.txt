@@ -8,18 +8,13 @@ Check if there is any API that i could use to display any real information?
 remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
 Make the tabs inside github work
 
-Make the 'Follow' button go to my actual github
 
 Linkedin page:
-'Connect' button should go to actual linkedin site
 Remove and replace buttons that have no use and that could be replaced by more practical buttons and features
-Make the Message button message me
 make more button also go to actual linkedin site
 My banner from linkedin should display here
 
 Fiverr page:
-Fix 'Gig' container phone icon not left centered
-Fix 'What I Offer' -> 'Publishing and deployment' container not same size
 Fix search bar and buttons not working
 
 Start menu:
@@ -58,10 +53,13 @@ Later Features:
 !! Terminal
 hidden commands inside the terminal
 
-!! Change wallpaper feature
+!! Wallpaper
+Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows
+
 !! Settings app
 !! What would have done different and how to improve
 
+!! Dynamic, 3D Graphics, How to make more interesting
 
 ================
 Version History:
@@ -74,3 +72,4 @@ V1.2.3
 
 V1.0.0 Browser and terminal with basic commands
 V1.1.0 window size improvement, introducing neofetch command, more terminal features
+V1.2.0 Improved UI, navigation to my websites profiles, Improved Github, Fiverr and Linkedin pages

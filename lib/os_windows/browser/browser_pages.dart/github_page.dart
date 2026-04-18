@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:web/web.dart' as web;
 
 class GitHubPage extends StatelessWidget {
   const GitHubPage({super.key});
@@ -150,20 +151,28 @@ class GitHubPage extends StatelessWidget {
         const SizedBox(height: 16),
 
         // Follow button
-        Container(
-          width: double.infinity,
-          height: 32,
-          decoration: BoxDecoration(
-            color: const Color(0xFF21262D),
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: _borderColor),
-          ),
-          child: Center(
-            child: Text(
-              'Follow',
-              style: AppTextStyles.label.copyWith(
-                color: _textPrimary,
-                fontSize: 13,
+        MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () {
+              web.window.open('https://${PortfolioData.github}', '_blank');
+            },
+            child: Container(
+              width: double.infinity,
+              height: 32,
+              decoration: BoxDecoration(
+                color: const Color(0xFF21262D),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: _borderColor),
+              ),
+              child: Center(
+                child: Text(
+                  'Follow',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
+                ),
               ),
             ),
           ),
