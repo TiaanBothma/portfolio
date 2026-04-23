@@ -1,13 +1,12 @@
 Next Step:
-File explorer that has folders (certifications folder, projects folder, etc.)
-Notes app
-File explorer window + notes window -> wire together
+Notes app (when click on file in vault, then notes app should open to view)
+Start menu:
+Buttons should work
+When click outside the range of the start menu popup then it should pop / delete / go away
 
 Github page:
-Check if there is any API that i could use to display any real information?
 remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
 Make the tabs inside github work
-
 
 Linkedin page:
 Remove and replace buttons that have no use and that could be replaced by more practical buttons and features
@@ -15,14 +14,8 @@ make more button also go to actual linkedin site
 My banner from linkedin should display here
 
 Fiverr page:
-Fix search bar and buttons not working
+Fix search bar and buttons ontaps
 
-Start menu:
-Buttons should work
-When click outside the range of the start menu popup then it should pop / delete / go away
-
-Status card:
-Remove the Stack section
 
 =========
 Features:
@@ -35,15 +28,12 @@ More pages inside the browser
 
 !! Terminal
 'tab button' for completing string in terminal window
-'man' prefix to most of the commands
 change '--list' to '-list'
 add '--all' command to most of the commands to get even more data
 '--web' or '--site' (or something like that) to go to the actual site for example 'linkedin --web' will take the user to the actual site
 bar cursor in terminal
 'contact' command then the user must be able to type in something like ssh contact --linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
-
-!! File Explorer
-Update file versions
+'man' prefix to most of the commands
 
 
 ===============
@@ -60,17 +50,17 @@ Make wallpaper dynamic in correlation to the cursor, make it like a Neural Netwo
 !! What would have done different and how to improve
 
 !! Dynamic, 3D Graphics, How to make more interesting
+!! GITHUB: Check if there is any API that i could use to display any real information?
 
 ================
 Version History:
 ================
-V1.2.3
+V1.2.0
 
 1 = version (Big update)
 2 = small feature update
-3 = bug fix
 
 V1.0.0 Browser and terminal with basic commands
 V1.1.0 window size improvement, introducing neofetch command, more terminal features
 V1.2.0 Improved UI, navigation to my websites profiles, Improved Github, Fiverr and Linkedin pages
-V1.3.0 Improved UI and pages inside browser, Added vault / file application, improved user experience with size constraints and feeling
+V2.0.0 Improved UI and pages inside browser, Added vault / file application, improved user experience with size constraints and feeling

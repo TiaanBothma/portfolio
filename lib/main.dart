@@ -5,6 +5,7 @@ import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
+import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/widgets/device_guard.dart';
 
@@ -13,6 +14,7 @@ void main() {
   Get.put(TerminalController());
   Get.put(BrowserController());
   Get.put(StartMenuController());
+  Get.put(VaultController());
 
   runApp(const MyApp());
 }

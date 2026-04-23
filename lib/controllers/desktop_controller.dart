@@ -31,6 +31,10 @@ class DesktopController extends GetxController {
       'browser',
       WindowState(offset: const Offset(10, 10), size: Size(1300, 770)),
     );
+    _registerWindow(
+      'vault',
+      WindowState(offset: const Offset(120, 80), size: const Size(850, 550)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;

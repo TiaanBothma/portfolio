@@ -42,6 +42,12 @@ class Taskbar extends StatelessWidget {
                       onTap: () =>
                           Get.find<DesktopController>().toggleWindow('browser'),
                     ),
+                    _DockIcon(
+                      icon: PhosphorIconsRegular.vault,
+                      label: 'Vault',
+                      onTap: () =>
+                          Get.find<DesktopController>().toggleWindow('vault'),
+                    ),
                   ],
                 ),
                 const Spacer(),

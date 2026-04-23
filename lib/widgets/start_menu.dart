@@ -42,6 +42,14 @@ class StartMenu extends StatelessWidget {
                 Get.find<StartMenuController>().close();
               },
             ),
+            _buildItem(
+              icon: PhosphorIconsRegular.vault,
+              label: 'Vault',
+              onTap: () {
+                Get.find<DesktopController>().toggleWindow('vault');
+                Get.find<StartMenuController>().close();
+              },
+            ),
           ]),
           _buildDivider(),
           _buildSection('FIND ME ON', [

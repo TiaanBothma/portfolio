@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
+import 'package:portfolio/os_windows/vault/vault_window.dart';
 import 'package:portfolio/widgets/drag_resize_window.dart';
 import 'package:portfolio/widgets/main_layout.dart';
 import 'package:portfolio/widgets/status_card.dart';
@@ -30,6 +31,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 600,
                 minHeight: 400,
                 child: BrowserWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'vault',
+                minWidth: 600,
+                minHeight: 400,
+                child: VaultWindow(),
               ),
             ],
           ),
