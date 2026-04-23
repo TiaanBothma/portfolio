@@ -5,7 +5,6 @@ import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
-import 'package:portfolio/widgets/start_menu.dart';
 
 class Taskbar extends StatelessWidget {
   const Taskbar({super.key});
@@ -14,53 +13,41 @@ class Taskbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            height: 60,
-            width: double.infinity,
-            color: Colors.black.withValues(alpha: 0.3),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
+      child: Container(
+        height: 60,
+        width: double.infinity,
+        color: Colors.black.withValues(alpha: 0.3),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          children: [
+            const _LogoButton(),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const _LogoButton(),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _DockIcon(
-                      icon: PhosphorIconsBold.terminalWindow,
-                      label: 'Terminal',
-                      onTap: () => Get.find<DesktopController>().toggleWindow(
-                        'terminal',
-                      ),
-                    ),
-                    _DockIcon(
-                      icon: PhosphorIconsBold.browser,
-                      label: 'Browser',
-                      onTap: () =>
-                          Get.find<DesktopController>().toggleWindow('browser'),
-                    ),
-                    _DockIcon(
-                      icon: PhosphorIconsRegular.vault,
-                      label: 'Vault',
-                      onTap: () =>
-                          Get.find<DesktopController>().toggleWindow('vault'),
-                    ),
-                  ],
+                _DockIcon(
+                  icon: PhosphorIconsBold.terminalWindow,
+                  label: 'Terminal',
+                  onTap: () =>
+                      Get.find<DesktopController>().toggleWindow('terminal'),
                 ),
-                const Spacer(),
+                _DockIcon(
+                  icon: PhosphorIconsBold.browser,
+                  label: 'Browser',
+                  onTap: () =>
+                      Get.find<DesktopController>().toggleWindow('browser'),
+                ),
+                _DockIcon(
+                  icon: PhosphorIconsRegular.vault,
+                  label: 'Vault',
+                  onTap: () =>
+                      Get.find<DesktopController>().toggleWindow('vault'),
+                ),
               ],
             ),
-          ),
-          // Start menu popup
-          Obx(() {
-            final startMenu = Get.find<StartMenuController>();
-            if (!startMenu.isOpen.value) return const SizedBox.shrink();
-            return Positioned(bottom: 64, left: 8, child: StartMenu());
-          }),
-        ],
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }
@@ -85,7 +72,7 @@ class _LogoButtonState extends State<_LogoButton> {
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
-        onTap: startMenu.toggle,
+        onTap: () => startMenu.toggle(context),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           padding: const EdgeInsets.all(8),
