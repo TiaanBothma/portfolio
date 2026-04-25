@@ -35,6 +35,10 @@ class DesktopController extends GetxController {
       'vault',
       WindowState(offset: const Offset(120, 80), size: const Size(850, 550)),
     );
+    _registerWindow(
+      'notepad',
+      WindowState(offset: const Offset(200, 120), size: const Size(600, 500)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;

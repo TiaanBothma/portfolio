@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
+import 'package:portfolio/os_windows/notepad/notepad_window.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
 import 'package:portfolio/os_windows/vault/vault_window.dart';
 import 'package:portfolio/widgets/drag_resize_window.dart';
@@ -37,6 +38,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 600,
                 minHeight: 400,
                 child: VaultWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'notepad',
+                minWidth: 400,
+                minHeight: 300,
+                child: NotepadWindow(),
               ),
             ],
           ),

@@ -63,4 +63,4 @@ V1.2.0
 V1.0.0 Browser and terminal with basic commands
 V1.1.0 window size improvement, introducing neofetch command, more terminal features
 V1.2.0 Improved UI, navigation to my websites profiles, Improved Github, Fiverr and Linkedin pages
-V2.0.0 Improved UI and pages inside browser, Added vault / file application, improved user experience with size constraints and feeling
+V2.0.0 Improved UI and pages inside browser, Added vault / file application, improved user experience with size constraints and feeling, added notepad application for viewing text files

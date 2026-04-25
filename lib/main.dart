@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
+import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
@@ -15,6 +16,7 @@ void main() {
   Get.put(BrowserController());
   Get.put(StartMenuController());
   Get.put(VaultController());
+  Get.put(NotepadController());
 
   runApp(const MyApp());
 }

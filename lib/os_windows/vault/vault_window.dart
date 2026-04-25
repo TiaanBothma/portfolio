@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
+import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
@@ -19,7 +20,10 @@ class VaultWindow extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.black.withValues(alpha: 0.92),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.blue.withValues(alpha: 0.5), width: 1),
+        border: Border.all(
+          color: AppColors.blue.withValues(alpha: 0.5),
+          width: 1,
+        ),
       ),
       child: Column(
         children: [
@@ -51,8 +55,11 @@ class VaultWindow extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(PhosphorIconsRegular.vault,
-                    color: Colors.white54, size: 13),
+                Icon(
+                  PhosphorIconsRegular.vault,
+                  color: Colors.white54,
+                  size: 13,
+                ),
                 const SizedBox(width: 8),
                 Text('vault', style: AppTextStyles.label),
               ],
@@ -67,51 +74,56 @@ class VaultWindow extends StatelessWidget {
   Widget _buildToolBar() {
     final vault = Get.find<VaultController>();
 
-    return Obx(() => Container(
-      height: 36,
-      color: AppColors.deepBlue.withValues(alpha: 0.4),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Row(
-        children: [
-          // Back button
-          _toolbarButton(
-            icon: PhosphorIconsRegular.arrowLeft,
-            enabled: vault.canGoBack,
-            onTap: vault.goBack,
-          ),
-          const SizedBox(width: 4),
-          // Home button
-          _toolbarButton(
-            icon: PhosphorIconsRegular.house,
-            enabled: true,
-            onTap: vault.goHome,
-          ),
-          const SizedBox(width: 12),
-          // Path bar
-          Expanded(
-            child: Container(
-              height: 24,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: AppColors.black.withValues(alpha: 0.4),
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(
-                    color: AppColors.blue.withValues(alpha: 0.3)),
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  vault.currentPath,
-                  style: AppTextStyles.terminal.copyWith(
-                      color: Colors.white60, fontSize: 11),
-                  overflow: TextOverflow.ellipsis,
+    return Obx(
+      () => Container(
+        height: 36,
+        color: AppColors.deepBlue.withValues(alpha: 0.4),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Row(
+          children: [
+            // Back button
+            _toolbarButton(
+              icon: PhosphorIconsRegular.arrowLeft,
+              enabled: vault.canGoBack,
+              onTap: vault.goBack,
+            ),
+            const SizedBox(width: 4),
+            // Home button
+            _toolbarButton(
+              icon: PhosphorIconsRegular.house,
+              enabled: true,
+              onTap: vault.goHome,
+            ),
+            const SizedBox(width: 12),
+            // Path bar
+            Expanded(
+              child: Container(
+                height: 24,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: AppColors.black.withValues(alpha: 0.4),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                    color: AppColors.blue.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    vault.currentPath,
+                    style: AppTextStyles.terminal.copyWith(
+                      color: Colors.white60,
+                      fontSize: 11,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _toolbarButton({
@@ -160,9 +172,14 @@ class VaultWindow extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
-            child: Text('LOCATIONS',
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white24, fontSize: 10, letterSpacing: 1.5)),
+            child: Text(
+              'LOCATIONS',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white24,
+                fontSize: 10,
+                letterSpacing: 1.5,
+              ),
+            ),
           ),
           _sidebarItem(
             icon: PhosphorIconsRegular.house,
@@ -172,15 +189,22 @@ class VaultWindow extends StatelessWidget {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-            child: Text('FOLDERS',
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white24, fontSize: 10, letterSpacing: 1.5)),
+            child: Text(
+              'FOLDERS',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white24,
+                fontSize: 10,
+                letterSpacing: 1.5,
+              ),
+            ),
           ),
-          ...FileSystemData.root.subFolders.map((f) => _sidebarItem(
-            icon: PhosphorIconsRegular.folder,
-            label: f.name,
-            onTap: () => vault.openFolder(f),
-          )),
+          ...FileSystemData.root.subFolders.map(
+            (f) => _sidebarItem(
+              icon: PhosphorIconsRegular.folder,
+              label: f.name,
+              onTap: () => vault.openFolder(f),
+            ),
+          ),
         ],
       ),
     );
@@ -200,10 +224,14 @@ class VaultWindow extends StatelessWidget {
             Icon(icon, color: Colors.white54, size: 13),
             const SizedBox(width: 8),
             Flexible(
-              child: Text(label,
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white70, fontSize: 12),
-                  overflow: TextOverflow.ellipsis),
+              child: Text(
+                label,
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white70,
+                  fontSize: 12,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),
@@ -235,8 +263,10 @@ class VaultWindow extends StatelessWidget {
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 40),
-                child: Text('Empty folder',
-                    style: AppTextStyles.label.copyWith(color: Colors.white24)),
+                child: Text(
+                  'Empty folder',
+                  style: AppTextStyles.label.copyWith(color: Colors.white24),
+                ),
               ),
             ),
         ],
@@ -245,9 +275,14 @@ class VaultWindow extends StatelessWidget {
   }
 
   Widget _sectionLabel(String label) {
-    return Text(label,
-        style: AppTextStyles.label
-            .copyWith(color: Colors.white24, fontSize: 10, letterSpacing: 1.5));
+    return Text(
+      label,
+      style: AppTextStyles.label.copyWith(
+        color: Colors.white24,
+        fontSize: 10,
+        letterSpacing: 1.5,
+      ),
+    );
   }
 
   Widget _folderItem(VaultFolder folder, VaultController vault) {
@@ -262,17 +297,28 @@ class VaultWindow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
-              Icon(PhosphorIconsFill.folder,
-                  color: const Color(0xFF6B8AFF), size: 16),
+              Icon(
+                PhosphorIconsFill.folder,
+                color: const Color(0xFF6B8AFF),
+                size: 16,
+              ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(folder.name,
-                    style: AppTextStyles.label
-                        .copyWith(color: Colors.white, fontSize: 13)),
+                child: Text(
+                  folder.name,
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
               ),
-              Text('${folder.files.length + folder.subFolders.length} items',
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white30, fontSize: 11)),
+              Text(
+                '${folder.files.length + folder.subFolders.length} items',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white30,
+                  fontSize: 11,
+                ),
+              ),
             ],
           ),
         ),
@@ -286,22 +332,34 @@ class VaultWindow extends StatelessWidget {
 
       return _HoverItem(
         onTap: () => vault.selectFile(file),
+        onDoubleTap: () => Get.find<NotepadController>().openFile(file),
         selected: isSelected,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
-              Icon(PhosphorIconsRegular.fileText,
-                  color: Colors.white54, size: 16),
+              Icon(
+                PhosphorIconsRegular.fileText,
+                color: Colors.white54,
+                size: 16,
+              ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(file.name,
-                    style: AppTextStyles.label
-                        .copyWith(color: Colors.white, fontSize: 13)),
+                child: Text(
+                  file.name,
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
               ),
-              Text('.txt',
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white30, fontSize: 11)),
+              Text(
+                '.txt',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white30,
+                  fontSize: 11,
+                ),
+              ),
             ],
           ),
         ),
@@ -322,8 +380,8 @@ class VaultWindow extends StatelessWidget {
         child: file != null
             ? _filePreview(file)
             : folder != null
-                ? _folderPreview(folder)
-                : _emptyPreview(),
+            ? _folderPreview(folder)
+            : _emptyPreview(),
       );
     });
   }
@@ -338,19 +396,23 @@ class VaultWindow extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.black.withValues(alpha: 0.3),
             border: Border(
-              bottom: BorderSide(
-                  color: AppColors.blue.withValues(alpha: 0.2)),
+              bottom: BorderSide(color: AppColors.blue.withValues(alpha: 0.2)),
             ),
           ),
           child: Column(
             children: [
-              Icon(PhosphorIconsRegular.fileText,
-                  color: AppColors.blue, size: 36),
+              Icon(
+                PhosphorIconsRegular.fileText,
+                color: AppColors.blue,
+                size: 36,
+              ),
               const SizedBox(height: 8),
               Text(
                 file.name,
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white, fontSize: 12),
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -362,7 +424,10 @@ class VaultWindow extends StatelessWidget {
             child: Text(
               file.content,
               style: AppTextStyles.terminal.copyWith(
-                  color: Colors.white60, fontSize: 10, height: 1.6),
+                color: Colors.white60,
+                fontSize: 10,
+                height: 1.6,
+              ),
             ),
           ),
         ),
@@ -380,19 +445,25 @@ class VaultWindow extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.black.withValues(alpha: 0.3),
             border: Border(
-              bottom: BorderSide(
-                  color: AppColors.blue.withValues(alpha: 0.2)),
+              bottom: BorderSide(color: AppColors.blue.withValues(alpha: 0.2)),
             ),
           ),
           child: Column(
             children: [
-              Icon(PhosphorIconsFill.folder,
-                  color: const Color(0xFF6B8AFF), size: 36),
+              Icon(
+                PhosphorIconsFill.folder,
+                color: const Color(0xFF6B8AFF),
+                size: 36,
+              ),
               const SizedBox(height: 8),
-              Text(folder.name,
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white, fontSize: 12),
-                  textAlign: TextAlign.center),
+              Text(
+                folder.name,
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
@@ -407,9 +478,13 @@ class VaultWindow extends StatelessWidget {
               const SizedBox(height: 6),
               _previewStat('Type', 'File Folder'),
               const SizedBox(height: 16),
-              Text('Double-click to open',
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white24, fontSize: 11)),
+              Text(
+                'Double-click to open',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white24,
+                  fontSize: 11,
+                ),
+              ),
             ],
           ),
         ),
@@ -421,12 +496,20 @@ class VaultWindow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label,
-            style: AppTextStyles.label
-                .copyWith(color: Colors.white30, fontSize: 11)),
-        Text(value,
-            style: AppTextStyles.label
-                .copyWith(color: Colors.white60, fontSize: 11)),
+        Text(
+          label,
+          style: AppTextStyles.label.copyWith(
+            color: Colors.white30,
+            fontSize: 11,
+          ),
+        ),
+        Text(
+          value,
+          style: AppTextStyles.label.copyWith(
+            color: Colors.white60,
+            fontSize: 11,
+          ),
+        ),
       ],
     );
   }
@@ -436,22 +519,26 @@ class VaultWindow extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(PhosphorIconsRegular.selectionSlash,
-              color: Colors.white12, size: 32),
+          Icon(
+            PhosphorIconsRegular.selectionSlash,
+            color: Colors.white12,
+            size: 32,
+          ),
           const SizedBox(height: 12),
-          Text('No item selected',
-              style: AppTextStyles.label
-                  .copyWith(color: Colors.white24, fontSize: 12)),
+          Text(
+            'No item selected',
+            style: AppTextStyles.label.copyWith(
+              color: Colors.white24,
+              fontSize: 12,
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildVerticalDivider() {
-    return Container(
-      width: 1,
-      color: AppColors.blue.withValues(alpha: 0.15),
-    );
+    return Container(width: 1, color: AppColors.blue.withValues(alpha: 0.15));
   }
 }
 
@@ -490,8 +577,8 @@ class _HoverItemState extends State<_HoverItem> {
             color: widget.selected
                 ? AppColors.blue.withValues(alpha: 0.25)
                 : _hovered
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.transparent,
+                ? Colors.white.withValues(alpha: 0.05)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(4),
             border: Border.all(
               color: widget.selected
