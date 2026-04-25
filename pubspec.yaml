@@ -18,7 +18,10 @@ dependencies:
 
   #State Management
   get: ^4.7.3
+
+  # Web Functions
   web: ^1.1.1
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,8 @@
 Next Step:
-Notes app (when click on file in vault, then notes app should open to view)
-Start menu:
-Buttons should work
-When click outside the range of the start menu popup then it should pop / delete / go away
-
 Github page:
-remove Pull requests, issues, marketplace and explore button in the top right (maybe add another button that i can use to go to something or show something or do something)
-Make the tabs inside github work
+system mouse cursor = click
+launch urls correct dependancy
+Check that buttons in the top right work
 
 Linkedin page:
 Remove and replace buttons that have no use and that could be replaced by more practical buttons and features
@@ -16,6 +12,8 @@ My banner from linkedin should display here
 Fiverr page:
 Fix search bar and buttons ontaps
 
+notepad:
+add 'back' button then when click on back then it goes back to vault where the user was last directory
 
 =========
 Features:
@@ -50,7 +48,6 @@ Make wallpaper dynamic in correlation to the cursor, make it like a Neural Netwo
 !! What would have done different and how to improve
 
 !! Dynamic, 3D Graphics, How to make more interesting
-!! GITHUB: Check if there is any API that i could use to display any real information?
 
 ================
 Version History:
@@ -63,4 +60,4 @@ V1.2.0
 V1.0.0 Browser and terminal with basic commands
 V1.1.0 window size improvement, introducing neofetch command, more terminal features
 V1.2.0 Improved UI, navigation to my websites profiles, Improved Github, Fiverr and Linkedin pages
-V2.0.0 Improved UI and pages inside browser, Added vault / file application, improved user experience with size constraints and feeling, added notepad application for viewing text files
+V2.0.0 Improved UI, improved pages inside browser, Added vault / file application, improved user experience with size constraints and feeling, added notepad application for viewing text files, start menu improved and working
