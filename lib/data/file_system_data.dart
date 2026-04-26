@@ -27,7 +27,7 @@ class FileSystemData {
     subFolders: [_experience, _projects, _education, _certifications, _system],
   );
 
-  // ─── EXPERIENCE ───────────────────────────────────────────
+  // === EXPERIENCE ===========================================
   static final VaultFolder _experience = VaultFolder(
     name: 'Experience',
     files: [
@@ -38,7 +38,7 @@ COMPANY:   18INK Productions (Pty)
 TYPE:      Part-time
 PERIOD:    Feb 2024 - Present
 LOCATION:  South Africa - Remote
-─────────────────────────────────────────
+=========================================
 
 ABOUT THE ROLE:
 Worked during Grade 11, 12 and University developing
@@ -67,7 +67,7 @@ COMPANY:   MyEncore CC
 TYPE:      Part-time
 PERIOD:    Feb 2024 - Jun 2024
 LOCATION:  South Africa - Remote
-─────────────────────────────────────────
+=========================================
 
 ABOUT THE ROLE:
 Worked during Grade 11 developing a comprehensive
@@ -97,7 +97,7 @@ COMPANY:   Fiverr
 TYPE:      Part-time / Freelance
 PERIOD:    Dec 2022 - Sep 2024
 LOCATION:  Remote
-─────────────────────────────────────────
+=========================================
 
 ABOUT THE ROLE:
 Started freelancing in Grade 10 - delivering custom
@@ -126,7 +126,7 @@ COMPANY:   Bergvallei Estates
 TYPE:      Part-time
 PERIOD:    Nov 2023 - Nov 2025
 LOCATION:  Krugersdorp, Gauteng - On-site
-─────────────────────────────────────────
+=========================================
 
 ABOUT THE ROLE:
 Worked during Grade 11 and 12 in a fast-paced
@@ -148,7 +148,7 @@ SKILLS USED:
     ],
   );
 
-  // ─── PROJECTS ─────────────────────────────────────────────
+  // === PROJECTS =============================================
   static final VaultFolder _projects = VaultFolder(
     name: 'Projects',
     files: [
@@ -158,7 +158,7 @@ SKILLS USED:
 COMPANY:   18INK Productions (Pty)
 PERIOD:    Sep 2025 - Present
 STATUS:    Active
-─────────────────────────────────────────
+=========================================
 
 DESCRIPTION:
 Full-stack Flutter application with Cloud Firestore
@@ -184,7 +184,7 @@ COMPANY:   18INK Productions (Pty)
 PERIOD:    Jun 2024 - Jan 2025
 STATUS:    Completed
 URL:       https://mo27-1bdd8.web.app/
-─────────────────────────────────────────
+=========================================
 
 DESCRIPTION:
 Full-stack printing service web application with
@@ -208,7 +208,7 @@ TECH STACK:
         content: '''PROJECT:   Local DNS with Docker: Pi-hole + Unbound
 PERIOD:    Dec 2024
 STATUS:    Completed (Personal Project)
-─────────────────────────────────────────
+=========================================
 
 DESCRIPTION:
 Containerized DNS-based ad-blocking solution running
@@ -235,7 +235,7 @@ TECH STACK:
     ],
   );
 
-  // ─── EDUCATION ────────────────────────────────────────────
+  // === EDUCATION ============================================
   static final VaultFolder _education = VaultFolder(
     name: 'Education',
     files: [
@@ -245,7 +245,7 @@ TECH STACK:
 DEGREE:      Bachelor of Science - Information Technology
 PERIOD:      Jan 2026 - Dec 2029
 STATUS:      Currently Enrolled
-─────────────────────────────────────────
+=========================================
 
 ABOUT:
 Currently pursuing a BSc in Information Technology
@@ -268,7 +268,7 @@ QUALIFICATION: National Senior Certificate (Matric)
 PERIOD:      Jan 2022 - Dec 2025
 STATUS:      Completed
 RESULT:      4 Distinctions - 82% Average
-─────────────────────────────────────────
+=========================================
 
 DISTINCTIONS:
   - Information Technology
@@ -294,7 +294,7 @@ AWARDS:
     ],
   );
 
-  // ─── CERTIFICATIONS ───────────────────────────────────────
+  // === CERTIFICATIONS =======================================
   static final VaultFolder _certifications = VaultFolder(
     name: 'Certifications',
     files: [
@@ -303,7 +303,7 @@ AWARDS:
         content: '''CERTIFICATION: Grade 12 - Best in IT
 ISSUER:        Hoërskool Noordheuwel
 ISSUED:        October 2025
-─────────────────────────────────────────
+=========================================
 
 DESCRIPTION:
 Awarded the top Information Technology student
@@ -322,7 +322,7 @@ Recognized for excellence in:
                Professional Certificate
 ISSUER:        GitHub
 ISSUED:        December 2024
-─────────────────────────────────────────
+=========================================
 
 DESCRIPTION:
 Completed the GitHub Career Essentials professional
@@ -341,7 +341,7 @@ TOPICS COVERED:
     ],
   );
 
-  // ─── SYSTEM ───────────────────────────────────────────────
+  // === SYSTEM ===============================================
   static final VaultFolder _system = VaultFolder(
     name: 'System',
     files: [
@@ -350,7 +350,7 @@ TOPICS COVERED:
         content:
             '''Welcome to Tiaan Bothma OS
 ${PortfolioData.version}
-─────────────────────────────────────────
+=========================================
 
 Hello! Thanks for taking the time to explore.
 
@@ -377,46 +377,62 @@ ABOUT THIS PROJECT:
   The terminal has real command history (arrow up).
   The browser renders custom-built profile pages.
 
-─────────────────────────────────────────
+=========================================
 ${PortfolioData.name}
 ${PortfolioData.role}
 ${PortfolioData.linkedin}
 ''',
       ),
-      VaultFile(
-        name: 'version.txt',
-        content:
-            '''Tiaan Bothma OS
+     VaultFile(
+  name: 'version.txt',
+  content: '''Tiaan Bothma OS
 Version: ${PortfolioData.version}
-─────────────────────────────────────────
+=========================================
 
 CURRENT VERSION: ${PortfolioData.version}
 
 CHANGELOG:
-  v1.0.0 - Initial Release
-  ───────────────────────
-  + Desktop OS concept with wallpaper
+  v1.0.0 — Initial Release
+  =======================
+  + Initial Release
+  + Custom OS logo designed and created
   + Terminal with full CV commands
-  + Command history (arrow up/down)
-  + Neofetch command
   + Browser with tab support
-  + GitHub profile page
-  + LinkedIn profile page
-  + Fiverr profile page
-  + Browser home with pinned sites
+  + GitHub, LinkedIn and Fiverr profile pages
   + Draggable and resizable windows
-  + Windows remember position and size
-  + Status card on desktop
-  + Start menu with quick launch
   + Mobile blocking (desktop only)
-  + Live updating clock in top bar
-  + Vault file explorer
-  + OS favicon
 
-─────────────────────────────────────────
+  v1.1.0 — Terminal Improvements
+  ===============================
+  + Neofetch command with ASCII logo
+  + Terminal Command history (arrow up / down)
+  + Window size improvements and constraints
+  + Additional terminal commands and responses
+  + Improved terminal feel and behaviour
+
+  v1.2.0 — Pages and Navigation
+  ==============================
+  + Improved UI across the OS
+  + Navigation to real social profiles
+  + External links open in new browser tab
+
+  v2.0.0 — Major Update
+  ======================
+  + Vault files and folder application
+  + Improved LinkedIn page with banner
+  + Improved Fiverr page with working buttons
+  + Improved GitHub page with real API data
+  + Notepad application for viewing text files
+  + File system with folders and .txt files
+  + Start menu redesigned and fully working
+  + Improved overall user experience
+  + Improved window sizing and feel
+  + About section and system files added
+
+=========================================
 Built with Flutter Web
 ''',
-      ),
+),
     ],
   );
 }

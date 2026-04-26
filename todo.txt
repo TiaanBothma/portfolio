@@ -1,3 +1,11 @@
+Fixes + Updates:
+Link in github under pfp doesn't work
+Add links to the section under the pfp in the github page (mo and holimint)
+MouseRegion in the vault when the user clicks on back or home button
+links should work in the notepad
+refresh button in the browser should work but remove the arrow buttons (i do not need them) but it may take away from the aunthenticity of the browser so maybe get a use for it
+'+' button in the browswer -> MouseRegion
+
 notepad:
 add 'back' button then when click on back then it goes back to vault where the user was last directory
 file / edit / view buttons should work
@@ -21,37 +29,25 @@ More pages inside the browser
 !! Terminal
 'tab button' for completing string in terminal window
 change '--list' to '-list'
-add '--all' command to most of the commands to get even more data
+'man' command in the terminal for some of the command
 '--web' or '--site' (or something like that) to go to the actual site for example 'linkedin --web' will take the user to the actual site
-bar cursor in terminal
-'contact' command then the user must be able to type in something like ssh contact --linkedin then it will take the user to the actual site (but when entering contact then it must give a 'hint' that the user can type this in)
-'man' prefix to most of the commands
-
+'ssh' command then the user must be able to type in something like 'ssh linkedin' then it will take the user to the actual linkedin site (so in the 'help' command then it should say that 'ssh' is a command then the user can type in 'man ssh' to see what they can do with ssh)
+just typing 'man' OR 'help -list' will give the full list of command that the user can type so that 'help command' isn't too full
 
 ===============
 Later Features:
 ===============
 
-!! Terminal
-hidden commands inside the terminal
-
 !! Wallpaper
-Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows
+Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows but the user can choose between this wallpaper and another one in the settings app
 
 !! Settings app
-!! What would have done different and how to improve
+settings app -> bar cursor in terminal
+?? Should make it so that settings app remembers user settings?
 
 !! Dynamic, 3D Graphics, How to make more interesting
 
 ================
 Version History:
 ================
-V1.2.0
-
-1 = version (Big update)
-2 = small feature update
-
-V1.0.0 Browser and terminal with basic commands
-V1.1.0 window size improvement, introducing neofetch command, more terminal features
-V1.2.0 Improved UI, navigation to my websites profiles, Improved Github, Fiverr and Linkedin pages
-V2.0.0 Improved UI, improved pages inside browser, Added vault / file application, improved user experience with size constraints and feeling, added notepad application for viewing text files, start menu improved and working
+V2.1.0 -> 

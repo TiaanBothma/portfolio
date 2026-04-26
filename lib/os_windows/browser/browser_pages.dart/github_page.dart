@@ -943,8 +943,9 @@ class _GitHubPageState extends State<GitHubPage> {
   }
 
   Color _langColor(String skills) {
-    if (skills.contains('Flutter') || skills.contains('Dart'))
+    if (skills.contains('Flutter') || skills.contains('Dart')) {
       return const Color(0xFF54C5F8);
+    }
     if (skills.contains('Python')) return const Color(0xFF3572A5);
     if (skills.contains('Docker')) return const Color(0xFF384D54);
     if (skills.contains('JavaScript')) return const Color(0xFFF1E05A);

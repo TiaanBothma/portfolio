@@ -163,7 +163,7 @@ class NotepadWindow extends StatelessWidget {
 
   Widget _buildLine(String line) {
     // Separator lines
-    if (line.startsWith('─') || line.startsWith('━')) {
+    if (line.startsWith('=')) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Divider(
