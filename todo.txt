@@ -5,15 +5,20 @@ launch urls correct dependancy
 Check that buttons in the top right work
 
 Linkedin page:
-Remove and replace buttons that have no use and that could be replaced by more practical buttons and features
-make more button also go to actual linkedin site
-My banner from linkedin should display here
+Home, network, jobs, notifications button in linkedin page doesn't do anything and not sure what is should do
 
 Fiverr page:
 Fix search bar and buttons ontaps
 
 notepad:
 add 'back' button then when click on back then it goes back to vault where the user was last directory
+file / edit / view buttons should work
+file - simple functions like close, go back (same as the back button), etc.
+edit - not sure what to do here yet
+view - font size + to increase font size | font size - to decrease font size
+
+New applicatoin:
+what application should i build next
 
 =========
 Features:
