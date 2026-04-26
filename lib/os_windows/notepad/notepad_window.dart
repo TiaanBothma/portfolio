@@ -52,21 +52,35 @@ class NotepadWindow extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(
-                    PhosphorIconsRegular.notepad,
+              // Back button
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () {
+                    desktop.toggleWindow('notepad');
+                    desktop.toggleWindow('vault');
+                  },
+                  child: Icon(
+                    PhosphorIconsRegular.arrowLeft,
                     color: Colors.white54,
-                    size: 13,
+                    size: 15,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    notepad.currentFile.value?.name ?? 'notepad',
-                    style: AppTextStyles.label,
-                  ),
-                ],
+                ),
+              ),
+              const SizedBox(width: 30),
+              Icon(
+                PhosphorIconsRegular.notepad,
+                color: Colors.white54,
+                size: 13,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  notepad.currentFile.value?.name ?? 'notepad',
+                  style: AppTextStyles.label,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               MinimizeButton(onTap: notepad.close),
             ],

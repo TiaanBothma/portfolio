@@ -82,7 +82,7 @@ class _LogoButtonState extends State<_LogoButton> {
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Image.asset('assets/logo.png', width: 40, height: 40),
+          child: Image.asset('assets/logo.png', width: 45, height: 45),
         ),
       ),
     );

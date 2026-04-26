@@ -24,13 +24,7 @@ class FileSystemData {
 
   static final VaultFolder root = VaultFolder(
     name: 'Tiaan Bothma OS',
-    subFolders: [
-      _experience,
-      _projects,
-      _education,
-      _certifications,
-      _system,
-    ],
+    subFolders: [_experience, _projects, _education, _certifications, _system],
   );
 
   // ─── EXPERIENCE ───────────────────────────────────────────
@@ -43,7 +37,7 @@ class FileSystemData {
 COMPANY:   18INK Productions (Pty)
 TYPE:      Part-time
 PERIOD:    Feb 2024 - Present
-LOCATION:  South Africa · Remote
+LOCATION:  South Africa - Remote
 ─────────────────────────────────────────
 
 ABOUT THE ROLE:
@@ -62,8 +56,8 @@ RESPONSIBILITIES:
     UI/UX design, and agile methodologies
 
 SKILLS USED:
-  Flutter · Cloud Firestore · Firebase · Dart
-  UI/UX Design · State Management · Git
+  Flutter - Cloud Firestore - Firebase - Dart
+  UI/UX Design - State Management - Git
 ''',
       ),
       VaultFile(
@@ -72,7 +66,7 @@ SKILLS USED:
 COMPANY:   MyEncore CC
 TYPE:      Part-time
 PERIOD:    Feb 2024 - Jun 2024
-LOCATION:  South Africa · Remote
+LOCATION:  South Africa - Remote
 ─────────────────────────────────────────
 
 ABOUT THE ROLE:
@@ -92,8 +86,8 @@ RESPONSIBILITIES:
     based on user feedback
 
 SKILLS USED:
-  Flutter · Firebase · Full-Stack Development
-  UI/UX Design · Team Collaboration · Testing
+  Flutter - Firebase - Full-Stack Development
+  UI/UX Design - Team Collaboration - Testing
 ''',
       ),
       VaultFile(
@@ -106,7 +100,7 @@ LOCATION:  Remote
 ─────────────────────────────────────────
 
 ABOUT THE ROLE:
-Started freelancing in Grade 10 — delivering custom
+Started freelancing in Grade 10 - delivering custom
 Flutter applications and games to international clients.
 
 RESPONSIBILITIES:
@@ -121,8 +115,8 @@ RESPONSIBILITIES:
     problem-solving skills
 
 SKILLS USED:
-  Flutter · Python · Unity · C# · Client Communication
-  Project Management · Firebase · Dart
+  Flutter - Python - Unity - C# - Client Communication
+  Project Management - Firebase - Dart
 ''',
       ),
       VaultFile(
@@ -131,7 +125,7 @@ SKILLS USED:
 COMPANY:   Bergvallei Estates
 TYPE:      Part-time
 PERIOD:    Nov 2023 - Nov 2025
-LOCATION:  Krugersdorp, Gauteng · On-site
+LOCATION:  Krugersdorp, Gauteng - On-site
 ─────────────────────────────────────────
 
 ABOUT THE ROLE:
@@ -147,8 +141,8 @@ RESPONSIBILITIES:
     pressure
 
 SKILLS USED:
-  Teamwork · Communication · Problem Solving
-  Multitasking · Customer Service
+  Teamwork - Communication - Problem Solving
+  Multitasking - Customer Service
 ''',
       ),
     ],
@@ -179,8 +173,8 @@ FEATURES:
   - Clean and professional UI/UX design
 
 TECH STACK:
-  Flutter · Cloud Firestore · Firebase Auth
-  Firebase Storage · Dart · GetX
+  Flutter - Cloud Firestore - Firebase Auth
+  Firebase Storage - Dart - GetX
 ''',
       ),
       VaultFile(
@@ -205,8 +199,8 @@ FEATURES:
   - Flutter Web deployment via Firebase Hosting
 
 TECH STACK:
-  Flutter · Cloud Firestore · Firebase Auth
-  Firebase Hosting · Dart · Flutter Web
+  Flutter - Cloud Firestore - Firebase Auth
+  Firebase Hosting - Dart - Flutter Web
 ''',
       ),
       VaultFile(
@@ -234,8 +228,8 @@ WHAT I LEARNED:
   - Network administration on a local level
 
 TECH STACK:
-  Docker · Portainer · Pi-hole · Unbound
-  Linux · Server Management · Networking
+  Docker - Portainer - Pi-hole - Unbound
+  Linux - Server Management - Networking
 ''',
       ),
     ],
@@ -248,7 +242,7 @@ TECH STACK:
       VaultFile(
         name: 'North_West_University.txt',
         content: '''INSTITUTION: North-West University (NWU)
-DEGREE:      Bachelor of Science — Information Technology
+DEGREE:      Bachelor of Science - Information Technology
 PERIOD:      Jan 2026 - Dec 2029
 STATUS:      Currently Enrolled
 ─────────────────────────────────────────
@@ -273,28 +267,28 @@ FOCUS AREAS:
 QUALIFICATION: National Senior Certificate (Matric)
 PERIOD:      Jan 2022 - Dec 2025
 STATUS:      Completed
-RESULT:      4 Distinctions · 82% Average
+RESULT:      4 Distinctions - 82% Average
 ─────────────────────────────────────────
 
 DISTINCTIONS:
   - Information Technology
-    Top IT student · Programming · Full Stack Development
+    Top IT student - Programming - Full Stack Development
 
   - Computer Applications Technology
-    Microsoft Excel/Word · Hardware/Software · HTML
+    Microsoft Excel/Word - Hardware/Software - HTML
 
   - Accounting
-    Business Management · Financial Tracking
+    Business Management - Financial Tracking
     Profit & Loss Ratios
 
   - Mathematics
-    Algebra · Number Theory · Geometry · Arithmetic
+    Algebra - Number Theory - Geometry - Arithmetic
 
 ACTIVITIES:
-  Rugby · Gym · Helping other students
+  Rugby - Gym - Helping other students
 
 AWARDS:
-  Grade 12 Best in IT — Oct 2025
+  Grade 12 Best in IT - Oct 2025
 ''',
       ),
     ],
@@ -306,7 +300,7 @@ AWARDS:
     files: [
       VaultFile(
         name: 'Best_in_IT_Grade12.txt',
-        content: '''CERTIFICATION: Grade 12 — Best in IT
+        content: '''CERTIFICATION: Grade 12 - Best in IT
 ISSUER:        Hoërskool Noordheuwel
 ISSUED:        October 2025
 ─────────────────────────────────────────
@@ -353,31 +347,32 @@ TOPICS COVERED:
     files: [
       VaultFile(
         name: 'README.txt',
-        content: '''Welcome to Tiaan Bothma OS
+        content:
+            '''Welcome to Tiaan Bothma OS
 ${PortfolioData.version}
 ─────────────────────────────────────────
 
 Hello! Thanks for taking the time to explore.
 
 This OS is a portfolio built entirely in Flutter Web
-by Tiaan Bothma — a remote Flutter Full Stack Developer
+by Tiaan Bothma - a remote Flutter Full Stack Developer
 and BSc IT student at North-West University.
 
 HOW TO NAVIGATE:
   > Use the dock at the bottom to open apps
-  > Terminal — type "help" to see all commands
-  > Vault — browse files and folders like a real OS
-  > Browser — visit GitHub, LinkedIn and Fiverr pages
+  > Terminal - type "help" to see all commands
+  > Vault - browse files and folders like a real OS
+  > Browser - visit GitHub, LinkedIn and Fiverr pages
 
 QUICK TERMINAL COMMANDS:
-  whoami          — who am I
-  cv --view       — full CV in the terminal
-  projects --list — all my projects
-  contact         — how to reach me
-  neofetch        — system info
+  whoami           - who am I
+  cv --view        - full CV in the terminal
+  projects --list  - all my projects
+  contact          - how to reach me
+  neofetch         - system info
 
 ABOUT THIS PROJECT:
-  Built with Flutter Web · GetX · Firebase Hosting
+  Built with Flutter Web - GetX - Firebase Hosting
   Every window is draggable and resizable.
   The terminal has real command history (arrow up).
   The browser renders custom-built profile pages.
@@ -390,14 +385,15 @@ ${PortfolioData.linkedin}
       ),
       VaultFile(
         name: 'version.txt',
-        content: '''Tiaan Bothma OS
+        content:
+            '''Tiaan Bothma OS
 Version: ${PortfolioData.version}
 ─────────────────────────────────────────
 
 CURRENT VERSION: ${PortfolioData.version}
 
 CHANGELOG:
-  v1.0.0 — Initial Release
+  v1.0.0 - Initial Release
   ───────────────────────
   + Desktop OS concept with wallpaper
   + Terminal with full CV commands
