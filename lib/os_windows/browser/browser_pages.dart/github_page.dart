@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/github_api.dart';
 import 'package:portfolio/data/portfolio_data.dart';
-import 'package:portfolio/os_windows/browser/browser_controller.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:web/web.dart' as web;
 
 class GitHubPage extends StatefulWidget {
   const GitHubPage({super.key});
@@ -94,19 +93,8 @@ class _GitHubPageState extends State<GitHubPage> {
           _navButton(
             label: 'View on GitHub',
             icon: PhosphorIconsRegular.arrowSquareOut,
-            onTap: () {},
-            // onTap: () => launchUrl(
-            // Uri.parse('https://${PortfolioData.github}')),
-          ),
-          const SizedBox(width: 8),
-          // Open Terminal CV button
-          _navButton(
-            label: 'cv --view',
-            icon: PhosphorIconsRegular.terminalWindow,
-            onTap: () {
-              final browser = Get.find<BrowserController>();
-              browser.navigateTo('home', 'Home');
-            },
+
+            onTap: () => web.window.open('https://${PortfolioData.github}'),
           ),
         ],
       ),
@@ -118,27 +106,30 @@ class _GitHubPageState extends State<GitHubPage> {
     required IconData icon,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          color: const Color(0xFF21262D),
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: _borderColor),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: _textMuted, size: 13),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: AppTextStyles.label.copyWith(
-                color: _textPrimary,
-                fontSize: 12,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: const Color(0xFF21262D),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: _borderColor),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: _textMuted, size: 13),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: AppTextStyles.label.copyWith(
+                  color: _textPrimary,
+                  fontSize: 12,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -167,7 +158,7 @@ class _GitHubPageState extends State<GitHubPage> {
                 ? Image.network(
                     _profile['avatar_url'],
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => const Icon(
+                    errorBuilder: (_, _, _) => const Icon(
                       PhosphorIconsRegular.user,
                       color: _textMuted,
                       size: 80,
@@ -211,23 +202,26 @@ class _GitHubPageState extends State<GitHubPage> {
         const SizedBox(height: 16),
 
         // Follow button
-        GestureDetector(
-          // onTap: () => launchUrl(
-          // Uri.parse('https://${PortfolioData.github}')),
-          child: Container(
-            width: double.infinity,
-            height: 32,
-            decoration: BoxDecoration(
-              color: const Color(0xFF21262D),
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: _borderColor),
-            ),
-            child: Center(
-              child: Text(
-                'Follow',
-                style: AppTextStyles.label.copyWith(
-                  color: _textPrimary,
-                  fontSize: 13,
+        MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => web.window.open('https://${PortfolioData.github}'),
+
+            child: Container(
+              width: double.infinity,
+              height: 32,
+              decoration: BoxDecoration(
+                color: const Color(0xFF21262D),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: _borderColor),
+              ),
+              child: Center(
+                child: Text(
+                  'Follow',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ),
@@ -340,50 +334,55 @@ class _GitHubPageState extends State<GitHubPage> {
         final count = tab['count'];
         final active = _activeTab == label;
 
-        return GestureDetector(
-          onTap: () => setState(() => _activeTab = label),
-          child: Container(
-            margin: const EdgeInsets.only(right: 4),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: active ? const Color(0xFFF78166) : Colors.transparent,
-                  width: 2,
+        return MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => setState(() => _activeTab = label),
+            child: Container(
+              margin: const EdgeInsets.only(right: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: active
+                        ? const Color(0xFFF78166)
+                        : Colors.transparent,
+                    width: 2,
+                  ),
                 ),
               ),
-            ),
-            child: Row(
-              children: [
-                Text(
-                  label,
-                  style: AppTextStyles.label.copyWith(
-                    color: active ? _textPrimary : _textMuted,
-                    fontSize: 13,
+              child: Row(
+                children: [
+                  Text(
+                    label,
+                    style: AppTextStyles.label.copyWith(
+                      color: active ? _textPrimary : _textMuted,
+                      fontSize: 13,
+                    ),
                   ),
-                ),
-                if (count != null) ...[
-                  const SizedBox(width: 6),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF21262D),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: _borderColor),
-                    ),
-                    child: Text(
-                      count,
-                      style: AppTextStyles.label.copyWith(
-                        color: _textMuted,
-                        fontSize: 11,
+                  if (count != null) ...[
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF21262D),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: _borderColor),
+                      ),
+                      child: Text(
+                        count,
+                        style: AppTextStyles.label.copyWith(
+                          color: _textMuted,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         );
@@ -466,127 +465,130 @@ class _GitHubPageState extends State<GitHubPage> {
   }
 
   Widget _buildApiRepoCard(GitHubRepo repo) {
-    return GestureDetector(
-      // onTap: () => launchUrl(Uri.parse(repo.url)),
-      child: Container(
-        width: 280,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: _cardColor,
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: _borderColor),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  PhosphorIconsRegular.bookBookmark,
-                  color: _textMuted,
-                  size: 14,
-                ),
-                const SizedBox(width: 6),
-                Flexible(
-                  child: Text(
-                    repo.name,
-                    style: AppTextStyles.label.copyWith(
-                      color: _linkBlue,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => web.window.open(repo.url, '_blank'),
+        child: Container(
+          width: 280,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: _cardColor,
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: _borderColor),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    PhosphorIconsRegular.bookBookmark,
+                    color: _textMuted,
+                    size: 14,
+                  ),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      repo.name,
+                      style: AppTextStyles.label.copyWith(
+                        color: _linkBlue,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: _borderColor),
+                    ),
+                    child: Text(
+                      'Public',
+                      style: AppTextStyles.label.copyWith(
+                        color: _textMuted,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                repo.description,
+                style: AppTextStyles.label.copyWith(
+                  color: _textMuted,
+                  fontSize: 12,
+                  height: 1.5,
                 ),
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: _langColor(repo.language),
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: _borderColor),
-                  ),
-                  child: Text(
-                    'Public',
+                  const SizedBox(width: 4),
+                  Text(
+                    repo.language,
                     style: AppTextStyles.label.copyWith(
                       color: _textMuted,
-                      fontSize: 10,
+                      fontSize: 12,
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              repo.description,
-              style: AppTextStyles.label.copyWith(
-                color: _textMuted,
-                fontSize: 12,
-                height: 1.5,
+                  const Spacer(),
+                  const Icon(
+                    PhosphorIconsRegular.star,
+                    color: _textMuted,
+                    size: 12,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    repo.stars.toString(),
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Icon(
+                    PhosphorIconsRegular.gitFork,
+                    color: _textMuted,
+                    size: 12,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    repo.forks.toString(),
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: _langColor(repo.language),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  repo.language,
-                  style: AppTextStyles.label.copyWith(
-                    color: _textMuted,
-                    fontSize: 12,
-                  ),
-                ),
-                const Spacer(),
-                const Icon(
-                  PhosphorIconsRegular.star,
+              const SizedBox(height: 6),
+              Text(
+                'Updated ${repo.updatedAt}',
+                style: AppTextStyles.label.copyWith(
                   color: _textMuted,
-                  size: 12,
+                  fontSize: 11,
                 ),
-                const SizedBox(width: 4),
-                Text(
-                  repo.stars.toString(),
-                  style: AppTextStyles.label.copyWith(
-                    color: _textMuted,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Icon(
-                  PhosphorIconsRegular.gitFork,
-                  color: _textMuted,
-                  size: 12,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  repo.forks.toString(),
-                  style: AppTextStyles.label.copyWith(
-                    color: _textMuted,
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 6),
-            Text(
-              'Updated ${repo.updatedAt}',
-              style: AppTextStyles.label.copyWith(
-                color: _textMuted,
-                fontSize: 11,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -678,107 +680,110 @@ class _GitHubPageState extends State<GitHubPage> {
   }
 
   Widget _buildRepoListItem(GitHubRepo repo) {
-    return GestureDetector(
-      // onTap: () => launchUrl(Uri.parse(repo.url)),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 1),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: _borderColor, width: 1)),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        repo.name,
-                        style: AppTextStyles.body.copyWith(
-                          color: _linkBlue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: _borderColor),
-                        ),
-                        child: Text(
-                          'Public',
-                          style: AppTextStyles.label.copyWith(
-                            color: _textMuted,
-                            fontSize: 10,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => web.window.open(repo.url, '_blank'),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 1),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: _borderColor, width: 1)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          repo.name,
+                          style: AppTextStyles.body.copyWith(
+                            color: _linkBlue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    repo.description,
-                    style: AppTextStyles.label.copyWith(
-                      color: _textMuted,
-                      fontSize: 12,
-                      height: 1.4,
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: _borderColor),
+                          ),
+                          child: Text(
+                            'Public',
+                            style: AppTextStyles.label.copyWith(
+                              color: _textMuted,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: _langColor(repo.language),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        repo.language,
-                        style: AppTextStyles.label.copyWith(
-                          color: _textMuted,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      const Icon(
-                        PhosphorIconsRegular.star,
+                    const SizedBox(height: 4),
+                    Text(
+                      repo.description,
+                      style: AppTextStyles.label.copyWith(
                         color: _textMuted,
-                        size: 12,
+                        fontSize: 12,
+                        height: 1.4,
                       ),
-                      const SizedBox(width: 4),
-                      Text(
-                        repo.stars.toString(),
-                        style: AppTextStyles.label.copyWith(
-                          color: _textMuted,
-                          fontSize: 12,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: _langColor(repo.language),
+                            shape: BoxShape.circle,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        'Updated ${repo.updatedAt}',
-                        style: AppTextStyles.label.copyWith(
-                          color: _textMuted,
-                          fontSize: 12,
+                        const SizedBox(width: 4),
+                        Text(
+                          repo.language,
+                          style: AppTextStyles.label.copyWith(
+                            color: _textMuted,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(width: 16),
+                        const Icon(
+                          PhosphorIconsRegular.star,
+                          color: _textMuted,
+                          size: 12,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          repo.stars.toString(),
+                          style: AppTextStyles.label.copyWith(
+                            color: _textMuted,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Updated ${repo.updatedAt}',
+                          style: AppTextStyles.label.copyWith(
+                            color: _textMuted,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,15 +1,3 @@
-Next Step:
-Github page:
-system mouse cursor = click
-launch urls correct dependancy
-Check that buttons in the top right work
-
-Linkedin page:
-Home, network, jobs, notifications button in linkedin page doesn't do anything and not sure what is should do
-
-Fiverr page:
-Fix search bar and buttons ontaps
-
 notepad:
 add 'back' button then when click on back then it goes back to vault where the user was last directory
 file / edit / view buttons should work
@@ -18,6 +6,7 @@ edit - not sure what to do here yet
 view - font size + to increase font size | font size - to decrease font size
 
 New applicatoin:
+setting app (change wallpaper, what more?)
 what application should i build next
 
 =========

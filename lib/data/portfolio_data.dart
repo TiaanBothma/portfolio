@@ -12,7 +12,8 @@ class PortfolioData {
       'Remote-working junior software developer with experience building and maintaining Flutter applications. Skilled in UI design, backend systems, and full-stack development using Cloud Firestore.';
 
   // Contact
-  static const String linkedin = 'www.linkedin.com/in/tiaan-bothma-0b1bb3283/?isSelfProfile=true';
+  static const String linkedin =
+      'linkedin.com/in/tiaan-bothma-0b1bb3283/?isSelfProfile=true';
   static const String github = 'github.com/TiaanBothma';
   static const String fiverr = 'fiverr.com/s/xX3GEzD';
 

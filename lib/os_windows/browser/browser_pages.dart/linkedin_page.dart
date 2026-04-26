@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/themes/text_style.dart';
+import 'package:web/web.dart' as web;
 
 class LinkedInPage extends StatelessWidget {
   const LinkedInPage({super.key});
@@ -51,8 +52,11 @@ class LinkedInPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Row(
         children: [
-          const Icon(PhosphorIconsFill.linkedinLogo,
-              color: _linkedInBlue, size: 34),
+          const Icon(
+            PhosphorIconsFill.linkedinLogo,
+            color: _linkedInBlue,
+            size: 34,
+          ),
           const SizedBox(width: 16),
           // Replaced search bar with name/tagline
           Column(
@@ -69,56 +73,38 @@ class LinkedInPage extends StatelessWidget {
               ),
               Text(
                 PortfolioData.role,
-                style: AppTextStyles.label
-                    .copyWith(color: _textMuted, fontSize: 11),
+                style: AppTextStyles.label.copyWith(
+                  color: _textMuted,
+                  fontSize: 11,
+                ),
               ),
             ],
           ),
           const Spacer(),
-          _navIcon(PhosphorIconsRegular.house, 'Home'),
-          _navIcon(PhosphorIconsRegular.users, 'Network'),
-          _navIcon(PhosphorIconsRegular.briefcase, 'Jobs'),
-          _navIcon(PhosphorIconsRegular.bell, 'Notifications'),
-          const SizedBox(width: 16),
-          // View profile button — opens real LinkedIn
-          GestureDetector(
-            // onTap: () => launchUrl(
-                // Uri.parse('https://${PortfolioData.linkedin}')),
-            child: Container(
-              height: 32,
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              decoration: BoxDecoration(
-                color: _linkedInBlue,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Center(
-                child: Text(
-                  'View Real Profile',
-                  style: AppTextStyles.label.copyWith(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => web.window.open('https://${PortfolioData.linkedin}'),
+              child: Container(
+                height: 32,
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                decoration: BoxDecoration(
+                  color: _linkedInBlue,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Center(
+                  child: Text(
+                    'View Real Profile',
+                    style: AppTextStyles.label.copyWith(
+                      color: Colors.white,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _navIcon(IconData icon, String label) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: _textMuted, size: 20),
-          const SizedBox(height: 2),
-          Text(label,
-              style: AppTextStyles.label
-                  .copyWith(color: _textMuted, fontSize: 11)),
         ],
       ),
     );
@@ -163,14 +149,11 @@ class LinkedInPage extends StatelessWidget {
               width: double.infinity,
               height: 120,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
+              errorBuilder: (_, _, _) => Container(
                 height: 120,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFF04052E),
-                      const Color(0xFF0D00A4),
-                    ],
+                    colors: [const Color(0xFF04052E), const Color(0xFF0D00A4)],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
@@ -194,8 +177,11 @@ class LinkedInPage extends StatelessWidget {
                       color: const Color(0xFF374151),
                       border: Border.all(color: _cardColor, width: 3),
                     ),
-                    child: const Icon(PhosphorIconsRegular.user,
-                        color: _textMuted, size: 36),
+                    child: const Icon(
+                      PhosphorIconsRegular.user,
+                      color: _textMuted,
+                      size: 36,
+                    ),
                   ),
                 ),
                 Transform.translate(
@@ -203,40 +189,53 @@ class LinkedInPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(PortfolioData.name,
-                          style: AppTextStyles.heading.copyWith(
-                              color: _textPrimary, fontSize: 20)),
+                      Text(
+                        PortfolioData.name,
+                        style: AppTextStyles.heading.copyWith(
+                          color: _textPrimary,
+                          fontSize: 20,
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text(PortfolioData.role,
-                          style: AppTextStyles.body.copyWith(
-                              color: _textPrimary, fontSize: 14)),
+                      Text(
+                        PortfolioData.role,
+                        style: AppTextStyles.body.copyWith(
+                          color: _textPrimary,
+                          fontSize: 14,
+                        ),
+                      ),
                       const SizedBox(height: 4),
                       Text(
                         '${PortfolioData.university} · ${PortfolioData.location}',
-                        style: AppTextStyles.label
-                            .copyWith(color: _textMuted, fontSize: 13),
+                        style: AppTextStyles.label.copyWith(
+                          color: _textMuted,
+                          fontSize: 13,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       // Action buttons
                       Row(
                         children: [
-                          GestureDetector(
-                            // onTap: () => launchUrl(Uri.parse(
-                                // 'https://${PortfolioData.linkedin}')),
-                            child: _profileButton('Connect',
-                                filled: true),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => web.window.open(
+                                'https://${PortfolioData.linkedin}',
+                              ),
+
+                              child: _profileButton('Connect', filled: true),
+                            ),
                           ),
                           const SizedBox(width: 8),
-                          GestureDetector(
-                            // onTap: () => launchUrl(Uri.parse(
-                                // 'https://${PortfolioData.linkedin}')),
-                            child: _profileButton('Message'),
-                          ),
-                          const SizedBox(width: 8),
-                          GestureDetector(
-                            // onTap: () => launchUrl(Uri.parse(
-                                // 'https://${PortfolioData.linkedin}')),
-                            child: _profileButton('Follow'),
+                          MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => web.window.open(
+                                'https://${PortfolioData.linkedin}',
+                              ),
+
+                              child: _profileButton('Follow'),
+                            ),
                           ),
                         ],
                       ),
@@ -258,16 +257,17 @@ class LinkedInPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: filled ? _linkedInBlue : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-            color: filled ? _linkedInBlue : _linkedInLightBlue),
+        border: Border.all(color: filled ? _linkedInBlue : _linkedInLightBlue),
       ),
       child: Center(
-        child: Text(label,
-            style: AppTextStyles.label.copyWith(
-              color: filled ? Colors.white : _linkedInLightBlue,
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-            )),
+        child: Text(
+          label,
+          style: AppTextStyles.label.copyWith(
+            color: filled ? Colors.white : _linkedInLightBlue,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -279,9 +279,14 @@ class LinkedInPage extends StatelessWidget {
         children: [
           _cardTitle('About'),
           const SizedBox(height: 12),
-          Text(PortfolioData.bio,
-              style: AppTextStyles.body.copyWith(
-                  color: _textPrimary, fontSize: 14, height: 1.6)),
+          Text(
+            PortfolioData.bio,
+            style: AppTextStyles.body.copyWith(
+              color: _textPrimary,
+              fontSize: 14,
+              height: 1.6,
+            ),
+          ),
         ],
       ),
     );
@@ -296,11 +301,18 @@ class LinkedInPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _cardTitle('Experience'),
-              GestureDetector(
-                // onTap: () => launchUrl(
-                    // Uri.parse('https://${PortfolioData.linkedin}')),
-                child: Icon(PhosphorIconsRegular.arrowSquareOut,
-                    color: _textMuted, size: 16),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () =>
+                      web.window.open('https://${PortfolioData.linkedin}'),
+
+                  child: Icon(
+                    PhosphorIconsRegular.arrowSquareOut,
+                    color: _textMuted,
+                    size: 16,
+                  ),
+                ),
               ),
             ],
           ),
@@ -324,28 +336,38 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.briefcase,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.briefcase,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(e['title'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
+                Text(
+                  e['title'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
                 Text(
                   '${e['company']} · ${e['type']}',
-                  style: AppTextStyles.label
-                      .copyWith(color: _textPrimary, fontSize: 13),
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
                 ),
                 Text(
                   '${e['period']} · ${e['location']}',
-                  style: AppTextStyles.label
-                      .copyWith(color: _textMuted, fontSize: 12),
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),
@@ -364,11 +386,18 @@ class LinkedInPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _cardTitle('Education'),
-              GestureDetector(
-                // onTap: () => launchUrl(
-                    // Uri.parse('https://${PortfolioData.linkedin}')),
-                child: Icon(PhosphorIconsRegular.arrowSquareOut,
-                    color: _textMuted, size: 16),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () =>
+                      web.window.open('https://${PortfolioData.linkedin}'),
+
+                  child: Icon(
+                    PhosphorIconsRegular.arrowSquareOut,
+                    color: _textMuted,
+                    size: 16,
+                  ),
+                ),
               ),
             ],
           ),
@@ -392,29 +421,47 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.graduationCap,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.graduationCap,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(e['institution'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
-                Text(e['qualification'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textPrimary, fontSize: 13)),
-                Text(e['period'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textMuted, fontSize: 12)),
+                Text(
+                  e['institution'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  e['qualification'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  e['period'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
+                ),
                 if (e['note'] != null)
-                  Text(e['note']!,
-                      style: AppTextStyles.label
-                          .copyWith(color: _textMuted, fontSize: 12)),
+                  Text(
+                    e['note']!,
+                    style: AppTextStyles.label.copyWith(
+                      color: _textMuted,
+                      fontSize: 12,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -448,12 +495,15 @@ class LinkedInPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: _linkedInBlue.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-            color: _linkedInBlue.withValues(alpha: 0.4)),
+        border: Border.all(color: _linkedInBlue.withValues(alpha: 0.4)),
       ),
-      child: Text(skill,
-          style: AppTextStyles.label
-              .copyWith(color: _linkedInLightBlue, fontSize: 13)),
+      child: Text(
+        skill,
+        style: AppTextStyles.label.copyWith(
+          color: _linkedInLightBlue,
+          fontSize: 13,
+        ),
+      ),
     );
   }
 
@@ -466,17 +516,23 @@ class LinkedInPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _cardTitle('Licenses & Certifications'),
-              GestureDetector(
-                // onTap: () => launchUrl(
-                    // Uri.parse('https://${PortfolioData.linkedin}')),
-                child: Icon(PhosphorIconsRegular.arrowSquareOut,
-                    color: _textMuted, size: 16),
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () =>
+                      web.window.open('https://${PortfolioData.linkedin}'),
+
+                  child: Icon(
+                    PhosphorIconsRegular.arrowSquareOut,
+                    color: _textMuted,
+                    size: 16,
+                  ),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 16),
-          ...PortfolioData.certifications
-              .map((c) => _certItem(c)),
+          ...PortfolioData.certifications.map((c) => _certItem(c)),
         ],
       ),
     );
@@ -495,25 +551,39 @@ class LinkedInPage extends StatelessWidget {
               color: const Color(0xFF374151),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(PhosphorIconsRegular.certificate,
-                color: _textMuted, size: 20),
+            child: const Icon(
+              PhosphorIconsRegular.certificate,
+              color: _textMuted,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(c['title'] ?? '',
-                    style: AppTextStyles.body.copyWith(
-                        color: _textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
-                Text(c['issuer'] ?? '',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textPrimary, fontSize: 13)),
-                Text('Issued ${c['date']}',
-                    style: AppTextStyles.label
-                        .copyWith(color: _textMuted, fontSize: 12)),
+                Text(
+                  c['title'] ?? '',
+                  style: AppTextStyles.body.copyWith(
+                    color: _textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  c['issuer'] ?? '',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textPrimary,
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  'Issued ${c['date']}',
+                  style: AppTextStyles.label.copyWith(
+                    color: _textMuted,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
           ),
@@ -540,8 +610,7 @@ class LinkedInPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: _linkedInBlue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: _linkedInBlue.withValues(alpha: 0.4)),
+        border: Border.all(color: _linkedInBlue.withValues(alpha: 0.4)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,36 +626,48 @@ class LinkedInPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text('Open to work',
-                  style: AppTextStyles.body.copyWith(
-                      color: _textPrimary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14)),
+              Text(
+                'Open to work',
+                style: AppTextStyles.body.copyWith(
+                  color: _textPrimary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             'Flutter Developer · Full Stack · Remote · Part-time',
             style: AppTextStyles.label.copyWith(
-                color: _textMuted, fontSize: 13, height: 1.5),
+              color: _textMuted,
+              fontSize: 13,
+              height: 1.5,
+            ),
           ),
           const SizedBox(height: 12),
-          GestureDetector(
-            // onTap: () => launchUrl(
-                // Uri.parse('https://${PortfolioData.linkedin}')),
-            child: Container(
-              width: double.infinity,
-              height: 32,
-              decoration: BoxDecoration(
-                border: Border.all(color: _linkedInLightBlue),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Center(
-                child: Text('See all details',
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => web.window.open('https://${PortfolioData.linkedin}'),
+
+              child: Container(
+                width: double.infinity,
+                height: 32,
+                decoration: BoxDecoration(
+                  border: Border.all(color: _linkedInLightBlue),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Center(
+                  child: Text(
+                    'See all details',
                     style: AppTextStyles.label.copyWith(
-                        color: _linkedInLightBlue,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold)),
+                      color: _linkedInLightBlue,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -610,9 +691,13 @@ class LinkedInPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
           const SizedBox(height: 8),
-          Text('All-Star',
-              style: AppTextStyles.label
-                  .copyWith(color: _linkedInLightBlue, fontSize: 13)),
+          Text(
+            'All-Star',
+            style: AppTextStyles.label.copyWith(
+              color: _linkedInLightBlue,
+              fontSize: 13,
+            ),
+          ),
         ],
       ),
     );
@@ -628,7 +713,7 @@ class LinkedInPage extends StatelessWidget {
           _contactRow(
             PhosphorIconsRegular.linkedinLogo,
             'LinkedIn',
-            PortfolioData.linkedin,
+            'linkedin.com/tiaan-bothma',
           ),
           const SizedBox(height: 10),
           _contactRow(
@@ -648,26 +733,43 @@ class LinkedInPage extends StatelessWidget {
   }
 
   Widget _contactRow(IconData icon, String label, String url) {
-    return GestureDetector(
-      // onTap: () => launchUrl(Uri.parse('https://$url')),
-      child: Row(
-        children: [
-          Icon(icon, color: _textMuted, size: 16),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          if (label == 'LinkedIn') {
+            web.window.open('https://${PortfolioData.linkedin}');
+          } else {
+            web.window.open('https://$url');
+          }
+        },
+
+        child: Row(
+          children: [
+            Icon(icon, color: _textMuted, size: 16),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
                   style: AppTextStyles.label.copyWith(
-                      color: _textPrimary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold)),
-              Text(url,
+                    color: _textPrimary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  url,
                   style: AppTextStyles.label.copyWith(
-                      color: _linkedInLightBlue, fontSize: 12)),
-            ],
-          ),
-        ],
+                    color: _linkedInLightBlue,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -686,8 +788,9 @@ class LinkedInPage extends StatelessWidget {
   }
 
   Widget _cardTitle(String title) {
-    return Text(title,
-        style: AppTextStyles.heading
-            .copyWith(color: _textPrimary, fontSize: 18));
+    return Text(
+      title,
+      style: AppTextStyles.heading.copyWith(color: _textPrimary, fontSize: 18),
+    );
   }
 }
