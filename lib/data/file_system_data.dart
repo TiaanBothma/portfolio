@@ -301,35 +301,35 @@ AWARDS:
     files: [
       VaultFile(
         name: 'Best_in_IT_Grade12.png',
-        imagePath: 'assets/IT_Award.jpg',
+        imagePath: 'assets/certifications/IT_Award.jpg',
       ),
       VaultFile(
         name: 'GitHub_Professional_Certificate.png',
-        imagePath: 'assets/Github_Essentials_Certificate.png',
+        imagePath: 'assets/certifications/Github_Essentials_Certificate.png',
       ),
       VaultFile(
         name: 'Learning_Data_Science.png',
-        imagePath: 'assets/Data_Science_Certificate.png',
+        imagePath: 'assets/certifications/Data_Science_Certificate.png',
       ),
       VaultFile(
         name: 'Flutter_Course_Simplilearn.png',
-        imagePath: 'assets/Flutter_Certificate.jpg',
+        imagePath: 'assets/certifications/Flutter_Certificate.jpg',
       ),
       VaultFile(
         name: 'Career_Essentials_Cybersecurity.png',
-        imagePath: 'assets/Cybersecurity_Essentials_Certificate.png',
+        imagePath: 'assets/certifications/Cybersecurity_Essentials_Certificate.png',
       ),
       VaultFile(
         name: 'Cybersecurity_Threat_Landscape.png',
-        imagePath: 'assets/Linkedin_Cybersecurity_Certificate.png',
+        imagePath: 'assets/certifications/Linkedin_Cybersecurity_Certificate.png',
       ),
       VaultFile(
         name: 'Fortinet_Cybersecurity.png',
-        imagePath: 'assets/Fortinet_Certificate.png',
+        imagePath: 'assets/certifications/Fortinet_Certificate.png',
       ),
       VaultFile(
         name: 'CCNA_Fundamentals.png',
-        imagePath: 'assets/CCNA_Fundamentals_Certificate.jpg',
+        imagePath: 'assets/certifications/CCNA_Fundamentals_Certificate.jpg',
       ),
     ],
   );

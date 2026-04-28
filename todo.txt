@@ -1,11 +1,9 @@
 notepad:
 file / edit / view buttons should work (maybe use overlay again for when the user clicks outside the popup then it pops)
-file - simple functions like close, go back (same as the back button), etc.
-edit - not sure what to do here yet
-view - font size + to increase font size | font size - to decrease font size
+file: close button, back to vault (same as the back button in the title bar), print to be able to print the hard copy of text / images
+edit - find button to find text, copy all button to copy all of the text (for images this would copy the image name i guess)
+view - Font size + and -, word wrap toggle button, line number toggle show
 still shows .txt for the .png files
-
-!! Setting app (change wallpaper, what more?)
 
 !! Browser
 Make the current active tab underline blue like the other tabs
@@ -15,10 +13,23 @@ More pages inside the browser
 !! Terminal
 'tab button' for completing string in terminal window
 change '--list' to '-list'
-'man' command in the terminal for some of the command
-'--web' or '--site' (or something like that) to go to the actual site for example 'linkedin --web' will take the user to the actual site
+'--web' or '--site' (or something like that) to go to the actual site for example 'contact linkedin --web' will take the user to the actual site
 'ssh' command then the user must be able to type in something like 'ssh linkedin' then it will take the user to the actual linkedin site (so in the 'help' command then it should say that 'ssh' is a command then the user can type in 'man ssh' to see what they can do with ssh)
+(need to decide between --web, --site or ssh or maybe i could add all three or just maybe two of the options)
 just typing 'man' OR 'help -list' will give the full list of command that the user can type so that 'help command' isn't too full
+'sudo apt update' -> prints bunch of lines like fetching package, fetching tiaan's info stuff like that and if the site hasn't been updates in a while then it should say updates are due or something like that
+
+!! Browser Page: Portfolio page / Project Page
+!! Browser Page: CV Page (what would be the difference between this and the linkedin page)
+
+!! Setting App (save with shared preferences):
+Wallpaper change (3-4 wallpaper options)
+Terminal cursor style (block vs underline vs line)
+Font size (changes the whole site's font size)
+Window transparency (between 85% and 100%)
+Clock style format (12hr vs 24hr)
+Accent color change
+Reset settings to default
 
 ===============
 Later Features:
@@ -36,4 +47,4 @@ settings app -> bar cursor in terminal
 ================
 Version History:
 ================
-V2.1.0 -> 
+V2.1.0 -> Image viewer to view certificates, Urls work in the notes app, better UI / UX control and more pleasent user experience, small fixes and features
