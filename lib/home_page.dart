@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
+import 'package:portfolio/os_windows/image_viewer/image_viewer_window.dart';
 import 'package:portfolio/os_windows/notepad/notepad_window.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
 import 'package:portfolio/os_windows/vault/vault_window.dart';
@@ -44,6 +45,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 400,
                 minHeight: 300,
                 child: NotepadWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'imageviewer',
+                minWidth: 400,
+                minHeight: 300,
+                child: ImageViewerWindow(),
               ),
             ],
           ),

@@ -1,13 +1,11 @@
 notepad:
-file / edit / view buttons should work
+file / edit / view buttons should work (maybe use overlay again for when the user clicks outside the popup then it pops)
 file - simple functions like close, go back (same as the back button), etc.
 edit - not sure what to do here yet
 view - font size + to increase font size | font size - to decrease font size
+still shows .txt for the .png files
 
-New applicatoin:
-setting app (change wallpaper, what more?)
-Image viewer to view certificates
-update certifications but just do that after image viewer is added
+!! Setting app (change wallpaper, what more?)
 
 !! Browser
 Make the current active tab underline blue like the other tabs

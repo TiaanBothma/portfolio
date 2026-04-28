@@ -3,8 +3,9 @@ import 'package:portfolio/data/portfolio_data.dart';
 class VaultFile {
   final String name;
   final String content;
+  final String? imagePath;
 
-  const VaultFile({required this.name, required this.content});
+  const VaultFile({required this.name, this.content = '', this.imagePath});
 }
 
 class VaultFolder {
@@ -299,44 +300,36 @@ AWARDS:
     name: 'Certifications',
     files: [
       VaultFile(
-        name: 'Best_in_IT_Grade12.txt',
-        content: '''CERTIFICATION: Grade 12 - Best in IT
-ISSUER:        Hoërskool Noordheuwel
-ISSUED:        October 2025
-=========================================
-
-DESCRIPTION:
-Awarded the top Information Technology student
-award in Grade 12 at Hoërskool Noordheuwel.
-
-Recognized for excellence in:
-  - Programming and software development
-  - Full stack development concepts
-  - Computer science fundamentals
-  - Consistent academic performance in IT
-''',
+        name: 'Best_in_IT_Grade12.png',
+        imagePath: 'assets/IT_Award.jpg',
       ),
       VaultFile(
-        name: 'GitHub_Professional_Certificate.txt',
-        content: '''CERTIFICATION: Career Essentials in GitHub
-               Professional Certificate
-ISSUER:        GitHub
-ISSUED:        December 2024
-=========================================
-
-DESCRIPTION:
-Completed the GitHub Career Essentials professional
-certification covering modern development workflows
-and GitHub platform expertise.
-
-TOPICS COVERED:
-  - Version control with Git and GitHub
-  - Collaborative development workflows
-  - Pull requests and code review processes
-  - GitHub Actions and automation
-  - Repository management best practices
-  - Open source contribution workflows
-''',
+        name: 'GitHub_Professional_Certificate.png',
+        imagePath: 'assets/Github_Essentials_Certificate.png',
+      ),
+      VaultFile(
+        name: 'Learning_Data_Science.png',
+        imagePath: 'assets/Data_Science_Certificate.png',
+      ),
+      VaultFile(
+        name: 'Flutter_Course_Simplilearn.png',
+        imagePath: 'assets/Flutter_Certificate.jpg',
+      ),
+      VaultFile(
+        name: 'Career_Essentials_Cybersecurity.png',
+        imagePath: 'assets/Cybersecurity_Essentials_Certificate.png',
+      ),
+      VaultFile(
+        name: 'Cybersecurity_Threat_Landscape.png',
+        imagePath: 'assets/Linkedin_Cybersecurity_Certificate.png',
+      ),
+      VaultFile(
+        name: 'Fortinet_Cybersecurity.png',
+        imagePath: 'assets/Fortinet_Certificate.png',
+      ),
+      VaultFile(
+        name: 'CCNA_Fundamentals.png',
+        imagePath: 'assets/CCNA_Fundamentals_Certificate.jpg',
       ),
     ],
   );
@@ -383,9 +376,10 @@ ${PortfolioData.role}
 ${PortfolioData.linkedin}
 ''',
       ),
-     VaultFile(
-  name: 'version.txt',
-  content: '''Tiaan Bothma OS
+      VaultFile(
+        name: 'version.txt',
+        content:
+            '''Tiaan Bothma OS
 Version: ${PortfolioData.version}
 =========================================
 
@@ -432,7 +426,7 @@ CHANGELOG:
 =========================================
 Built with Flutter Web
 ''',
-),
+      ),
     ],
   );
 }

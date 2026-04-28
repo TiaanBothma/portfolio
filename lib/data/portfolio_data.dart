@@ -121,5 +121,36 @@ class PortfolioData {
       'issuer': 'GitHub',
       'date': 'Dec 2024',
     },
+    {
+      'title': 'Learning Data Science: Understanding the Basics',
+      'issuer': 'LinkedIn',
+      'date': 'Dec 2024',
+    },
+    {
+      'title': 'Database Management System',
+      'issuer': 'Great Learning',
+      'date': 'Dec 2024',
+    },
+    {'title': 'Flutter Course', 'issuer': 'Simplilearn', 'date': 'Feb 2024'},
+    {
+      'title': 'Career Essentials in Cybersecurity by Microsoft and LinkedIn',
+      'issuer': 'Microsoft',
+      'date': 'Jan 2024',
+    },
+    {
+      'title': 'The Cybersecurity Threat Landscape',
+      'issuer': 'LinkedIn',
+      'date': 'Jan 2024',
+    },
+    {
+      'title': 'Fortinet Certified Fundamentals Cybersecurity',
+      'issuer': 'Fortinet',
+      'date': 'Dec 2023',
+    },
+    {
+      'title': 'Cisco Certified Network Associate (CCNA) Fundamentals',
+      'issuer': 'Simplilearn',
+      'date': 'Nov 2023',
+    },
   ];
 }

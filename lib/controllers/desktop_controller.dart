@@ -39,6 +39,10 @@ class DesktopController extends GetxController {
       'notepad',
       WindowState(offset: const Offset(200, 120), size: const Size(600, 500)),
     );
+    _registerWindow(
+      'imageviewer',
+      WindowState(offset: const Offset(150, 80), size: const Size(750, 550)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;

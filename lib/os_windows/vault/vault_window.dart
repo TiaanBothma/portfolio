@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
+import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
@@ -335,14 +336,25 @@ class VaultWindow extends StatelessWidget {
 
       return _HoverItem(
         onTap: () => vault.selectFile(file),
-        onDoubleTap: () => Get.find<NotepadController>().openFile(file),
+        onDoubleTap: () {
+          if (file.imagePath != null) {
+            Get.find<ImageViewerController>().openImage(
+              file.name,
+              file.imagePath!,
+            );
+          } else {
+            Get.find<NotepadController>().openFile(file);
+          }
+        },
         selected: isSelected,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
               Icon(
-                PhosphorIconsRegular.fileText,
+                file.imagePath != null
+                    ? PhosphorIconsRegular.image
+                    : PhosphorIconsRegular.fileText,
                 color: Colors.white54,
                 size: 16,
               ),
