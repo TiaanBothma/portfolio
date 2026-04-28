@@ -275,21 +275,26 @@ class _GitHubPageState extends State<GitHubPage> {
         ),
         const SizedBox(height: 12),
 
-        _sidebarItem(PhosphorIconsRegular.mapPin, PortfolioData.location),
-        const SizedBox(height: 8),
-        _sidebarItem(PhosphorIconsRegular.graduationCap, 'NWU — BSc IT'),
-        const SizedBox(height: 8),
-        _sidebarItem(
-          PhosphorIconsRegular.linkedinLogo,
-          PortfolioData.linkedin,
-          color: _linkBlue,
-        ),
+     _sidebarItem(PhosphorIconsRegular.mapPin, PortfolioData.location),
+_sidebarItem(PhosphorIconsRegular.graduationCap, 'NWU — BSc IT'),
+_sidebarItem(
+  PhosphorIconsRegular.linkedinLogo,
+  PortfolioData.linkedin,
+  color: _linkBlue,
+  url: 'https://${PortfolioData.linkedin}',
+),
+_sidebarItem(
+  PhosphorIconsRegular.globe,
+  'MO27 Portal',
+  color: _linkBlue,
+  url: 'https://mo27-1bdd8.web.app/',
+),
       ],
     );
   }
 
-  Widget _sidebarItem(IconData icon, String text, {Color? color}) {
-    return Row(
+  Widget _sidebarItem(IconData icon, String text, {Color? color, String? url}) {
+    final widget = Row(
       children: [
         Icon(icon, color: _textMuted, size: 14),
         const SizedBox(width: 6),
@@ -305,6 +310,21 @@ class _GitHubPageState extends State<GitHubPage> {
         ),
       ],
     );
+
+    if (url != null) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 4),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => web.window.open(url, '_blank'),
+            child: widget,
+          ),
+        ),
+      );
+    }
+
+    return Padding(padding: const EdgeInsets.only(bottom: 4), child: widget);
   }
 
   Widget _buildMainContent() {

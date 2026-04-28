@@ -1,13 +1,4 @@
-Fixes + Updates:
-Link in github under pfp doesn't work
-Add links to the section under the pfp in the github page (mo and holimint)
-MouseRegion in the vault when the user clicks on back or home button
-links should work in the notepad
-refresh button in the browser should work but remove the arrow buttons (i do not need them) but it may take away from the aunthenticity of the browser so maybe get a use for it
-'+' button in the browswer -> MouseRegion
-
 notepad:
-add 'back' button then when click on back then it goes back to vault where the user was last directory
 file / edit / view buttons should work
 file - simple functions like close, go back (same as the back button), etc.
 edit - not sure what to do here yet
@@ -15,11 +6,8 @@ view - font size + to increase font size | font size - to decrease font size
 
 New applicatoin:
 setting app (change wallpaper, what more?)
-what application should i build next
-
-=========
-Features:
-=========
+Image viewer to view certificates
+update certifications but just do that after image viewer is added
 
 !! Browser
 Make the current active tab underline blue like the other tabs

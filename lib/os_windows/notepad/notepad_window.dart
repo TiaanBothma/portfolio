@@ -6,6 +6,7 @@ import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
+import 'package:web/web.dart' as web;
 
 class NotepadWindow extends StatelessWidget {
   const NotepadWindow({super.key});
@@ -162,6 +163,66 @@ class NotepadWindow extends StatelessWidget {
   }
 
   Widget _buildLine(String line) {
+     // Extract URL — handles both https:// and bare domains like linkedin.com
+  final urlRegex = RegExp(
+    r'(https?://[^\s]+|(?:www\.)?[\w\-]+\.(?:com|app|dev|co\.za|org|net|io)/[^\s]*)',
+  );
+  final urlMatch = urlRegex.firstMatch(line);
+
+  if (urlMatch != null) {
+    final rawUrl = urlMatch.group(0)!;
+    final url = rawUrl.startsWith('http') ? rawUrl : 'https://$rawUrl';
+    final beforeUrl = line.substring(0, urlMatch.start);
+    final afterUrl = line.substring(urlMatch.end);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 2),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            if (beforeUrl.isNotEmpty)
+              TextSpan(
+                text: beforeUrl,
+                style: AppTextStyles.terminal.copyWith(
+                  color: AppColors.blue.withValues(alpha: 0.9),
+                  fontSize: 12,
+                  height: 1.6,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            WidgetSpan(
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => web.window.open(url, '_blank'),
+                  child: Text(
+                    rawUrl,
+                    style: AppTextStyles.terminal.copyWith(
+                      color: const Color(0xFF58A6FF),
+                      fontSize: 12,
+                      height: 1.6,
+                      decoration: TextDecoration.underline,
+                      decorationColor: const Color(0xFF58A6FF),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            if (afterUrl.isNotEmpty)
+              TextSpan(
+                text: afterUrl,
+                style: AppTextStyles.terminal.copyWith(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  height: 1.6,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
     // Separator lines
     if (line.startsWith('=')) {
       return Padding(

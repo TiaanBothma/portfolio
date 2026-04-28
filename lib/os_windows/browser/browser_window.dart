@@ -129,14 +129,17 @@ class BrowserWindow extends StatelessWidget {
               ),
             ),
             // New tab button
-            GestureDetector(
-              onTap: () => browser.openNewTab(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Icon(
-                  PhosphorIconsRegular.plus,
-                  color: Colors.white54,
-                  size: 16,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => browser.openNewTab(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(
+                    PhosphorIconsRegular.plus,
+                    color: Colors.white54,
+                    size: 16,
+                  ),
                 ),
               ),
             ),
@@ -156,23 +159,39 @@ class BrowserWindow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(
           children: [
-            // Back button (placeholder for now)
-            Icon(
-              PhosphorIconsRegular.arrowLeft,
-              color: Colors.white38,
-              size: 16,
+            // Back button — goes to home
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () => browser.navigateTo('home', 'New Tab'),
+                child: Icon(
+                  PhosphorIconsRegular.arrowLeft,
+                  color: Colors.white60,
+                  size: 16,
+                ),
+              ),
             ),
             const SizedBox(width: 8),
-            Icon(
-              PhosphorIconsRegular.arrowRight,
-              color: Colors.white38,
-              size: 16,
-            ),
-            const SizedBox(width: 8),
-            Icon(
-              PhosphorIconsRegular.arrowClockwise,
-              color: Colors.white38,
-              size: 16,
+            // Refresh button — rebuilds current page
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  final current = browser.activeTab;
+                  if (current == null) return;
+                  final url = current.url;
+                  final title = current.title;
+                  browser.navigateTo('home', 'Loading...');
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    browser.navigateTo(url, title);
+                  });
+                },
+                child: Icon(
+                  PhosphorIconsRegular.arrowClockwise,
+                  color: Colors.white60,
+                  size: 16,
+                ),
+              ),
             ),
             const SizedBox(width: 12),
             // URL bar

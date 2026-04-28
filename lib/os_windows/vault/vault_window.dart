@@ -131,19 +131,22 @@ class VaultWindow extends StatelessWidget {
     required bool enabled,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: Container(
-        width: 28,
-        height: 28,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Icon(
-          icon,
-          color: enabled ? Colors.white60 : Colors.white24,
-          size: 14,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: enabled ? onTap : null,
+        child: Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Icon(
+            icon,
+            color: enabled ? Colors.white60 : Colors.white24,
+            size: 14,
+          ),
         ),
       ),
     );
