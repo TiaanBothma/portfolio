@@ -1,4 +1,4 @@
-notepad:
+!! Notepad:
 file / edit / view buttons should work (maybe use overlay again for when the user clicks outside the popup then it pops)
 file: close button, back to vault (same as the back button in the title bar), print to be able to print the hard copy of text / images
 edit - find button to find text, copy all button to copy all of the text (for images this would copy the image name i guess)
@@ -24,23 +24,13 @@ just typing 'man' OR 'help -list' will give the full list of command that the us
 
 !! Setting App (save with shared preferences):
 Wallpaper change (3-4 wallpaper options)
+Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows but the user can choose between this wallpaper and another one in the settings app
 Terminal cursor style (block vs underline vs line)
 Font size (changes the whole site's font size)
 Window transparency (between 85% and 100%)
 Clock style format (12hr vs 24hr)
 Accent color change
 Reset settings to default
-
-===============
-Later Features:
-===============
-
-!! Wallpaper
-Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows but the user can choose between this wallpaper and another one in the settings app
-
-!! Settings app
-settings app -> bar cursor in terminal
-?? Should make it so that settings app remembers user settings?
 
 !! Dynamic, 3D Graphics, How to make more interesting
 

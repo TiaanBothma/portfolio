@@ -369,7 +369,7 @@ class VaultWindow extends StatelessWidget {
                 ),
               ),
               Text(
-                '.txt',
+                file.imagePath != null ? '.png' : '.txt',
                 style: AppTextStyles.label.copyWith(
                   color: Colors.white30,
                   fontSize: 11,
