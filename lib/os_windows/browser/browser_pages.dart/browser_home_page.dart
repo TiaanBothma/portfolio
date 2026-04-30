@@ -41,6 +41,14 @@ class _BrowserHomePageState extends State<BrowserHomePage> {
       icon: PhosphorIconsBold.handCoins,
       accentColor: Color(0xFF1DBF73),
     ),
+    _PinnedSite(
+      id: 'cv',
+      label: 'CV',
+      url: 'cv',
+      subtitle: 'Download or print my CV',
+      icon: PhosphorIconsRegular.filePdf,
+      accentColor: Color(0xFF0D00A4),
+    ),
   ];
 
   @override

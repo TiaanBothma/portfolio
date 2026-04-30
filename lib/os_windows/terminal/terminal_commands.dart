@@ -439,14 +439,14 @@ class TerminalCommands {
       '─────────────────────────────',
       'OS       Tiaan Bothma OS ${PortfolioData.version}',
       'Shell    terminal v2.0',
-      'Theme    Midnight Hacker',
+      'Theme    Midnight',
       'Font     Oxanium / JetBrains Mono',
       'Stack    Flutter · Firebase · Dart',
       'Role     ${PortfolioData.role}',
       'Uni      ${PortfolioData.university}',
       'Status   ${PortfolioData.status}',
       '',
-      '███ ███ ███ ███ ███',
+      '       ███ ███ ███ ███ ███',
     ];
 
     final lines = <TerminalLine>[];

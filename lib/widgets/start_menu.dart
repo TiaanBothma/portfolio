@@ -54,6 +54,18 @@ class StartMenu extends StatelessWidget {
           _buildDivider(),
           _buildSection('FIND ME ON', [
             _buildItem(
+              icon: PhosphorIconsRegular.filePdf,
+              label: 'CV',
+              onTap: () {
+                Get.find<DesktopController>().toggleWindow('browser');
+                Get.find<BrowserController>().openNewTab(
+                  title: 'CV',
+                  url: 'cv',
+                );
+                Get.find<StartMenuController>().close();
+              },
+            ),
+            _buildItem(
               icon: PhosphorIconsRegular.linkedinLogo,
               label: 'LinkedIn',
               onTap: () {

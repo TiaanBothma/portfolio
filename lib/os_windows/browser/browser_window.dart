@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
+import 'package:portfolio/os_windows/browser/browser_pages.dart/cv_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/fiverr_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/github_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/linkedin_page.dart';
@@ -77,72 +78,60 @@ class BrowserWindow extends StatelessWidget {
                 itemCount: browser.tabs.length,
                 itemBuilder: (context, index) {
                   final tab = browser.tabs[index];
-                  final isActive = tab.id == browser.activeTabId.value;
-
-                  return GestureDetector(
-                    onTap: () => browser.switchTab(tab.id),
-                    child: Container(
-                      constraints: const BoxConstraints(
-                        minWidth: 120,
-                        maxWidth: 200,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: isActive
-                            ? AppColors.black.withValues(alpha: 0.6)
-                            : Colors.transparent,
-                        border: Border(
-                          bottom: BorderSide(
+                  // Each tab item has its own Obx watching activeTabId
+                  return Obx(() {
+                    final isActive = tab.id == browser.activeTabId.value;
+                    return MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => browser.switchTab(tab.id),
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minWidth: 120,
+                            maxWidth: 200,
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
                             color: isActive
-                                ? AppColors.blue
+                                ? AppColors.black.withValues(alpha: 0.6)
                                 : Colors.transparent,
-                            width: 2,
+                            border: Border(
+                              bottom: BorderSide(
+                                color: isActive
+                                    ? AppColors.blue
+                                    : Colors.transparent,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  tab.title,
+                                  style: AppTextStyles.label.copyWith(
+                                    color: isActive
+                                        ? Colors.white
+                                        : Colors.white54,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              _CloseTabButton(
+                                onTap: () => browser.closeTab(tab.id),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              tab.title,
-                              style: AppTextStyles.label.copyWith(
-                                color: isActive ? Colors.white : Colors.white54,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          GestureDetector(
-                            onTap: () => browser.closeTab(tab.id),
-                            child: const Icon(
-                              PhosphorIconsRegular.x,
-                              color: Colors.white38,
-                              size: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                    );
+                  });
                 },
               ),
             ),
-            // New tab button
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: () => browser.openNewTab(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(
-                    PhosphorIconsRegular.plus,
-                    color: Colors.white54,
-                    size: 16,
-                  ),
-                ),
-              ),
-            ),
+            _NewTabButton(onTap: () => browser.openNewTab()),
           ],
         ),
       ),
@@ -238,9 +227,89 @@ class _BrowserContent extends StatelessWidget {
           return const LinkedInPage();
         case 'fiverr':
           return const FiverrPage();
+        case 'cv':
+          return const CvPage();
         default:
           return const BrowserHomePage();
       }
     });
+  }
+}
+
+class _CloseTabButton extends StatefulWidget {
+  final VoidCallback onTap;
+  const _CloseTabButton({required this.onTap});
+
+  @override
+  State<_CloseTabButton> createState() => _CloseTabButtonState();
+}
+
+class _CloseTabButtonState extends State<_CloseTabButton> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(
+            color: _hovered
+                ? Colors.white.withValues(alpha: 0.15)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Icon(
+            PhosphorIconsRegular.x,
+            color: _hovered ? Colors.white : Colors.white38,
+            size: 10,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NewTabButton extends StatefulWidget {
+  final VoidCallback onTap;
+  const _NewTabButton({required this.onTap});
+
+  @override
+  State<_NewTabButton> createState() => _NewTabButtonState();
+}
+
+class _NewTabButtonState extends State<_NewTabButton> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: _hovered
+                ? AppColors.blue.withValues(alpha: 0.2)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Icon(
+            PhosphorIconsRegular.plus,
+            color: _hovered ? Colors.white : Colors.white54,
+            size: 16,
+          ),
+        ),
+      ),
+    );
   }
 }

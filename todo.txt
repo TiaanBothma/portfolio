@@ -1,9 +1,8 @@
-!! Browser
-Make the current active tab underline blue like the other tabs
-Make the 'close tab button' and the 'open tab button' glow when hover (just like minimize button)
+!! Browser fixes:
+corners of the browser is rounded but the pages inside of them are not rounded so on the left bottom corner and the right bottom corner the page hangs over the rounded border of the browser outline
+CV page: for some reason on the cv page there is not blue outline border on this page so its just plain white and then the bottom right corner and the left bottom corer has no roundness and is pointy (not rounded this could be because of the previously mentioned issue)
 
 !! Browser Page: Portfolio page / Project Page
-!! Browser Page: CV Page (what would be the difference between this and the linkedin page)
 
 !! Setting App (save with shared preferences):
 Wallpaper change (3-4 wallpaper options)
@@ -15,6 +14,7 @@ Clock style format (12hr vs 24hr)
 Accent color change
 Reset settings to default
 
+!! CV.pdf: Add buttons and ways to get my actualf cv.pdf (terminal download cv or something like that and in linkedin, github, fiverr there should be button to view my cv in the file explorer as well and way to print and download it)
 !! Dynamic, 3D Graphics, How to make more interesting
 
 ================
@@ -22,5 +22,6 @@ Version History:
 ================
 V2.1.0 -> Image viewer to view certificates, Urls work in the notes app, better UI / UX control and more pleasent user experience, small fixes and features, improved notepad with extra features
 V2.2.0 -> Terminal update: terminal commands and file system navigation inside terminal
-V2.3.0 -> Browser update: New browser pages, imrpoved browser user experience, browser UI fixes
+V2.3.0 -> Browser update: New browser page, imrpoved browser user experience, browser UI fixes
+
 V3.0.0 -> Settings app 
