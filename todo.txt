@@ -1,16 +1,9 @@
 !! Browser
 Make the current active tab underline blue like the other tabs
 Make the 'close tab button' and the 'open tab button' glow when hover (just like minimize button)
-More pages inside the browser
 
 !! Terminal
-'tab button' for completing string in terminal window
-change '--list' to '-list'
-'--web' or '--site' (or something like that) to go to the actual site for example 'contact linkedin --web' will take the user to the actual site
-'ssh' command then the user must be able to type in something like 'ssh linkedin' then it will take the user to the actual linkedin site (so in the 'help' command then it should say that 'ssh' is a command then the user can type in 'man ssh' to see what they can do with ssh)
-(need to decide between --web, --site or ssh or maybe i could add all three or just maybe two of the options)
-just typing 'man' OR 'help -list' will give the full list of command that the user can type so that 'help command' isn't too full
-'sudo apt update' -> prints bunch of lines like fetching package, fetching tiaan's info stuff like that and if the site hasn't been updates in a while then it should say updates are due or something like that
+some commands feel weird and awkward because for example sudo apt update displays eveything instantly maybe add some delay between output lines so make it more realistic
 
 !! Browser Page: Portfolio page / Project Page
 !! Browser Page: CV Page (what would be the difference between this and the linkedin page)
@@ -31,3 +24,4 @@ Reset settings to default
 Version History:
 ================
 V2.1.0 -> Image viewer to view certificates, Urls work in the notes app, better UI / UX control and more pleasent user experience, small fixes and features, improved notepad with extra features
+V2.2.0 -> Terminal update: terminal commands and file system navigation inside terminal

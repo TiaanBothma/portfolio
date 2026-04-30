@@ -90,32 +90,34 @@ class TerminalWindow extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        children: [
-          Text(
-            '${terminal.prompt} ',
-            style: AppTextStyles.terminal.copyWith(color: AppColors.blue),
-          ),
-          Expanded(
-            child: TextField(
-              controller: terminal.inputController,
-              focusNode: terminal.focusNode,
-              autofocus: true,
-              style: AppTextStyles.terminal.copyWith(color: Colors.white),
-              cursorColor: Colors.white,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-              ),
-              onChanged: terminal.onInputChanged,
-              onSubmitted: (_) {
-                terminal.onSubmit();
-                terminal.focusNode.requestFocus();
-              },
+      child: Obx(
+        () => Row(
+          children: [
+            Text(
+              '${terminal.prompt} ',
+              style: AppTextStyles.terminal.copyWith(color: AppColors.blue),
             ),
-          ),
-        ],
+            Expanded(
+              child: TextField(
+                controller: terminal.inputController,
+                focusNode: terminal.focusNode,
+                autofocus: true,
+                style: AppTextStyles.terminal.copyWith(color: Colors.white),
+                cursorColor: Colors.white,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                ),
+                onChanged: terminal.onInputChanged,
+                onSubmitted: (_) {
+                  terminal.onSubmit();
+                  terminal.focusNode.requestFocus();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
