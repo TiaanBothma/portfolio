@@ -2,9 +2,6 @@
 Make the current active tab underline blue like the other tabs
 Make the 'close tab button' and the 'open tab button' glow when hover (just like minimize button)
 
-!! Terminal
-some commands feel weird and awkward because for example sudo apt update displays eveything instantly maybe add some delay between output lines so make it more realistic
-
 !! Browser Page: Portfolio page / Project Page
 !! Browser Page: CV Page (what would be the difference between this and the linkedin page)
 
@@ -25,3 +22,5 @@ Version History:
 ================
 V2.1.0 -> Image viewer to view certificates, Urls work in the notes app, better UI / UX control and more pleasent user experience, small fixes and features, improved notepad with extra features
 V2.2.0 -> Terminal update: terminal commands and file system navigation inside terminal
+V2.3.0 -> Browser update: New browser pages, imrpoved browser user experience, browser UI fixes
+V3.0.0 -> Settings app 

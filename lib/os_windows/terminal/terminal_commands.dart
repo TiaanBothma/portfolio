@@ -3,13 +3,14 @@ import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:get/get.dart';
-import 'package:web/web.dart' as web;
 
 class TerminalCommands {
   TerminalCommands._();
 
   static List<TerminalLine> process(
-      String command, TerminalController terminal) {
+    String command,
+    TerminalController terminal,
+  ) {
     final lower = command.toLowerCase().trim();
 
     // ── ECHO ──────────────────────────────────────────────
@@ -34,19 +35,9 @@ class TerminalCommands {
       return _cat(terminal, fileName);
     }
 
-    // ── SSH ───────────────────────────────────────────────
-    if (lower.startsWith('ssh ')) {
-      return _ssh(lower.substring(4).trim());
-    }
-
     // ── OPEN ──────────────────────────────────────────────
     if (lower.startsWith('open ')) {
       return _open(lower.substring(5).trim());
-    }
-
-    // ── PING ──────────────────────────────────────────────
-    if (lower.startsWith('ping ')) {
-      return _ping(lower.substring(5).trim());
     }
 
     // ── MAN ───────────────────────────────────────────────
@@ -65,11 +56,6 @@ class TerminalCommands {
 
     if (lower.startsWith('man ')) {
       return _man(lower.substring(4).trim());
-    }
-
-    // ── SUDO APT UPDATE ───────────────────────────────────
-    if (lower == 'sudo apt update') {
-      return _sudoAptUpdate();
     }
 
     if (lower.startsWith('sudo')) {
@@ -106,58 +92,58 @@ class TerminalCommands {
 
   // ─── HELP ─────────────────────────────────────────────────
   static List<TerminalLine> _help() => [
-        _out('Essential commands:'),
-        _out(''),
-        _out('  whoami              — who am I'),
-        _out('  cv -view            — full CV'),
-        _out('  projects -list      — my projects'),
-        _out('  contact             — contact info'),
-        _out('  ssh [site]          — connect to a profile'),
-        _out('  open [app]          — open an OS application'),
-        _out('  neofetch            — system info'),
-        _out('  clear               — clear terminal'),
-        _out(''),
-        _out('Type "man -a" for the full command list.'),
-      ];
+    _out('Essential commands:'),
+    _out(''),
+    _out('  whoami              — who am I'),
+    _out('  cv -view            — full CV'),
+    _out('  projects -list      — my projects'),
+    _out('  contact             — contact info'),
+    _out('  ssh [site]          — connect to a profile'),
+    _out('  open [app]          — open an OS application'),
+    _out('  neofetch            — system info'),
+    _out('  clear               — clear terminal'),
+    _out(''),
+    _out('Type "man -a" for the full command list.'),
+  ];
 
   // ─── MAN ──────────────────────────────────────────────────
   static List<TerminalLine> _manAll() => [
-        _out('All available commands:'),
-        _out(''),
-        _out('  PORTFOLIO'),
-        _out('  whoami              — personal info and bio'),
-        _out('  cv -view            — full CV output'),
-        _out('  projects -list      — all projects'),
-        _out('  experience -list    — work experience'),
-        _out('  education -list     — education history'),
-        _out('  skills -list        — skills with progress bars'),
-        _out('  certifications -list — certifications'),
-        _out('  contact             — contact info'),
-        _out(''),
-        _out('  FILE SYSTEM'),
-        _out('  ls                  — list current directory'),
-        _out('  ls [folder]         — list specific folder'),
-        _out('  ls -la              — list with permissions'),
-        _out('  cd [folder]         — change directory'),
-        _out('  cd ..               — go up one level'),
-        _out('  cd ~                — go to root'),
-        _out('  cat [file]          — read a file'),
-        _out('  cat cv.txt          — alias for cv -view'),
-        _out(''),
-        _out('  NAVIGATION'),
-        _out('  ssh [site]          — connect to a profile'),
-        _out('  open [app]          — open an OS application'),
-        _out('  ping [site]         — ping a profile'),
-        _out(''),
-        _out('  SYSTEM'),
-        _out('  sudo apt update     — fetch portfolio data'),
-        _out('  neofetch            — system info'),
-        _out('  echo [text]         — print text'),
-        _out('  man [command]       — command manual'),
-        _out('  man -a              — this list'),
-        _out('  help                — essential commands'),
-        _out('  clear               — clear terminal'),
-      ];
+    _out('All available commands:'),
+    _out(''),
+    _out('  PORTFOLIO'),
+    _out('  whoami              — personal info and bio'),
+    _out('  cv -view            — full CV output'),
+    _out('  projects -list      — all projects'),
+    _out('  experience -list    — work experience'),
+    _out('  education -list     — education history'),
+    _out('  skills -list        — skills with progress bars'),
+    _out('  certifications -list — certifications'),
+    _out('  contact             — contact info'),
+    _out(''),
+    _out('  FILE SYSTEM'),
+    _out('  ls                  — list current directory'),
+    _out('  ls [folder]         — list specific folder'),
+    _out('  ls -la              — list with permissions'),
+    _out('  cd [folder]         — change directory'),
+    _out('  cd ..               — go up one level'),
+    _out('  cd ~                — go to root'),
+    _out('  cat [file]          — read a file'),
+    _out('  cat cv.txt          — alias for cv -view'),
+    _out(''),
+    _out('  NAVIGATION'),
+    _out('  ssh [site]          — connect to a profile'),
+    _out('  open [app]          — open an OS application'),
+    _out('  ping [site]         — ping a profile'),
+    _out(''),
+    _out('  SYSTEM'),
+    _out('  sudo apt update     — fetch portfolio data'),
+    _out('  neofetch            — system info'),
+    _out('  echo [text]         — print text'),
+    _out('  man [command]       — command manual'),
+    _out('  man -a              — this list'),
+    _out('  help                — essential commands'),
+    _out('  clear               — clear terminal'),
+  ];
 
   static List<TerminalLine> _man(String command) {
     switch (command) {
@@ -191,8 +177,7 @@ class TerminalCommands {
           _out('       cd ~           — go to root'),
           _out(''),
           _out('Available folders from root:'),
-          ...FileSystemData.root.subFolders
-              .map((f) => _out('  ${f.name}')),
+          ...FileSystemData.root.subFolders.map((f) => _out('  ${f.name}')),
         ];
       case 'ls':
         return [
@@ -244,13 +229,17 @@ class TerminalCommands {
   }
 
   // ─── LS ───────────────────────────────────────────────────
-  static List<TerminalLine> _ls(TerminalController terminal,
-      {bool fancy = false}) {
+  static List<TerminalLine> _ls(
+    TerminalController terminal, {
+    bool fancy = false,
+  }) {
     final folder = terminal.currentFolder;
     final lines = <TerminalLine>[];
 
     if (fancy) {
-      lines.add(_out('total ${folder.subFolders.length + folder.files.length}'));
+      lines.add(
+        _out('total ${folder.subFolders.length + folder.files.length}'),
+      );
       lines.add(_out('drwxr-xr-x  tiaan  tiaan  ./'));
       if (terminal.currentPath.isNotEmpty) {
         lines.add(_out('drwxr-xr-x  tiaan  tiaan  ../'));
@@ -263,12 +252,12 @@ class TerminalCommands {
       }
     } else {
       if (folder.subFolders.isNotEmpty) {
-        lines.add(_out(
-            folder.subFolders.map((f) => '${f.name}/').join('    ')));
+        lines.add(
+          _out(folder.subFolders.map((f) => '${f.name}/').join('    ')),
+        );
       }
       if (folder.files.isNotEmpty) {
-        lines.add(
-            _out(folder.files.map((f) => f.name).join('    ')));
+        lines.add(_out(folder.files.map((f) => f.name).join('    ')));
       }
       if (folder.subFolders.isEmpty && folder.files.isEmpty) {
         lines.add(_out('(empty)'));
@@ -279,7 +268,9 @@ class TerminalCommands {
   }
 
   static List<TerminalLine> _lsTarget(
-      TerminalController terminal, String target) {
+    TerminalController terminal,
+    String target,
+  ) {
     final folder = terminal.currentFolder;
     final match = folder.subFolders.firstWhereOrNull(
       (f) => f.name.toLowerCase() == target.toLowerCase(),
@@ -303,8 +294,7 @@ class TerminalCommands {
   }
 
   // ─── CAT ──────────────────────────────────────────────────
-  static List<TerminalLine> _cat(
-      TerminalController terminal, String fileName) {
+  static List<TerminalLine> _cat(TerminalController terminal, String fileName) {
     final folder = terminal.currentFolder;
     final file = folder.files.firstWhereOrNull(
       (f) => f.name.toLowerCase() == fileName.toLowerCase(),
@@ -323,31 +313,6 @@ class TerminalCommands {
 
     final lines = file.content.split('\n');
     return lines.map((l) => _out(l)).toList();
-  }
-
-  // ─── SSH ──────────────────────────────────────────────────
-  static List<TerminalLine> _ssh(String target) {
-    final urls = {
-      'linkedin': 'https://${PortfolioData.linkedin}',
-      'github': 'https://${PortfolioData.github}',
-      'fiverr': 'https://${PortfolioData.fiverr}',
-    };
-
-    final url = urls[target];
-    if (url == null) {
-      return [
-        _err('ssh: $target: Host not found'),
-        _out('Available: ssh linkedin | ssh github | ssh fiverr'),
-      ];
-    }
-
-    web.window.open(url, '_blank');
-
-    return [
-      _out('Connecting to $target...'),
-      _out('Connection established.'),
-      _out('Opening ${urls[target]}'),
-    ];
   }
 
   // ─── OPEN ─────────────────────────────────────────────────
@@ -369,65 +334,16 @@ class TerminalCommands {
     }
   }
 
-  // ─── PING ─────────────────────────────────────────────────
-  static List<TerminalLine> _ping(String target) {
-    final hosts = {
-      'linkedin': 'linkedin.com',
-      'github': 'github.com',
-      'fiverr': 'fiverr.com',
-    };
-
-    final host = hosts[target];
-    if (host == null) {
-      return [
-        _err('ping: $target: Host not found'),
-        _out('Available: ping linkedin | ping github | ping fiverr'),
-      ];
-    }
-
-    return [
-      _out('PING $host: 56 bytes of data'),
-      _out('64 bytes from $host: seq=0 time=1ms'),
-      _out('64 bytes from $host: seq=1 time=2ms'),
-      _out('64 bytes from $host: seq=2 time=1ms'),
-      _out(''),
-      _out('--- $host ping statistics ---'),
-      _out('3 packets transmitted, 3 received, 0% packet loss'),
-      _out('Profile is live and reachable.'),
-    ];
-  }
-
-  // ─── SUDO APT UPDATE ──────────────────────────────────────
-  static List<TerminalLine> _sudoAptUpdate() => [
-        _out('[sudo] password for tiaan: ••••••••'),
-        _out(''),
-        _out('Hit: github.com/TiaanBothma'),
-        _out('Hit: linkedin.com/in/tiaan-bothma'),
-        _out('Hit: fiverr.com/tiaanbothma'),
-        _out(''),
-        _out('Fetching portfolio data...'),
-        _out('  Fetching: experience        (${PortfolioData.experience.length} records)    OK'),
-        _out('  Fetching: projects          (${PortfolioData.projects.length} records)    OK'),
-        _out('  Fetching: certifications    (${PortfolioData.certifications.length} records)    OK'),
-        _out('  Fetching: skills            (${PortfolioData.skills.length} records)    OK'),
-        _out(''),
-        _out('Reading package lists... Done'),
-        _out('Building dependency tree... Done'),
-        _out(''),
-        _out('Tiaan Bothma OS ${PortfolioData.version} is up to date.'),
-        _out('All packages are current. No updates available.'),
-      ];
-
   // ─── PORTFOLIO ────────────────────────────────────────────
   static List<TerminalLine> _whoami() => [
-        _out(PortfolioData.name),
-        _out(PortfolioData.role),
-        _out(PortfolioData.university),
-        _out(PortfolioData.location),
-        _out(PortfolioData.status),
-        _out(''),
-        _out(PortfolioData.bio),
-      ];
+    _out(PortfolioData.name),
+    _out(PortfolioData.role),
+    _out(PortfolioData.university),
+    _out(PortfolioData.location),
+    _out(PortfolioData.status),
+    _out(''),
+    _out(PortfolioData.bio),
+  ];
 
   static List<TerminalLine> _projects() {
     final lines = [_out('Projects:')];
@@ -467,8 +383,9 @@ class TerminalCommands {
       final percent = ((s['level'] as double) * 100).toInt();
       final filled = (percent / 10).round();
       final bar = '${'█' * filled}${'░' * (10 - filled)}';
-      lines.add(_out(
-          '  ${s['name'].toString().padRight(22)} [$bar] $percent%'));
+      lines.add(
+        _out('  ${s['name'].toString().padRight(22)} [$bar] $percent%'),
+      );
     }
     return lines;
   }
@@ -484,23 +401,23 @@ class TerminalCommands {
   }
 
   static List<TerminalLine> _contact() => [
-        _out('Contact:'),
-        _out('  LinkedIn  — ${PortfolioData.linkedin}'),
-        _out('  GitHub    — ${PortfolioData.github}'),
-        _out('  Fiverr    — ${PortfolioData.fiverr}'),
-        _out(''),
-        _out('Tip: type "ssh linkedin" to connect directly.'),
-      ];
+    _out('Contact:'),
+    _out('  LinkedIn  — ${PortfolioData.linkedin}'),
+    _out('  GitHub    — ${PortfolioData.github}'),
+    _out('  Fiverr    — ${PortfolioData.fiverr}'),
+    _out(''),
+    _out('Tip: type "ssh linkedin" to connect directly.'),
+  ];
 
   static List<TerminalLine> _cv() => [
-        ..._whoami(),
-        _out(''),
-        ..._experience(),
-        ..._education(),
-        ..._skills(),
-        ..._certifications(),
-        ..._contact(),
-      ];
+    ..._whoami(),
+    _out(''),
+    ..._experience(),
+    ..._education(),
+    ..._skills(),
+    ..._certifications(),
+    ..._contact(),
+  ];
 
   static List<TerminalLine> _neofetch() {
     const logo = [
@@ -533,15 +450,12 @@ class TerminalCommands {
     ];
 
     final lines = <TerminalLine>[];
-    final maxLines =
-        logo.length > info.length ? logo.length : info.length;
+    final maxLines = logo.length > info.length ? logo.length : info.length;
 
     for (int i = 0; i < maxLines; i++) {
-      final logoLine =
-          i < logo.length ? logo[i] : ''.padRight(30);
+      final logoLine = i < logo.length ? logo[i] : ''.padRight(30);
       final infoLine = i < info.length ? info[i] : '';
-      lines.add(TerminalLine(
-          '$logoLine  $infoLine', TerminalLineType.output));
+      lines.add(TerminalLine('$logoLine  $infoLine', TerminalLineType.output));
     }
 
     return lines;
