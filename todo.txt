@@ -1,8 +1,4 @@
-!! Browser fixes:
-corners of the browser is rounded but the pages inside of them are not rounded so on the left bottom corner and the right bottom corner the page hangs over the rounded border of the browser outline
-CV page: for some reason on the cv page there is not blue outline border on this page so its just plain white and then the bottom right corner and the left bottom corer has no roundness and is pointy (not rounded this could be because of the previously mentioned issue)
-
-!! Browser Page: Portfolio page / Project Page
+!! Browser Page: Portfolio page / Project Page: page dedicated to my project (make interesting)
 
 !! Setting App (save with shared preferences):
 Wallpaper change (3-4 wallpaper options)
@@ -12,8 +8,7 @@ Font size (changes the whole site's font size)
 Window transparency (between 85% and 100%)
 Clock style format (12hr vs 24hr)
 Accent color change
-Reset settings to default
-
+Reset settings to default button
 !! CV.pdf: Add buttons and ways to get my actualf cv.pdf (terminal download cv or something like that and in linkedin, github, fiverr there should be button to view my cv in the file explorer as well and way to print and download it)
 !! Dynamic, 3D Graphics, How to make more interesting
 

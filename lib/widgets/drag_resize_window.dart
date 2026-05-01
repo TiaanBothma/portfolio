@@ -16,32 +16,32 @@ class DraggableResizableWindow extends StatelessWidget {
     this.minHeight = 200,
   });
 
-@override
-Widget build(BuildContext context) {
-  final controller = Get.find<DesktopController>();
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<DesktopController>();
 
-  return Obx(() {
-    final state = controller.getWindowRx(windowId).value;
+    return Obx(() {
+      final state = controller.getWindowRx(windowId).value;
 
-    return Positioned(
-      left: state.offset.dx,
-      top: state.offset.dy,
-      child: Visibility(
-        visible: state.isOpen,
-        child: SizedBox(
-          width: state.size.width,
-          height: state.size.height,
-          child: Stack(
-            children: [
-              child,
-              _buildResizeHandle(controller),
-            ],
+      return Positioned(
+        left: state.offset.dx,
+        top: state.offset.dy,
+        child: Visibility(
+          visible: state.isOpen,
+          child: SizedBox(
+            width: state.size.width,
+            height: state.size.height,
+            child: Stack(
+              children: [
+                ClipRRect(borderRadius: BorderRadius.circular(8), child: child),
+                _buildResizeHandle(controller),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  });
-}
+      );
+    });
+  }
 
   Widget _buildResizeHandle(DesktopController controller) {
     return Positioned(

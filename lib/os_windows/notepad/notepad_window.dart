@@ -277,7 +277,7 @@ class NotepadWindow extends StatelessWidget {
           _menuItem(
             icon: PhosphorIconsRegular.magnifyingGlass,
             label: 'Find',
-            shortcut: 'Ctrl+F',
+
             onTap: () {
               dismiss();
               notepad.toggleFind();
@@ -287,7 +287,7 @@ class NotepadWindow extends StatelessWidget {
           _menuItem(
             icon: PhosphorIconsRegular.copy,
             label: 'Copy All',
-            shortcut: 'Ctrl+A',
+
             onTap: () {
               dismiss();
               notepad.copyAll();
@@ -337,14 +337,8 @@ class NotepadWindow extends StatelessWidget {
     required IconData icon,
     required String label,
     required VoidCallback onTap,
-    String? shortcut,
   }) {
-    return _NotepadMenuItem(
-      icon: icon,
-      label: label,
-      shortcut: shortcut,
-      onTap: onTap,
-    );
+    return _NotepadMenuItem(icon: icon, label: label, onTap: onTap);
   }
 
   Widget _menuDivider() {
@@ -696,7 +690,7 @@ class NotepadWindow extends StatelessWidget {
       return Container(
         height: 24,
         color: AppColors.deepBlue.withValues(alpha: 0.4),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.only(left: 12, right: 24),
         child: Row(
           children: [
             // Word wrap indicator
@@ -737,13 +731,11 @@ class _NotepadMenuItem extends StatefulWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  final String? shortcut;
 
   const _NotepadMenuItem({
     required this.icon,
     required this.label,
     required this.onTap,
-    this.shortcut,
   });
 
   @override
@@ -784,14 +776,6 @@ class _NotepadMenuItemState extends State<_NotepadMenuItem> {
                   ),
                 ),
               ),
-              if (widget.shortcut != null)
-                Text(
-                  widget.shortcut!,
-                  style: AppTextStyles.label.copyWith(
-                    color: Colors.white30,
-                    fontSize: 11,
-                  ),
-                ),
             ],
           ),
         ),
