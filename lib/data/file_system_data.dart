@@ -423,6 +423,26 @@ CHANGELOG:
   + Improved window sizing and feel
   + About section and system files added
 
+  v2.1.0 — UI/UX & Notepad Improvements
+  =====================================
+  + Image viewer for viewing certificates
+  + URLs clickable inside Notepad
+  + Improved Notepad with additional features
+  + Better UI/UX control and smoother experience
+  + Minor fixes and small feature additions
+
+  v2.2.0 — Terminal Expansion
+  ============================
+  + Added new terminal commands
+  + File system navigation inside terminal
+  + Improved terminal functionality and usability
+
+  v2.3.0 — Browser Upgrade
+  =========================
+  + New browser page
+  + Improved browser user experience
+  + UI fixes and refinements
+
 =========================================
 Built with Flutter Web
 ''',
