@@ -111,7 +111,7 @@ class CvPage extends StatelessWidget {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () => web.window.open('assets/cv.pdf', '_blank'),
+              onTap: () => web.window.open('/cv.pdf', '_blank'),
               child: _topBarButton(
                 icon: PhosphorIconsRegular.printer,
                 label: 'Print',

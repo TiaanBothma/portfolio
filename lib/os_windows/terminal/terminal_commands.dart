@@ -304,6 +304,15 @@ class TerminalCommands {
       return [_err('cat: $fileName: No such file')];
     }
 
+    if (file.externalUrl != null) {
+      return [
+        _out('${file.name}: PDF document'),
+        _out('Open in Vault or type "ssh cv" to view.'),
+        _out(''),
+        _out('Tip: double-click cv.pdf in Vault to open.'),
+      ];
+    }
+
     if (file.imagePath != null) {
       return [
         _out('${file.name}: image file'),

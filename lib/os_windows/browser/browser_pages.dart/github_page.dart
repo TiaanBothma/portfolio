@@ -275,20 +275,20 @@ class _GitHubPageState extends State<GitHubPage> {
         ),
         const SizedBox(height: 12),
 
-     _sidebarItem(PhosphorIconsRegular.mapPin, PortfolioData.location),
-_sidebarItem(PhosphorIconsRegular.graduationCap, 'NWU — BSc IT'),
-_sidebarItem(
-  PhosphorIconsRegular.linkedinLogo,
-  PortfolioData.linkedin,
-  color: _linkBlue,
-  url: 'https://${PortfolioData.linkedin}',
-),
-_sidebarItem(
-  PhosphorIconsRegular.globe,
-  'MO27 Portal',
-  color: _linkBlue,
-  url: 'https://mo27-1bdd8.web.app/',
-),
+        _sidebarItem(PhosphorIconsRegular.mapPin, PortfolioData.location),
+        _sidebarItem(PhosphorIconsRegular.graduationCap, 'NWU — BSc IT'),
+        _sidebarItem(
+          PhosphorIconsRegular.linkedinLogo,
+          PortfolioData.linkedin,
+          color: _linkBlue,
+          url: 'https://${PortfolioData.linkedin}',
+        ),
+        _sidebarItem(
+          PhosphorIconsRegular.globe,
+          'MO27 Portal',
+          color: _linkBlue,
+          url: 'https://mo27-1bdd8.web.app/',
+        ),
       ],
     );
   }
@@ -469,7 +469,7 @@ _sidebarItem(
                 children: pinnedRepos.map((r) => _buildApiRepoCard(r)).toList(),
               ),
         const SizedBox(height: 24),
-        _buildContributionGraph(),
+        _buildRepoStats(),
       ],
     );
   }
@@ -872,96 +872,6 @@ _sidebarItem(
     );
   }
 
-  Widget _buildContributionGraph() {
-    final data = [
-      [0, 1, 0, 2, 0, 0, 1],
-      [0, 0, 3, 1, 0, 2, 0],
-      [1, 0, 0, 4, 0, 0, 1],
-      [0, 2, 1, 0, 3, 0, 0],
-      [1, 0, 0, 2, 0, 4, 0],
-      [0, 1, 0, 0, 2, 0, 1],
-      [0, 0, 2, 1, 0, 0, 3],
-      [1, 3, 0, 0, 1, 2, 0],
-      [0, 0, 1, 4, 0, 0, 2],
-      [2, 1, 0, 0, 3, 1, 0],
-      [0, 0, 4, 0, 0, 2, 1],
-      [1, 0, 0, 2, 1, 0, 0],
-      [0, 3, 1, 0, 0, 2, 1],
-      [2, 0, 0, 1, 0, 0, 3],
-      [0, 1, 2, 0, 1, 0, 0],
-      [0, 0, 0, 3, 0, 2, 1],
-      [1, 2, 0, 0, 4, 0, 0],
-      [0, 0, 1, 2, 0, 1, 0],
-      [3, 0, 0, 0, 1, 0, 2],
-      [0, 1, 0, 3, 0, 0, 1],
-      [0, 0, 2, 0, 1, 3, 0],
-      [1, 0, 0, 1, 0, 0, 4],
-      [0, 2, 1, 0, 2, 0, 0],
-      [1, 0, 0, 0, 0, 1, 2],
-      [0, 3, 0, 1, 0, 0, 1],
-      [2, 0, 1, 0, 3, 0, 0],
-    ];
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: _cardColor,
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: _borderColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Contribution activity',
-            style: AppTextStyles.body.copyWith(
-              color: _textPrimary,
-              fontSize: 13,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: data.map((week) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 3),
-                child: Column(
-                  children: week.map((level) {
-                    return Container(
-                      width: 10,
-                      height: 10,
-                      margin: const EdgeInsets.only(bottom: 3),
-                      decoration: BoxDecoration(
-                        color: _contributionColor(level),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Color _contributionColor(int level) {
-    switch (level) {
-      case 0:
-        return const Color(0xFF161B22);
-      case 1:
-        return const Color(0xFF0E4429);
-      case 2:
-        return const Color(0xFF006D32);
-      case 3:
-        return const Color(0xFF26A641);
-      case 4:
-        return const Color(0xFF39D353);
-      default:
-        return const Color(0xFF161B22);
-    }
-  }
-
   Color _langColor(String skills) {
     if (skills.contains('Flutter') || skills.contains('Dart')) {
       return const Color(0xFF54C5F8);
@@ -979,5 +889,235 @@ _sidebarItem(
     if (skills.contains('Docker')) return 'Docker';
     if (skills.contains('C#')) return 'C#';
     return 'Dart';
+  }
+
+  Map<String, int> _getLanguageStats() {
+    final Map<String, int> langs = {};
+    for (final repo in _repos) {
+      if (repo.language.isNotEmpty && repo.language != 'Unknown') {
+        langs[repo.language] = (langs[repo.language] ?? 0) + 1;
+      }
+    }
+    // Sort by count descending
+    final sorted = Map.fromEntries(
+      langs.entries.toList()..sort((a, b) => b.value.compareTo(a.value)),
+    );
+    return sorted;
+  }
+
+  int _getTotalStars() {
+    return _repos.fold(0, (sum, repo) => sum + repo.stars);
+  }
+
+  Widget _buildRepoStats() {
+    if (_loading) return const SizedBox.shrink();
+
+    final langStats = _getLanguageStats();
+    final totalStars = _getTotalStars();
+    final totalRepos = _repos.length;
+    final totalForks = _repos.fold(0, (sum, repo) => sum + repo.forks);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Private repos notice
+        _buildPrivateReposNotice(),
+        const SizedBox(height: 16),
+
+        // Stats row
+        Row(
+          children: [
+            _buildStatCard(
+              icon: PhosphorIconsRegular.bookBookmark,
+              label: 'Public Repos',
+              value: totalRepos.toString(),
+            ),
+            const SizedBox(width: 12),
+            _buildStatCard(
+              icon: PhosphorIconsRegular.star,
+              label: 'Total Stars',
+              value: totalStars.toString(),
+            ),
+            const SizedBox(width: 12),
+            _buildStatCard(
+              icon: PhosphorIconsRegular.gitFork,
+              label: 'Total Forks',
+              value: totalForks.toString(),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+
+        // Language breakdown
+        if (langStats.isNotEmpty) _buildLanguageBreakdown(langStats),
+      ],
+    );
+  }
+
+  Widget _buildPrivateReposNotice() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFF21262D),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF3D444D), width: 1),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(
+            PhosphorIconsRegular.lockKey,
+            color: Color(0xFF8B949E),
+            size: 16,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Most production repositories are private',
+                  style: AppTextStyles.body.copyWith(
+                    color: const Color(0xFFE6EDF3),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'The majority of my work — including full-stack Flutter apps built for real clients at 18INK Productions and MyEncore CC — lives in private repositories due to client confidentiality. The repos shown here represent personal and open projects.',
+                  style: AppTextStyles.label.copyWith(
+                    color: const Color(0xFF8B949E),
+                    fontSize: 12,
+                    height: 1.6,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required String label,
+    required String value,
+  }) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: const Color(0xFF161B22),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: const Color(0xFF30363D)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: const Color(0xFF8B949E), size: 16),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: AppTextStyles.heading.copyWith(
+                color: const Color(0xFFE6EDF3),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: AppTextStyles.label.copyWith(
+                color: const Color(0xFF8B949E),
+                fontSize: 11,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLanguageBreakdown(Map<String, int> langStats) {
+    final total = langStats.values.fold(0, (a, b) => a + b);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF161B22),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: const Color(0xFF30363D)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Languages',
+            style: AppTextStyles.body.copyWith(
+              color: const Color(0xFFE6EDF3),
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // Language bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Row(
+              children: langStats.entries.map((entry) {
+                final percent = entry.value / total;
+                return Flexible(
+                  flex: (percent * 100).round(),
+                  child: Container(height: 8, color: _langColor(entry.key)),
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // Language legend
+          Wrap(
+            spacing: 16,
+            runSpacing: 8,
+            children: langStats.entries.map((entry) {
+              final percent = ((entry.value / total) * 100).toStringAsFixed(1);
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: _langColor(entry.key),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    entry.key,
+                    style: AppTextStyles.label.copyWith(
+                      color: const Color(0xFFE6EDF3),
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '$percent%',
+                    style: AppTextStyles.label.copyWith(
+                      color: const Color(0xFF8B949E),
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
   }
 }

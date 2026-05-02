@@ -9,6 +9,8 @@ import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
+import 'package:web/web.dart' as web;
+
 
 class VaultWindow extends StatelessWidget {
   const VaultWindow({super.key});
@@ -336,28 +338,31 @@ class VaultWindow extends StatelessWidget {
 
       return _HoverItem(
         onTap: () => vault.selectFile(file),
-        onDoubleTap: () {
-          if (file.imagePath != null) {
-            Get.find<ImageViewerController>().openImage(
-              file.name,
-              file.imagePath!,
-            );
-          } else {
-            Get.find<NotepadController>().openFile(file);
-          }
-        },
+       onDoubleTap: () {
+  if (file.externalUrl != null) {
+    web.window.open(file.externalUrl!, '_blank');
+  } else if (file.imagePath != null) {
+    Get.find<ImageViewerController>().openImage(file.name, file.imagePath!);
+  } else {
+    Get.find<NotepadController>().openFile(file);
+  }
+},
         selected: isSelected,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
-              Icon(
-                file.imagePath != null
-                    ? PhosphorIconsRegular.image
-                    : PhosphorIconsRegular.fileText,
-                color: Colors.white54,
-                size: 16,
-              ),
+             Icon(
+  file.externalUrl != null
+      ? PhosphorIconsRegular.filePdf
+      : file.imagePath != null
+          ? PhosphorIconsRegular.image
+          : PhosphorIconsRegular.fileText,
+  color: file.externalUrl != null
+      ? const Color(0xFFE5534B)
+      : Colors.white54,
+  size: 16,
+),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -368,13 +373,15 @@ class VaultWindow extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                file.imagePath != null ? '.png' : '.txt',
-                style: AppTextStyles.label.copyWith(
-                  color: Colors.white30,
-                  fontSize: 11,
-                ),
-              ),
+          Text(
+  file.externalUrl != null
+      ? '.pdf'
+      : file.imagePath != null
+          ? '.png'
+          : '.txt',
+  style: AppTextStyles.label
+      .copyWith(color: Colors.white30, fontSize: 11),
+),
             ],
           ),
         ),

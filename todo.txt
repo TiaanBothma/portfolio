@@ -1,4 +1,4 @@
-!! Browser Page: Portfolio page / Project Page: page dedicated to my project (make interesting)
+!! CV Page: Do not like the page, redo completely
 
 !! Setting App (save with shared preferences):
 Wallpaper change (3-4 wallpaper options)
@@ -12,11 +12,13 @@ Reset settings to default button
 !! CV.pdf: Add buttons and ways to get my actualf cv.pdf (terminal download cv or something like that and in linkedin, github, fiverr there should be button to view my cv in the file explorer as well and way to print and download it)
 !! Dynamic, 3D Graphics, How to make more interesting
 
+!! cat cv.txt doesn't work remove this because we now have cv.pdf
+!! ssh cv should open cv.pdf and cat cv.pdf should do the same as ssh cv (it should open in new tab but of course the ssh cv should have a delay effect like ssh github)
+
 ================
 Version History:
 ================
-V2.1.0 -> Image viewer to view certificates, Urls work in the notes app, better UI / UX control and more pleasent user experience, small fixes and features, improved notepad with extra features
-V2.2.0 -> Terminal update: terminal commands and file system navigation inside terminal
-V2.3.0 -> Browser update: New browser page, imrpoved browser user experience, browser UI fixes
+V2.4.0 -> open / download / print cv works now and can view cv in the terminal and vault and is working, gitpage UI improvement and more api stats data show
 
-V3.0.0 -> Settings app 
+
+V3.0.0 -> Settings app

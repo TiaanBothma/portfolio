@@ -4,8 +4,14 @@ class VaultFile {
   final String name;
   final String content;
   final String? imagePath;
+  final String? externalUrl;
 
-  const VaultFile({required this.name, this.content = '', this.imagePath});
+  const VaultFile({
+    required this.name,
+    this.content = '',
+    this.imagePath,
+    this.externalUrl,
+  });
 }
 
 class VaultFolder {
@@ -26,6 +32,12 @@ class FileSystemData {
   static final VaultFolder root = VaultFolder(
     name: 'Tiaan Bothma OS',
     subFolders: [_experience, _projects, _education, _certifications, _system],
+    files: [
+        VaultFile(
+      name: 'cv.pdf',
+      externalUrl: '/cv.pdf',
+    ),
+    ]
   );
 
   // === EXPERIENCE ===========================================
@@ -317,11 +329,13 @@ AWARDS:
       ),
       VaultFile(
         name: 'Career_Essentials_Cybersecurity.png',
-        imagePath: 'assets/certifications/Cybersecurity_Essentials_Certificate.png',
+        imagePath:
+            'assets/certifications/Cybersecurity_Essentials_Certificate.png',
       ),
       VaultFile(
         name: 'Cybersecurity_Threat_Landscape.png',
-        imagePath: 'assets/certifications/Linkedin_Cybersecurity_Certificate.png',
+        imagePath:
+            'assets/certifications/Linkedin_Cybersecurity_Certificate.png',
       ),
       VaultFile(
         name: 'Fortinet_Cybersecurity.png',
@@ -338,6 +352,7 @@ AWARDS:
   static final VaultFolder _system = VaultFolder(
     name: 'System',
     files: [
+      
       VaultFile(
         name: 'README.txt',
         content:
