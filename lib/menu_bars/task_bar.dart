@@ -31,6 +31,13 @@ class Taskbar extends StatelessWidget {
                   onTap: () =>
                       Get.find<DesktopController>().toggleWindow('terminal'),
                 ),
+
+                _DockIcon(
+                  icon: PhosphorIconsRegular.vault,
+                  label: 'Vault',
+                  onTap: () =>
+                      Get.find<DesktopController>().toggleWindow('vault'),
+                ),
                 _DockIcon(
                   icon: PhosphorIconsBold.browser,
                   label: 'Browser',
@@ -38,10 +45,10 @@ class Taskbar extends StatelessWidget {
                       Get.find<DesktopController>().toggleWindow('browser'),
                 ),
                 _DockIcon(
-                  icon: PhosphorIconsRegular.vault,
-                  label: 'Vault',
+                  icon: PhosphorIconsRegular.gear,
+                  label: 'Settings',
                   onTap: () =>
-                      Get.find<DesktopController>().toggleWindow('vault'),
+                      Get.find<DesktopController>().toggleWindow('settings'),
                 ),
               ],
             ),

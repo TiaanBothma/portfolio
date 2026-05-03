@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
@@ -11,29 +12,32 @@ import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 import 'package:web/web.dart' as web;
 
-
 class VaultWindow extends StatelessWidget {
   const VaultWindow({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.92),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
+    return Obx(
+      () => Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.black.withValues(
+            alpha: Get.find<SettingsController>().windowTransparency.value,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: AppColors.blue.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          _buildTitleBar(),
-          _buildToolBar(),
-          Expanded(child: _buildBody()),
-        ],
+        child: Column(
+          children: [
+            _buildTitleBar(),
+            _buildToolBar(),
+            Expanded(child: _buildBody()),
+          ],
+        ),
       ),
     );
   }
@@ -338,31 +342,34 @@ class VaultWindow extends StatelessWidget {
 
       return _HoverItem(
         onTap: () => vault.selectFile(file),
-       onDoubleTap: () {
-  if (file.externalUrl != null) {
-    web.window.open(file.externalUrl!, '_blank');
-  } else if (file.imagePath != null) {
-    Get.find<ImageViewerController>().openImage(file.name, file.imagePath!);
-  } else {
-    Get.find<NotepadController>().openFile(file);
-  }
-},
+        onDoubleTap: () {
+          if (file.externalUrl != null) {
+            web.window.open(file.externalUrl!, '_blank');
+          } else if (file.imagePath != null) {
+            Get.find<ImageViewerController>().openImage(
+              file.name,
+              file.imagePath!,
+            );
+          } else {
+            Get.find<NotepadController>().openFile(file);
+          }
+        },
         selected: isSelected,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
-             Icon(
-  file.externalUrl != null
-      ? PhosphorIconsRegular.filePdf
-      : file.imagePath != null
-          ? PhosphorIconsRegular.image
-          : PhosphorIconsRegular.fileText,
-  color: file.externalUrl != null
-      ? const Color(0xFFE5534B)
-      : Colors.white54,
-  size: 16,
-),
+              Icon(
+                file.externalUrl != null
+                    ? PhosphorIconsRegular.filePdf
+                    : file.imagePath != null
+                    ? PhosphorIconsRegular.image
+                    : PhosphorIconsRegular.fileText,
+                color: file.externalUrl != null
+                    ? const Color(0xFFE5534B)
+                    : Colors.white54,
+                size: 16,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -373,15 +380,17 @@ class VaultWindow extends StatelessWidget {
                   ),
                 ),
               ),
-          Text(
-  file.externalUrl != null
-      ? '.pdf'
-      : file.imagePath != null
-          ? '.png'
-          : '.txt',
-  style: AppTextStyles.label
-      .copyWith(color: Colors.white30, fontSize: 11),
-),
+              Text(
+                file.externalUrl != null
+                    ? '.pdf'
+                    : file.imagePath != null
+                    ? '.png'
+                    : '.txt',
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white30,
+                  fontSize: 11,
+                ),
+              ),
             ],
           ),
         ),

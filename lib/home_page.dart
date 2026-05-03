@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_window.dart';
 import 'package:portfolio/os_windows/notepad/notepad_window.dart';
+import 'package:portfolio/os_windows/settings_app/settings_window.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
 import 'package:portfolio/os_windows/vault/vault_window.dart';
 import 'package:portfolio/widgets/drag_resize_window.dart';
+import 'package:portfolio/widgets/dynamic_wallpaper.dart';
 import 'package:portfolio/widgets/main_layout.dart';
 import 'package:portfolio/widgets/status_card.dart';
 
@@ -15,9 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: Image.asset('assets/wallpaper.png', fit: BoxFit.cover),
-        ),
+        const Positioned.fill(child: DynamicWallpaper()),
         MainLayout(
           child: Stack(
             children: [
@@ -51,6 +51,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 400,
                 minHeight: 300,
                 child: ImageViewerWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'settings',
+                minWidth: 400,
+                minHeight: 500,
+                child: SettingsWindow(),
               ),
             ],
           ),

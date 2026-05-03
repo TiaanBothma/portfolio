@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/browser_home_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/cv_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/fiverr_page.dart';
@@ -17,22 +18,26 @@ class BrowserWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.92),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
+    return Obx(
+      () => Container(
+        decoration: BoxDecoration(
+          color: AppColors.black.withValues(
+            alpha: Get.find<SettingsController>().windowTransparency.value,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: AppColors.blue.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          _buildTitleBar(),
-          _buildTabBar(),
-          _buildAddressBar(),
-          const Expanded(child: _BrowserContent()),
-        ],
+        child: Column(
+          children: [
+            _buildTitleBar(),
+            _buildTabBar(),
+            _buildAddressBar(),
+            const Expanded(child: _BrowserContent()),
+          ],
+        ),
       ),
     );
   }

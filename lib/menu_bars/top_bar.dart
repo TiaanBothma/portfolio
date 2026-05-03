@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/themes/text_style.dart';
 
 class TopBar extends StatefulWidget {
@@ -29,8 +31,19 @@ class _TopBarState extends State<TopBar> {
   }
 
   String _currentTime() {
+    final settings = Get.find<SettingsController>();
     final now = DateTime.now();
-    return '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    if (settings.clock24hr.value) {
+      return '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    } else {
+      final hour = now.hour > 12
+          ? now.hour - 12
+          : now.hour == 0
+          ? 12
+          : now.hour;
+      final period = now.hour >= 12 ? 'PM' : 'AM';
+      return '${hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} $period';
+    }
   }
 
   @override

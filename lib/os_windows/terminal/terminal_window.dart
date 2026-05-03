@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
@@ -13,23 +14,27 @@ class TerminalWindow extends StatelessWidget {
   Widget build(BuildContext context) {
     final terminal = Get.find<TerminalController>();
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.92),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
+    return Obx(
+      () => Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.black.withValues(
+            alpha: Get.find<SettingsController>().windowTransparency.value,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: AppColors.blue.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          _buildTitleBar(),
-          Expanded(child: _buildOutput(terminal)),
-          _buildInputRow(terminal),
-        ],
+        child: Column(
+          children: [
+            _buildTitleBar(),
+            Expanded(child: _buildOutput(terminal)),
+            _buildInputRow(terminal),
+          ],
+        ),
       ),
     );
   }
@@ -80,6 +85,8 @@ class TerminalWindow extends StatelessWidget {
   }
 
   Widget _buildInputRow(TerminalController terminal) {
+    final settings = Get.find<SettingsController>();
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -95,7 +102,9 @@ class TerminalWindow extends StatelessWidget {
           children: [
             Text(
               '${terminal.prompt} ',
-              style: AppTextStyles.terminal.copyWith(color: AppColors.blue),
+              style: AppTextStyles.terminal.copyWith(
+                color: settings.accentColor,
+              ),
             ),
             Expanded(
               child: TextField(
@@ -103,7 +112,11 @@ class TerminalWindow extends StatelessWidget {
                 focusNode: terminal.focusNode,
                 autofocus: true,
                 style: AppTextStyles.terminal.copyWith(color: Colors.white),
-                cursorColor: Colors.white,
+                cursorColor: settings.accentColor,
+                cursorWidth: settings.cursorStyle.value == 'block' ? 10.0 : 2.0,
+                cursorHeight: settings.cursorStyle.value == 'underline'
+                    ? 2.0
+                    : null,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   isDense: true,

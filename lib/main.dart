@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
@@ -19,6 +20,7 @@ void main() {
   Get.put(VaultController());
   Get.put(NotepadController());
   Get.put(ImageViewerController());
+  Get.put(SettingsController());
 
   runApp(const MyApp());
 }

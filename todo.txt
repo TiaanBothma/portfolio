@@ -1,19 +1,10 @@
 !! CV Page: Do not like the page, redo completely
 
-!! Setting App (save with shared preferences):
-Wallpaper change (3-4 wallpaper options)
-Make wallpaper dynamic in correlation to the cursor, make it like a Neural Network and when hover over dot, message shows but the user can choose between this wallpaper and another one in the settings app
-Terminal cursor style (block vs underline vs line)
-Font size (changes the whole site's font size)
-Window transparency (between 85% and 100%)
-Clock style format (12hr vs 24hr)
-Accent color change
-Reset settings to default button
-!! CV.pdf: Add buttons and ways to get my actualf cv.pdf (terminal download cv or something like that and in linkedin, github, fiverr there should be button to view my cv in the file explorer as well and way to print and download it)
-!! Dynamic, 3D Graphics, How to make more interesting
+!! dynamic wallpaper doens't react to mouse (but not a bad thing looks really good though maybe keep it but then remove code that makes it react to mouse cursor position)
 
 !! cat cv.txt doesn't work remove this because we now have cv.pdf
 !! ssh cv should open cv.pdf and cat cv.pdf should do the same as ssh cv (it should open in new tab but of course the ssh cv should have a delay effect like ssh github)
+!! Dynamic, 3D Graphics, How to make more interesting
 
 ================
 Version History:
@@ -21,4 +12,5 @@ Version History:
 V2.4.0 -> open / download / print cv works now and can view cv in the terminal and vault and is working, gitpage UI improvement and more api stats data show
 
 
-V3.0.0 -> Settings app
+V3.0.0 -> Settings app, dynamic wallpaper, accent color changes, clock style, wallpaper, change, dynamic wallpaper, terminal cursor style
+window transparency dynamic change, clock style format change, accent color change, reset settings to default button

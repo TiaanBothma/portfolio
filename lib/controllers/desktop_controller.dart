@@ -43,6 +43,10 @@ class DesktopController extends GetxController {
       'imageviewer',
       WindowState(offset: const Offset(150, 80), size: const Size(750, 550)),
     );
+    _registerWindow(
+      'settings',
+      WindowState(offset: const Offset(200, 100), size: const Size(500, 620)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;
