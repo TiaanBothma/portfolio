@@ -18,44 +18,52 @@ class SettingsController extends GetxController {
 
   // Full palette presets
   static const List<Map<String, dynamic>> palettes = [
+    /*
+    !! AppColors.black     - settings.background
+    !! AppColors.deepBlue  - settings.surface
+    !! AppColors.darkPurple- settings.surfaceAlt
+    !! AppColors.purple    - settings.muted
+    !! AppColors.blue      - settings.accent
+    */
+
     {
       'name': 'Midnight Blue',
-      'black': Color(0xFF02010A),
-      'deepAccent': Color(0xFF04052E),
-      'darkSecondary': Color(0xFF140152),
-      'secondary': Color(0xFF22007C),
+      'background': Color(0xFF02010A),
+      'surface': Color(0xFF04052E),
+      'surfaceAlt': Color(0xFF140152),
+      'muted': Color(0xFF22007C),
       'accent': Color(0xFF0D00A4),
     },
     {
       'name': 'Deep Purple',
-      'black': Color(0xFF08010A),
-      'deepBlue': Color(0xFF1A0230),
-      'darkPurple': Color(0xFF2D0152),
-      'purple': Color(0xFF4A007C),
+      'background': Color(0xFF08010A),
+      'surface': Color(0xFF1A0230),
+      'surfaceAlt': Color(0xFF2D0152),
+      'muted': Color(0xFF4A007C),
       'accent': Color(0xFF7B00A4),
     },
     {
       'name': 'Hacker Green',
-      'black': Color(0xFF010A02),
-      'deepBlue': Color(0xFF012E08),
-      'darkPurple': Color(0xFF015214),
-      'purple': Color(0xFF007C22),
+      'background': Color(0xFF010A02),
+      'surface': Color(0xFF012E08),
+      'surfaceAlt': Color(0xFF015214),
+      'muted': Color(0xFF007C22),
       'accent': Color(0xFF00A43B),
     },
     {
       'name': 'Cyber Cyan',
-      'black': Color(0xFF01090A),
-      'deepBlue': Color(0xFF012B2E),
-      'darkPurple': Color(0xFF014A52),
-      'purple': Color(0xFF007580),
+      'background': Color(0xFF01090A),
+      'surface': Color(0xFF012B2E),
+      'surfaceAlt': Color(0xFF014A52),
+      'muted': Color(0xFF007580),
       'accent': Color(0xFF009DA4),
     },
     {
       'name': 'Blood Red',
-      'black': Color(0xFF0A0101),
-      'deepBlue': Color(0xFF2E0202),
-      'darkPurple': Color(0xFF520101),
-      'purple': Color(0xFF7C0000),
+      'background': Color(0xFF0A0101),
+      'surface': Color(0xFF2E0202),
+      'surfaceAlt': Color(0xFF520101),
+      'muted': Color(0xFF7C0000),
       'accent': Color(0xFFA40000),
     },
   ];
@@ -91,10 +99,10 @@ class SettingsController extends GetxController {
   // Current palette getters — use these everywhere instead of AppColors
   Map<String, dynamic> get palette => palettes[paletteIndex.value];
   Color get accentColor => palette['accent'] as Color;
-  Color get black => palette['black'] as Color;
-  Color get deepBlue => palette['deepBlue'] as Color;
-  Color get darkPurple => palette['darkPurple'] as Color;
-  Color get purple => palette['purple'] as Color;
+  Color get background => palette['background'] as Color;
+  Color get surface => palette['surface'] as Color;
+  Color get surfaceAlt => palette['surfaceAlt'] as Color;
+  Color get muted => palette['muted'] as Color;
 
   // The accent color dot shown in the palette picker
   // Returns just the accent color of each palette for the circle preview

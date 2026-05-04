@@ -19,7 +19,7 @@ class SettingsWindow extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: settings.black.withValues(
+          color: settings.background.withValues(
             alpha: settings.windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
@@ -528,7 +528,7 @@ class SettingsWindow extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: settings.deepBlue.withValues(alpha: 0.3),
+          color: settings.surface.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: settings.accentColor.withValues(alpha: 0.2),

@@ -19,7 +19,7 @@ class TerminalWindow extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: settings.black.withValues(
+          color: settings.background.withValues(
             alpha: Get.find<SettingsController>().windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
@@ -47,7 +47,7 @@ class TerminalWindow extends StatelessWidget {
       child: Container(
         height: 32,
         decoration: BoxDecoration(
-          color: settings.deepBlue.withValues(alpha: 0.9),
+          color: settings.surface.withValues(alpha: 0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
