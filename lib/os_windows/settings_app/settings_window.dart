@@ -12,23 +12,25 @@ class SettingsWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.find<SettingsController>();
+
     return Obx(
       () => Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.black.withValues(
-            alpha: Get.find<SettingsController>().windowTransparency.value,
+          color: settings.black.withValues(
+            alpha: settings.windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: AppColors.blue.withValues(alpha: 0.5),
+            color: settings.accentColor.withValues(alpha: 0.5),
             width: 1,
           ),
         ),
         child: Column(
           children: [
-            _buildTitleBar(),
+            _buildTitleBar(settings),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
@@ -63,7 +65,7 @@ class SettingsWindow extends StatelessWidget {
   }
 
   // ─── TITLE BAR ──────────────────────────────────────────
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
 
     return GestureDetector(
@@ -272,8 +274,8 @@ class SettingsWindow extends StatelessWidget {
       title: 'Accent Color',
       child: Obx(
         () => Row(
-          children: List.generate(SettingsController.accentColors.length, (i) {
-            final isSelected = settings.accentColorIndex.value == i;
+          children: List.generate(SettingsController.palettes.length, (i) {
+            final isSelected = settings.paletteIndex.value == i;
             return Padding(
               padding: const EdgeInsets.only(right: 12),
               child: MouseRegion(
@@ -285,7 +287,7 @@ class SettingsWindow extends StatelessWidget {
                     width: 32,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: SettingsController.accentColors[i],
+                      color: SettingsController.paletteAccent(i),
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: isSelected ? Colors.white : Colors.transparent,
@@ -294,8 +296,9 @@ class SettingsWindow extends StatelessWidget {
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: SettingsController.accentColors[i]
-                                    .withValues(alpha: 0.5),
+                                color: SettingsController.paletteAccent(
+                                  i,
+                                ).withValues(alpha: 0.5),
                                 blurRadius: 8,
                                 spreadRadius: 2,
                               ),
@@ -518,33 +521,39 @@ class SettingsWindow extends StatelessWidget {
     required String title,
     required Widget child,
   }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.deepBlue.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.blue.withValues(alpha: 0.2)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, color: Colors.white54, size: 14),
-              const SizedBox(width: 8),
-              Text(
-                title,
-                style: AppTextStyles.body.copyWith(
-                  color: Colors.white,
-                  fontSize: 13,
-                ),
-              ),
-            ],
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: settings.deepBlue.withValues(alpha: 0.3),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.2),
           ),
-          const SizedBox(height: 14),
-          child,
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: Colors.white54, size: 14),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: AppTextStyles.body.copyWith(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            child,
+          ],
+        ),
       ),
     );
   }

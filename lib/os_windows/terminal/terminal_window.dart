@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 
@@ -13,33 +12,34 @@ class TerminalWindow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final terminal = Get.find<TerminalController>();
+    final settings = Get.find<SettingsController>();
 
     return Obx(
       () => Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.black.withValues(
+          color: settings.black.withValues(
             alpha: Get.find<SettingsController>().windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: AppColors.blue.withValues(alpha: 0.5),
+            color: settings.accentColor.withValues(alpha: 0.5),
             width: 1,
           ),
         ),
         child: Column(
           children: [
-            _buildTitleBar(),
+            _buildTitleBar(settings),
             Expanded(child: _buildOutput(terminal)),
-            _buildInputRow(terminal),
+            _buildInputRow(terminal, settings),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
 
     return GestureDetector(
@@ -47,7 +47,7 @@ class TerminalWindow extends StatelessWidget {
       child: Container(
         height: 32,
         decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.9),
+          color: settings.deepBlue.withValues(alpha: 0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
@@ -84,7 +84,7 @@ class TerminalWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildInputRow(TerminalController terminal) {
+  Widget _buildInputRow(TerminalController terminal, SettingsController settings) {
     final settings = Get.find<SettingsController>();
 
     return Container(
@@ -92,7 +92,7 @@ class TerminalWindow extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: AppColors.blue.withValues(alpha: 0.2),
+            color: settings.accentColor.withValues(alpha: 0.2),
             width: 1,
           ),
         ),

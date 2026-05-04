@@ -1,16 +1,16 @@
 !! CV Page: Do not like the page, redo completely
 
 !! dynamic wallpaper doens't react to mouse (but not a bad thing looks really good though maybe keep it but then remove code that makes it react to mouse cursor position)
-
+!! dynamic wallpaper in the settings app shows the new accent color (the dots are for example purple in the preview in settings app) but is not purple when i change it or select the live / dynmaic wallpaper
+!! dynamic wallpaper: lines connecting the dots are very hard to see maybe make this a bit thicker or other color
+!! accent color change, change whole color pallete (blue color pallete (blue, deepBlue, etc.) then there would be a for example purple color pallete (purple, deepPurple, etc.))
+!! 'pwd' command in terminal
 !! cat cv.txt doesn't work remove this because we now have cv.pdf
 !! ssh cv should open cv.pdf and cat cv.pdf should do the same as ssh cv (it should open in new tab but of course the ssh cv should have a delay effect like ssh github)
+
 !! Dynamic, 3D Graphics, How to make more interesting
 
 ================
 Version History:
 ================
-V2.4.0 -> open / download / print cv works now and can view cv in the terminal and vault and is working, gitpage UI improvement and more api stats data show
-
-
-V3.0.0 -> Settings app, dynamic wallpaper, accent color changes, clock style, wallpaper, change, dynamic wallpaper, terminal cursor style
-window transparency dynamic change, clock style format change, accent color change, reset settings to default button
+V3.1.0 -> 

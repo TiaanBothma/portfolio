@@ -6,28 +6,59 @@ class SettingsController extends GetxController {
   static const _keyWallpaper = 'wallpaper';
   static const _keyTransparency = 'transparency';
   static const _keyClock24hr = 'clock24hr';
-  static const _keyAccentColor = 'accentColor';
+  static const _keyPaletteIndex = 'paletteIndex';
   static const _keyCursorStyle = 'cursorStyle';
 
   // Observables
   final wallpaper = 'neural'.obs;
   final windowTransparency = 0.92.obs;
   final clock24hr = true.obs;
-  final accentColorIndex = 0.obs;
+  final paletteIndex = 0.obs;
   final cursorStyle = 'line'.obs;
 
-  // Accent color presets
-  static const List<Color> accentColors = [
-    Color(0xFF0D00A4), // original blue
-    Color(0xFF6B00A4), // purple
-    Color(0xFF00A4A4), // cyan
-    Color(0xFF00A44B), // hacker green
-    Color(0xFFA40000), // deep red
+  // Full palette presets
+  static const List<Map<String, dynamic>> palettes = [
+    {
+      'name': 'Midnight Blue',
+      'black': Color(0xFF02010A),
+      'deepAccent': Color(0xFF04052E),
+      'darkSecondary': Color(0xFF140152),
+      'secondary': Color(0xFF22007C),
+      'accent': Color(0xFF0D00A4),
+    },
+    {
+      'name': 'Deep Purple',
+      'black': Color(0xFF08010A),
+      'deepBlue': Color(0xFF1A0230),
+      'darkPurple': Color(0xFF2D0152),
+      'purple': Color(0xFF4A007C),
+      'accent': Color(0xFF7B00A4),
+    },
+    {
+      'name': 'Hacker Green',
+      'black': Color(0xFF010A02),
+      'deepBlue': Color(0xFF012E08),
+      'darkPurple': Color(0xFF015214),
+      'purple': Color(0xFF007C22),
+      'accent': Color(0xFF00A43B),
+    },
+    {
+      'name': 'Cyber Cyan',
+      'black': Color(0xFF01090A),
+      'deepBlue': Color(0xFF012B2E),
+      'darkPurple': Color(0xFF014A52),
+      'purple': Color(0xFF007580),
+      'accent': Color(0xFF009DA4),
+    },
+    {
+      'name': 'Blood Red',
+      'black': Color(0xFF0A0101),
+      'deepBlue': Color(0xFF2E0202),
+      'darkPurple': Color(0xFF520101),
+      'purple': Color(0xFF7C0000),
+      'accent': Color(0xFFA40000),
+    },
   ];
-
-  Color get accentColor => accentColors[accentColorIndex.value];
-  double get alpha => windowTransparency.value;
-  static Color get accent => Get.find<SettingsController>().accentColor;
 
   // Wallpaper options
   static const List<Map<String, dynamic>> wallpapers = [
@@ -57,6 +88,18 @@ class SettingsController extends GetxController {
     },
   ];
 
+  // Current palette getters — use these everywhere instead of AppColors
+  Map<String, dynamic> get palette => palettes[paletteIndex.value];
+  Color get accentColor => palette['accent'] as Color;
+  Color get black => palette['black'] as Color;
+  Color get deepBlue => palette['deepBlue'] as Color;
+  Color get darkPurple => palette['darkPurple'] as Color;
+  Color get purple => palette['purple'] as Color;
+
+  // The accent color dot shown in the palette picker
+  // Returns just the accent color of each palette for the circle preview
+  static Color paletteAccent(int index) => palettes[index]['accent'] as Color;
+
   @override
   void onInit() {
     super.onInit();
@@ -68,7 +111,7 @@ class SettingsController extends GetxController {
     wallpaper.value = prefs.getString(_keyWallpaper) ?? 'neural';
     windowTransparency.value = prefs.getDouble(_keyTransparency) ?? 0.92;
     clock24hr.value = prefs.getBool(_keyClock24hr) ?? true;
-    accentColorIndex.value = prefs.getInt(_keyAccentColor) ?? 0;
+    paletteIndex.value = prefs.getInt(_keyPaletteIndex) ?? 0;
     cursorStyle.value = prefs.getString(_keyCursorStyle) ?? 'line';
   }
 
@@ -91,9 +134,9 @@ class SettingsController extends GetxController {
   }
 
   Future<void> setAccentColor(int index) async {
-    accentColorIndex.value = index;
+    paletteIndex.value = index;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_keyAccentColor, index);
+    await prefs.setInt(_keyPaletteIndex, index);
   }
 
   Future<void> setCursorStyle(String style) async {
@@ -108,7 +151,7 @@ class SettingsController extends GetxController {
     wallpaper.value = 'neural';
     windowTransparency.value = 0.92;
     clock24hr.value = true;
-    accentColorIndex.value = 0;
+    paletteIndex.value = 0;
     cursorStyle.value = 'line';
   }
 }

@@ -392,9 +392,8 @@ ${PortfolioData.linkedin}
 ''',
       ),
       VaultFile(
-        name: 'version.txt',
-        content:
-            '''Tiaan Bothma OS
+  name: 'version.txt',
+  content: '''Tiaan Bothma OS
 Version: ${PortfolioData.version}
 =========================================
 
@@ -414,7 +413,7 @@ CHANGELOG:
   v1.1.0 — Terminal Improvements
   ===============================
   + Neofetch command with ASCII logo
-  + Terminal Command history (arrow up / down)
+  + Terminal command history (arrow up / down)
   + Window size improvements and constraints
   + Additional terminal commands and responses
   + Improved terminal feel and behaviour
@@ -427,7 +426,7 @@ CHANGELOG:
 
   v2.0.0 — Major Update
   ======================
-  + Vault files and folder application
+  + Vault file and folder application
   + Improved LinkedIn page with banner
   + Improved Fiverr page with working buttons
   + Improved GitHub page with real API data
@@ -438,30 +437,51 @@ CHANGELOG:
   + Improved window sizing and feel
   + About section and system files added
 
-  v2.1.0 — UI/UX & Notepad Improvements
-  =====================================
+  v2.1.0 — UI/UX and Notepad Improvements
+  ========================================
   + Image viewer for viewing certificates
   + URLs clickable inside Notepad
-  + Improved Notepad with additional features
+  + Improved Notepad with File, Edit, View menus
   + Better UI/UX control and smoother experience
   + Minor fixes and small feature additions
 
   v2.2.0 — Terminal Expansion
   ============================
-  + Added new terminal commands
+  + New terminal commands (ssh, ping, open, ls, cd, cat)
   + File system navigation inside terminal
+  + Tab completion for commands and file names
+  + Delayed output for realistic commands
   + Improved terminal functionality and usability
 
   v2.3.0 — Browser Upgrade
   =========================
-  + New browser page
-  + Improved browser user experience
+  + CV page added to browser
+  + Improved browser tab highlighting
+  + Tab close and new tab button hover effects
   + UI fixes and refinements
+
+  v2.4.0 — CV and GitHub Improvements
+  =====================================
+  + CV accessible from Vault, terminal and browser
+  + CV open / download / print now working on hosted site
+  + GitHub page real API stats (language breakdown, stars)
+
+  v3.0.0 — Settings App
+  ======================
+  + Settings application with persistent preferences
+  + Dynamic live wallpaper
+  + Wallpaper options to choose from
+  + Accent color presets
+  + Window transparency slider
+  + Clock format toggle (12hr vs 24hr)
+  + Terminal cursor style (line, block, underline)
+  + Reset settings to default button
+  + Settings saved across sessions
 
 =========================================
 Built with Flutter Web
 ''',
-      ),
+),
     ],
   );
 }
