@@ -450,6 +450,7 @@ class TerminalController extends GetxController {
       'linkedin': 'https://${PortfolioData.linkedin}',
       'github': 'https://${PortfolioData.github}',
       'fiverr': 'https://${PortfolioData.fiverr}',
+      'cv': '/cv.pdf',
     };
 
     final url = urls[target];
@@ -459,10 +460,27 @@ class TerminalController extends GetxController {
       );
       outputLines.add(
         TerminalLine(
-          'Available: ssh linkedin | ssh github | ssh fiverr',
+          'Available: ssh linkedin | ssh github | ssh fiverr | ssh cv',
           TerminalLineType.output,
         ),
       );
+      return;
+    }
+
+    if (target == 'cv') {
+      await addLinesWithDelay([
+        TerminalLine('Locating cv.pdf...', TerminalLineType.output),
+      ], delay: const Duration(milliseconds: 300));
+
+      await Future.delayed(const Duration(milliseconds: 400));
+
+      await addLinesWithDelay([
+        TerminalLine('Found: /cv.pdf', TerminalLineType.output),
+        TerminalLine('Opening in new tab...', TerminalLineType.output),
+      ], delay: const Duration(milliseconds: 200));
+
+      await Future.delayed(const Duration(milliseconds: 200));
+      web.window.open('/cv.pdf', '_blank');
       return;
     }
 
@@ -477,7 +495,6 @@ class TerminalController extends GetxController {
       TerminalLine('Opening $url', TerminalLineType.output),
     ], delay: const Duration(milliseconds: 200));
 
-    // Open after the lines print so the output is visible first
     await Future.delayed(const Duration(milliseconds: 300));
     web.window.open(url, '_blank');
   }

@@ -3,6 +3,7 @@ import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:get/get.dart';
+import 'package:web/web.dart' as web;
 
 class TerminalCommands {
   TerminalCommands._();
@@ -69,7 +70,6 @@ class TerminalCommands {
       case 'whoami':
         return _whoami();
       case 'cv -view':
-      case 'cat cv.txt':
         return _cv();
       case 'projects -list':
         return _projects();
@@ -85,6 +85,8 @@ class TerminalCommands {
         return _certifications();
       case 'neofetch':
         return _neofetch();
+      case 'pwd':
+        return [_out(terminal.promptPath)];
       default:
         return [_err('command not found: $command — type "help" or "man -a"')];
     }
@@ -129,6 +131,7 @@ class TerminalCommands {
     _out('  cd ~                — go to root'),
     _out('  cat [file]          — read a file'),
     _out('  cat cv.txt          — alias for cv -view'),
+    _out('  pwd                 — print current directory path'),
     _out(''),
     _out('  NAVIGATION'),
     _out('  ssh [site]          — connect to a profile'),
@@ -157,6 +160,7 @@ class TerminalCommands {
           _out('  ssh linkedin        — open LinkedIn profile'),
           _out('  ssh github          — open GitHub profile'),
           _out('  ssh fiverr          — open Fiverr profile'),
+          _out('  ssh cv              — open CV / resume as PDF'),
         ];
       case 'open':
         return [
@@ -194,7 +198,6 @@ class TerminalCommands {
           _out('Usage: cat [filename]'),
           _out(''),
           _out('Example: cat 18INK_Productions.txt'),
-          _out('         cat cv.txt (alias for cv -view)'),
         ];
       case 'sudo':
         return [
@@ -223,6 +226,7 @@ class TerminalCommands {
           _out(''),
           _out('Displays ASCII logo and OS info side by side.'),
         ];
+
       default:
         return [_err('man: no manual entry for $command')];
     }
@@ -295,6 +299,12 @@ class TerminalCommands {
 
   // ─── CAT ──────────────────────────────────────────────────
   static List<TerminalLine> _cat(TerminalController terminal, String fileName) {
+    // cv.pdf special case
+    if (fileName.toLowerCase() == 'cv.pdf') {
+      web.window.open('/cv.pdf', '_blank');
+      return [_out('CV opened in new tab.')];
+    }
+
     final folder = terminal.currentFolder;
     final file = folder.files.firstWhereOrNull(
       (f) => f.name.toLowerCase() == fileName.toLowerCase(),
@@ -304,20 +314,16 @@ class TerminalCommands {
       return [_err('cat: $fileName: No such file')];
     }
 
-    if (file.externalUrl != null) {
-      return [
-        _out('${file.name}: PDF document'),
-        _out('Open in Vault or type "ssh cv" to view.'),
-        _out(''),
-        _out('Tip: double-click cv.pdf in Vault to open.'),
-      ];
-    }
-
     if (file.imagePath != null) {
       return [
         _out('${file.name}: image file'),
         _out('Open in Vault to view this certificate.'),
       ];
+    }
+
+    if (file.externalUrl != null) {
+      web.window.open(file.externalUrl!, '_blank');
+      return [_out('Opening ${file.name}...')];
     }
 
     final lines = file.content.split('\n');

@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 
 class NeuralNetworkWallpaper extends StatefulWidget {
   const NeuralNetworkWallpaper({super.key});
@@ -12,11 +14,9 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   final List<_Node> _nodes = [];
-  Offset _mousePosition = Offset.zero;
   final Random _random = Random();
   static const int _nodeCount = 60;
-  static const double _connectionDistance = 150.0;
-  static const double _mouseInfluenceRadius = 120.0;
+  static const double _connectionDistance = 180.0;
 
   @override
   void initState() {
@@ -37,10 +37,10 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
             _random.nextDouble() * size.height,
           ),
           velocity: Offset(
-            (_random.nextDouble() - 0.5) * 0.4,
-            (_random.nextDouble() - 0.5) * 0.4,
+            (_random.nextDouble() - 0.5) * 0.5,
+            (_random.nextDouble() - 0.5) * 0.5,
           ),
-          radius: _random.nextDouble() * 2 + 1.5,
+          radius: _random.nextDouble() * 2 + 2,
         ),
       );
     }
@@ -50,20 +50,10 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
     for (final node in _nodes) {
       node.position += node.velocity;
 
-      // Mouse influence — nodes are gently attracted toward cursor
-      final dx = _mousePosition.dx - node.position.dx;
-      final dy = _mousePosition.dy - node.position.dy;
-      final dist = sqrt(dx * dx + dy * dy);
-
-      if (dist < _mouseInfluenceRadius && dist > 0) {
-        final force = (1 - dist / _mouseInfluenceRadius) * 0.3;
-        node.velocity += Offset(dx / dist * force, dy / dist * force);
-      }
-
-      // Dampen velocity to prevent runaway speed
+      // Dampen velocity
       final speed = node.velocity.distance;
-      if (speed > 1.2) {
-        node.velocity = node.velocity / speed * 1.2;
+      if (speed > 1.0) {
+        node.velocity = node.velocity / speed * 1.0;
       }
 
       // Bounce off edges
@@ -92,11 +82,12 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onHover: (event) {
-        setState(() => _mousePosition = event.localPosition);
-      },
-      child: AnimatedBuilder(
+    // No MouseRegion — mouse reaction removed
+    return Obx(() {
+      // Watches accentColor so painter rebuilds when palette changes
+      final accent = Get.find<SettingsController>().accentColor;
+
+      return AnimatedBuilder(
         animation: _controller,
         builder: (context, _) {
           return LayoutBuilder(
@@ -107,17 +98,16 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
               return CustomPaint(
                 painter: _NeuralNetworkPainter(
                   nodes: _nodes,
-                  mousePosition: _mousePosition,
                   connectionDistance: _connectionDistance,
-                  mouseInfluenceRadius: _mouseInfluenceRadius,
+                  accentColor: accent,
                 ),
                 size: size,
               );
             },
           );
         },
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -131,15 +121,13 @@ class _Node {
 
 class _NeuralNetworkPainter extends CustomPainter {
   final List<_Node> nodes;
-  final Offset mousePosition;
   final double connectionDistance;
-  final double mouseInfluenceRadius;
+  final Color accentColor;
 
   _NeuralNetworkPainter({
     required this.nodes,
-    required this.mousePosition,
     required this.connectionDistance,
-    required this.mouseInfluenceRadius,
+    required this.accentColor,
   });
 
   @override
@@ -150,11 +138,10 @@ class _NeuralNetworkPainter extends CustomPainter {
       Paint()..color = const Color(0xFF02010A),
     );
 
-    final linePaint = Paint()..strokeWidth = 0.5;
+    final linePaint = Paint()..strokeWidth = 1.2;
     final nodePaint = Paint();
-    final mouseLinePaint = Paint()..strokeWidth = 0.8;
 
-    // Draw connections between nodes
+    // Draw connections
     for (int i = 0; i < nodes.length; i++) {
       for (int j = i + 1; j < nodes.length; j++) {
         final dx = nodes[i].position.dx - nodes[j].position.dx;
@@ -162,50 +149,25 @@ class _NeuralNetworkPainter extends CustomPainter {
         final dist = sqrt(dx * dx + dy * dy);
 
         if (dist < connectionDistance) {
-          final opacity = (1 - dist / connectionDistance) * 0.35;
-          linePaint.color = Color.fromRGBO(13, 0, 164, opacity);
+          final opacity = (1 - dist / connectionDistance) * 0.55;
+          linePaint.color = accentColor.withValues(alpha: opacity);
           canvas.drawLine(nodes[i].position, nodes[j].position, linePaint);
         }
-      }
-
-      // Draw connections from node to mouse
-      final mdx = nodes[i].position.dx - mousePosition.dx;
-      final mdy = nodes[i].position.dy - mousePosition.dy;
-      final mouseDist = sqrt(mdx * mdx + mdy * mdy);
-
-      if (mouseDist < mouseInfluenceRadius) {
-        final opacity = (1 - mouseDist / mouseInfluenceRadius) * 0.6;
-        mouseLinePaint.color = Color.fromRGBO(34, 0, 124, opacity);
-        canvas.drawLine(nodes[i].position, mousePosition, mouseLinePaint);
       }
     }
 
     // Draw nodes
     for (final node in nodes) {
-      final mdx = node.position.dx - mousePosition.dx;
-      final mdy = node.position.dy - mousePosition.dy;
-      final mouseDist = sqrt(mdx * mdx + mdy * mdy);
-      final isNearMouse = mouseDist < mouseInfluenceRadius;
+      nodePaint.color = accentColor.withValues(alpha: 0.75);
+      canvas.drawCircle(node.position, node.radius, nodePaint);
 
-      nodePaint.color = isNearMouse
-          ? const Color(0xFF0D00A4).withValues(alpha: 0.9)
-          : const Color(0xFF140152).withValues(alpha: 0.7);
-
-      canvas.drawCircle(
-        node.position,
-        isNearMouse ? node.radius * 1.5 : node.radius,
-        nodePaint,
-      );
+      // Soft glow around each node
+      nodePaint.color = accentColor.withValues(alpha: 0.15);
+      canvas.drawCircle(node.position, node.radius * 3, nodePaint);
     }
-
-    // Draw mouse cursor dot
-    canvas.drawCircle(
-      mousePosition,
-      4,
-      Paint()..color = const Color(0xFF0D00A4).withValues(alpha: 0.8),
-    );
   }
 
   @override
-  bool shouldRepaint(_NeuralNetworkPainter old) => true;
+  bool shouldRepaint(_NeuralNetworkPainter old) =>
+      old.accentColor != accentColor;
 }
