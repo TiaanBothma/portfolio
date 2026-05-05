@@ -12,4 +12,4 @@
 ================
 Version History:
 ================
-V3.1.0 -> Full palette change in the settings, live wallpaper updated and improved, terminal cv commands fixed
+V3.1.0 -> Full palette change in the settings, live wallpaper updated and improved, terminal cv commands fixed, Fixed cv page and made more intersting
