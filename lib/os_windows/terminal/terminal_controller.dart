@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/os_windows/terminal/terminal_commands.dart';
@@ -143,6 +144,20 @@ class TerminalController extends GetxController {
     // Async commands — handle delay internally
     if (lower == 'sudo apt update') {
       await _sudoAptUpdate();
+      outputLines.add(TerminalLine('', TerminalLineType.output));
+      return;
+    }
+
+    if (lower.startsWith('sudo apt-get install ') ||
+        lower.startsWith('apt-get install ') ||
+        lower.startsWith('apt install ')) {
+      final package = lower
+          .replaceFirst('sudo apt-get install ', '')
+          .replaceFirst('apt-get install ', '')
+          .replaceFirst('apt install ', '')
+          .trim();
+
+      await _aptInstall(package);
       outputLines.add(TerminalLine('', TerminalLineType.output));
       return;
     }
@@ -497,6 +512,128 @@ class TerminalController extends GetxController {
 
     await Future.delayed(const Duration(milliseconds: 300));
     web.window.open(url, '_blank');
+  }
+
+  Future<void> _aptInstall(String package) async {
+    final desktop = Get.find<DesktopController>();
+
+    // Map package names to window ids
+    final packageMap = {
+      'terminal': 'terminal',
+      'browser': 'browser',
+      'vault': 'vault',
+      'files': 'vault',
+      'notepad': 'notepad',
+      'settings': 'settings',
+      'imageviewer': 'imageviewer',
+      'image-viewer': 'imageviewer',
+      'image_viewer': 'imageviewer',
+      'cv': null, // special case
+      'experience': 'vault',
+      'projects': 'vault',
+      'education': 'vault',
+      'certifications': 'vault',
+    };
+
+    // Special readable names for output
+    final displayNames = {
+      'terminal': 'terminal',
+      'browser': 'browser',
+      'vault': 'vault',
+      'files': 'vault',
+      'notepad': 'notepad',
+      'settings': 'settings',
+      'imageviewer': 'image-viewer',
+      'image-viewer': 'image-viewer',
+      'image_viewer': 'image-viewer',
+      'cv': 'cv.pdf',
+      'experience': 'vault (Experience)',
+      'projects': 'vault (Projects)',
+      'education': 'vault (Education)',
+      'certifications': 'vault (Certifications)',
+    };
+
+    if (!packageMap.containsKey(package)) {
+      await addLinesWithDelay([
+        TerminalLine('Reading package lists... Done', TerminalLineType.output),
+        TerminalLine(
+          'Building dependency tree... Done',
+          TerminalLineType.output,
+        ),
+        TerminalLine('', TerminalLineType.output),
+        TerminalLine(
+          'E: Unable to locate package $package',
+          TerminalLineType.error,
+        ),
+        TerminalLine(
+          'Available: terminal, browser, vault, notepad, settings, cv, experience, projects, education, certifications',
+          TerminalLineType.output,
+        ),
+      ], delay: const Duration(milliseconds: 120));
+      return;
+    }
+
+    final displayName = displayNames[package] ?? package;
+
+    await addLinesWithDelay([
+      TerminalLine('Reading package lists... Done', TerminalLineType.output),
+      TerminalLine('Building dependency tree... Done', TerminalLineType.output),
+      TerminalLine(
+        'Reading state information... Done',
+        TerminalLineType.output,
+      ),
+      TerminalLine('', TerminalLineType.output),
+      TerminalLine(
+        'The following NEW packages will be installed:',
+        TerminalLineType.output,
+      ),
+      TerminalLine('  $displayName', TerminalLineType.output),
+      TerminalLine('', TerminalLineType.output),
+      TerminalLine(
+        '0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.',
+        TerminalLineType.output,
+      ),
+    ], delay: const Duration(milliseconds: 100));
+
+    await Future.delayed(const Duration(milliseconds: 200));
+
+    // Progress bar animation
+    for (int i = 1; i <= 10; i++) {
+      final filled = '█' * i;
+      final empty = '░' * (10 - i);
+      final percent = i * 10;
+      outputLines.add(
+        TerminalLine(
+          'Installing: [$filled$empty] $percent%',
+          TerminalLineType.output,
+        ),
+      );
+      // Remove previous progress line and replace
+      if (outputLines.length > 1) {
+        final last = outputLines.removeLast();
+        if (outputLines.isNotEmpty) outputLines.removeLast();
+        outputLines.add(last);
+      }
+      await Future.delayed(const Duration(milliseconds: 120));
+    }
+
+    await addLinesWithDelay([
+      TerminalLine('', TerminalLineType.output),
+      TerminalLine('Setting up $displayName... Done', TerminalLineType.output),
+      TerminalLine('Launching $displayName...', TerminalLineType.output),
+    ], delay: const Duration(milliseconds: 150));
+
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    // Open the window or handle special cases
+    if (package == 'cv') {
+      web.window.open('/cv.pdf', '_blank');
+    } else {
+      final windowId = packageMap[package];
+      if (windowId != null) {
+        desktop.toggleWindow(windowId);
+      }
+    }
   }
 }
 

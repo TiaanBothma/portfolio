@@ -63,6 +63,7 @@ class TerminalCommands {
       return [_err('sudo: command not permitted outside of apt update')];
     }
 
+
     // ── PORTFOLIO COMMANDS ────────────────────────────────
     switch (lower) {
       case 'help':
@@ -113,39 +114,41 @@ class TerminalCommands {
     _out('All available commands:'),
     _out(''),
     _out('  PORTFOLIO'),
-    _out('  whoami              — personal info and bio'),
-    _out('  cv -view            — full CV output'),
-    _out('  projects -list      — all projects'),
-    _out('  experience -list    — work experience'),
-    _out('  education -list     — education history'),
-    _out('  skills -list        — skills with progress bars'),
+    _out('  whoami               — personal info and bio'),
+    _out('  cv -view             — full CV output'),
+    _out('  projects -list       — all projects'),
+    _out('  experience -list     — work experience'),
+    _out('  education -list      — education history'),
+    _out('  skills -list         — skills with progress bars'),
     _out('  certifications -list — certifications'),
-    _out('  contact             — contact info'),
+    _out('  contact              — contact info'),
     _out(''),
     _out('  FILE SYSTEM'),
-    _out('  ls                  — list current directory'),
-    _out('  ls [folder]         — list specific folder'),
-    _out('  ls -la              — list with permissions'),
-    _out('  cd [folder]         — change directory'),
-    _out('  cd ..               — go up one level'),
-    _out('  cd ~                — go to root'),
-    _out('  cat [file]          — read a file'),
-    _out('  cat cv.txt          — alias for cv -view'),
-    _out('  pwd                 — print current directory path'),
+    _out('  ls                   — list current directory'),
+    _out('  ls [folder]          — list specific folder'),
+    _out('  ls -la               — list with permissions'),
+    _out('  cd [folder]          — change directory'),
+    _out('  cd ..                — go up one level'),
+    _out('  cd ~                 — go to root'),
+    _out('  cat [file]           — read a file'),
+    _out('  cat cv.txt           — alias for cv -view'),
+    _out('  pwd                  — print current directory path'),
     _out(''),
     _out('  NAVIGATION'),
-    _out('  ssh [site]          — connect to a profile'),
-    _out('  open [app]          — open an OS application'),
-    _out('  ping [site]         — ping a profile'),
+    _out('  ssh [site]           — connect to a profile'),
+    _out('  open [app]           — open an OS application'),
+    _out('  ping [site]          — ping a profile'),
     _out(''),
     _out('  SYSTEM'),
-    _out('  sudo apt update     — fetch portfolio data'),
-    _out('  neofetch            — system info'),
-    _out('  echo [text]         — print text'),
-    _out('  man [command]       — command manual'),
-    _out('  man -a              — this list'),
-    _out('  help                — essential commands'),
-    _out('  clear               — clear terminal'),
+    _out('  sudo apt update      — fetch portfolio data'),
+    _out('  apt-get install [pkg]— install and open a package'),
+    _out('  apt install [pkg]    — alias for apt-get install'),
+    _out('  neofetch             — system info'),
+    _out('  echo [text]          — print text'),
+    _out('  man [command]        — command manual'),
+    _out('  man -a               — this list'),
+    _out('  help                 — essential commands'),
+    _out('  clear                — clear terminal'),
   ];
 
   static List<TerminalLine> _man(String command) {
@@ -226,7 +229,27 @@ class TerminalCommands {
           _out(''),
           _out('Displays ASCII logo and OS info side by side.'),
         ];
-
+      case 'apt-get':
+case 'apt':
+  return [
+    _out('APT — Package manager'),
+    _out(''),
+    _out('Usage: sudo apt-get install [package]'),
+    _out('       apt-get install [package]'),
+    _out('       apt install [package]'),
+    _out(''),
+    _out('Available packages:'),
+    _out('  terminal        — open Terminal'),
+    _out('  browser         — open Browser'),
+    _out('  vault           — open Vault'),
+    _out('  notepad         — open Notepad'),
+    _out('  settings        — open Settings'),
+    _out('  cv              — open CV as PDF'),
+    _out('  experience      — open Vault (Experience)'),
+    _out('  projects        — open Vault (Projects)'),
+    _out('  education       — open Vault (Education)'),
+    _out('  certifications  — open Vault (Certifications)'),
+  ];
       default:
         return [_err('man: no manual entry for $command')];
     }
