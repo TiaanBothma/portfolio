@@ -25,7 +25,6 @@ class SettingsController extends GetxController {
     !! AppColors.purple    - settings.muted
     !! AppColors.blue      - settings.accent
     */
-
     {
       'name': 'Midnight Blue',
       'background': Color(0xFF02010A),

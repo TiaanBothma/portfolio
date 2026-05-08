@@ -86,8 +86,10 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
           builder: (context, constraints) {
             _size = Size(constraints.maxWidth, constraints.maxHeight);
             return AnimatedBuilder(
-              animation: Listenable.merge(
-                  [_shimmerController, _floatController]),
+              animation: Listenable.merge([
+                _shimmerController,
+                _floatController,
+              ]),
               builder: (context, _) {
                 return Stack(
                   children: [
@@ -106,9 +108,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
                     // Layer 3 — cursor light bloom
                     _buildCursorBloom(accent),
                     // Layer 4 — main CV card with 3D tilt
-                    Center(
-                      child: _build3DCard(accent),
-                    ),
+                    Center(child: _build3DCard(accent)),
                   ],
                 );
               },
@@ -152,10 +152,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: RadialGradient(
-              colors: [
-                accent.withValues(alpha: 0.08),
-                Colors.transparent,
-              ],
+              colors: [accent.withValues(alpha: 0.08), Colors.transparent],
             ),
           ),
         ),
@@ -165,8 +162,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
 
   // ─── 3D CARD ────────────────────────────────────────────
   Widget _build3DCard(Color accent) {
-    final float =
-        sin(_floatController.value * pi) * 6;
+    final float = sin(_floatController.value * pi) * 6;
 
     return Transform(
       alignment: FractionalOffset.center,
@@ -174,19 +170,14 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
         ..setEntry(3, 2, 0.001)
         ..rotateX(_tiltX)
         ..rotateY(_tiltY)
-        ..translate(0.0, float, 0.0),
+        ..setTranslationRaw(0.0, float, 0.0),
       child: Container(
-        width: 780,
-        constraints: BoxConstraints(
-          maxHeight: _size.height * 0.92,
-        ),
+        width: 920,
+        constraints: BoxConstraints(maxHeight: _size.height * 0.92),
         decoration: BoxDecoration(
           color: const Color(0xFF02010A).withValues(alpha: 0.88),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: accent.withValues(alpha: 0.4),
-            width: 1,
-          ),
+          border: Border.all(color: accent.withValues(alpha: 0.4), width: 1),
           boxShadow: [
             BoxShadow(
               color: accent.withValues(alpha: 0.2),
@@ -226,8 +217,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment(shimmerX * 2 - 1, shimmerY * 2 - 1),
-              end: Alignment(
-                  (shimmerX * 2 - 1) + 1, (shimmerY * 2 - 1) + 1),
+              end: Alignment((shimmerX * 2 - 1) + 1, (shimmerY * 2 - 1) + 1),
               colors: [
                 Colors.transparent,
                 accent.withValues(alpha: 0.04),
@@ -249,7 +239,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
         children: [
           _buildCvHeader(accent),
           Padding(
-            padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
+            padding: const EdgeInsets.fromLTRB(28, 20, 28, 28),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -353,16 +343,12 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
       padding: const EdgeInsets.fromLTRB(32, 28, 32, 24),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(
-              color: accent.withValues(alpha: 0.2), width: 1),
+          bottom: BorderSide(color: accent.withValues(alpha: 0.2), width: 1),
         ),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            accent.withValues(alpha: 0.12),
-            Colors.transparent,
-          ],
+          colors: [accent.withValues(alpha: 0.12), Colors.transparent],
         ),
       ),
       child: Row(
@@ -375,7 +361,9 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
               shape: BoxShape.circle,
               color: accent.withValues(alpha: 0.15),
               border: Border.all(
-                  color: accent.withValues(alpha: 0.5), width: 1.5),
+                color: accent.withValues(alpha: 0.5),
+                width: 1.5,
+              ),
             ),
             child: Center(
               child: Text(
@@ -413,10 +401,14 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
                 Row(
                   children: [
                     _headerTag(
-                        PhosphorIconsRegular.mapPin, PortfolioData.location),
+                      PhosphorIconsRegular.mapPin,
+                      PortfolioData.location,
+                    ),
                     const SizedBox(width: 16),
-                    _headerTag(PhosphorIconsRegular.graduationCap,
-                        'NWU — BSc IT'),
+                    _headerTag(
+                      PhosphorIconsRegular.graduationCap,
+                      'NWU — BSc IT',
+                    ),
                     const SizedBox(width: 16),
                     _headerTag(
                       PhosphorIconsRegular.circle,
@@ -481,13 +473,13 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           decoration: BoxDecoration(
             color: filled ? accent.withValues(alpha: 0.2) : Colors.transparent,
             borderRadius: BorderRadius.circular(6),
             border: Border.all(
-                color: accent.withValues(alpha: filled ? 0.6 : 0.3)),
+              color: accent.withValues(alpha: filled ? 0.6 : 0.3),
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -521,8 +513,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.02),
         borderRadius: BorderRadius.circular(8),
-        border:
-            Border.all(color: accent.withValues(alpha: 0.15), width: 1),
+        border: Border.all(color: accent.withValues(alpha: 0.15), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -543,9 +534,10 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
             ],
           ),
           Divider(
-              height: 12,
-              thickness: 1,
-              color: accent.withValues(alpha: 0.15)),
+            height: 16,
+            thickness: 1,
+            color: accent.withValues(alpha: 0.15),
+          ),
           child,
         ],
       ),
@@ -555,7 +547,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
   // ─── EXPERIENCE ITEM ────────────────────────────────────
   Widget _experienceItem(Map<String, String> e, Color accent) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -563,8 +555,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
             width: 6,
             height: 6,
             margin: const EdgeInsets.only(top: 4, right: 8),
-            decoration: BoxDecoration(
-                color: accent, shape: BoxShape.circle),
+            decoration: BoxDecoration(color: accent, shape: BoxShape.circle),
           ),
           Expanded(
             child: Column(
@@ -581,12 +572,16 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
                 Text(
                   '${e['company']} · ${e['type']}',
                   style: AppTextStyles.label.copyWith(
-                      color: accent, fontSize: 11),
+                    color: accent,
+                    fontSize: 11,
+                  ),
                 ),
                 Text(
                   '${e['period']} · ${e['location']}',
                   style: AppTextStyles.label.copyWith(
-                      color: Colors.white38, fontSize: 10),
+                    color: Colors.white38,
+                    fontSize: 10,
+                  ),
                 ),
               ],
             ),
@@ -599,7 +594,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
   // ─── PROJECT ITEM ───────────────────────────────────────
   Widget _projectItem(Map<String, String> p, Color accent) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -616,8 +611,10 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
               ),
               Text(
                 p['period'] ?? '',
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white30, fontSize: 10),
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white30,
+                  fontSize: 10,
+                ),
               ),
             ],
           ),
@@ -625,7 +622,10 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
           Text(
             p['description'] ?? '',
             style: AppTextStyles.label.copyWith(
-                color: Colors.white38, fontSize: 11, height: 1.4),
+              color: Colors.white38,
+              fontSize: 11,
+              height: 1.4,
+            ),
           ),
           const SizedBox(height: 4),
           Wrap(
@@ -633,19 +633,26 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
             runSpacing: 4,
             children: (p['skills'] ?? '')
                 .split(' · ')
-                .map((s) => Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: accent.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                            color: accent.withValues(alpha: 0.3)),
+                .map(
+                  (s) => Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: accent.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: accent.withValues(alpha: 0.3)),
+                    ),
+                    child: Text(
+                      s,
+                      style: AppTextStyles.label.copyWith(
+                        color: accent,
+                        fontSize: 9,
                       ),
-                      child: Text(s,
-                          style: AppTextStyles.label.copyWith(
-                              color: accent, fontSize: 9)),
-                    ))
+                    ),
+                  ),
+                )
                 .toList(),
           ),
         ],
@@ -670,21 +677,23 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
           ),
           Text(
             e['qualification'] ?? '',
-            style:
-                AppTextStyles.label.copyWith(color: accent, fontSize: 11),
+            style: AppTextStyles.label.copyWith(color: accent, fontSize: 11),
           ),
           Text(
             e['period'] ?? '',
-            style: AppTextStyles.label
-                .copyWith(color: Colors.white38, fontSize: 10),
+            style: AppTextStyles.label.copyWith(
+              color: Colors.white38,
+              fontSize: 10,
+            ),
           ),
           if (e['note'] != null)
             Text(
               e['note']!,
               style: AppTextStyles.label.copyWith(
-                  color: Colors.white30,
-                  fontSize: 10,
-                  fontStyle: FontStyle.italic),
+                color: Colors.white30,
+                fontSize: 10,
+                fontStyle: FontStyle.italic,
+              ),
             ),
         ],
       ),
@@ -696,7 +705,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
     final percent = ((s['level'] as double) * 100).toInt();
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -705,13 +714,17 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
             children: [
               Text(
                 s['name'] as String,
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white60, fontSize: 11),
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white60,
+                  fontSize: 11,
+                ),
               ),
               Text(
                 '$percent%',
-                style: AppTextStyles.label
-                    .copyWith(color: Colors.white30, fontSize: 10),
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white30,
+                  fontSize: 10,
+                ),
               ),
             ],
           ),
@@ -722,7 +735,8 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
               value: s['level'] as double,
               backgroundColor: accent.withValues(alpha: 0.15),
               valueColor: AlwaysStoppedAnimation<Color>(
-                  accent.withValues(alpha: 0.8)),
+                accent.withValues(alpha: 0.8),
+              ),
               minHeight: 4,
             ),
           ),
@@ -734,7 +748,7 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
   // ─── CERT ITEM ──────────────────────────────────────────
   Widget _certItem(Map<String, String> c, Color accent) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
           Icon(PhosphorIconsFill.sealCheck, color: accent, size: 12),
@@ -746,16 +760,19 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
                 Text(
                   c['title'] ?? '',
                   style: AppTextStyles.label.copyWith(
-                      color: Colors.white70,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500),
+                    color: Colors.white70,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   '${c['issuer']} · ${c['date']}',
-                  style: AppTextStyles.label
-                      .copyWith(color: Colors.white30, fontSize: 10),
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white30,
+                    fontSize: 10,
+                  ),
                 ),
               ],
             ),
@@ -773,21 +790,32 @@ class _CvPageState extends State<CvPage> with TickerProviderStateMixin {
       title: 'Contact',
       child: Column(
         children: [
-          _contactRow(PhosphorIconsRegular.linkedinLogo, 'LinkedIn',
-              PortfolioData.linkedin, accent),
+          _contactRow(
+            PhosphorIconsRegular.linkedinLogo,
+            'LinkedIn',
+            PortfolioData.linkedin,
+            accent,
+          ),
           const SizedBox(height: 6),
-          _contactRow(PhosphorIconsRegular.githubLogo, 'GitHub',
-              PortfolioData.github, accent),
+          _contactRow(
+            PhosphorIconsRegular.githubLogo,
+            'GitHub',
+            PortfolioData.github,
+            accent,
+          ),
           const SizedBox(height: 6),
-          _contactRow(PhosphorIconsRegular.handCoins, 'Fiverr',
-              PortfolioData.fiverr, accent),
+          _contactRow(
+            PhosphorIconsRegular.handCoins,
+            'Fiverr',
+            PortfolioData.fiverr,
+            accent,
+          ),
         ],
       ),
     );
   }
 
-  Widget _contactRow(
-      IconData icon, String label, String url, Color accent) {
+  Widget _contactRow(IconData icon, String label, String url, Color accent) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -834,13 +862,15 @@ class _ParticlePainter extends CustomPainter {
     if (!_initialized) {
       final random = Random(42);
       for (int i = 0; i < 80; i++) {
-        _particles.add(_Particle(
-          x: random.nextDouble(),
-          y: random.nextDouble(),
-          size: random.nextDouble() * 1.5 + 0.5,
-          speed: random.nextDouble() * 0.0002 + 0.0001,
-          phase: random.nextDouble(),
-        ));
+        _particles.add(
+          _Particle(
+            x: random.nextDouble(),
+            y: random.nextDouble(),
+            size: random.nextDouble() * 1.5 + 0.5,
+            speed: random.nextDouble() * 0.0002 + 0.0001,
+            phase: random.nextDouble(),
+          ),
+        );
       }
       _initialized = true;
     }
@@ -853,18 +883,13 @@ class _ParticlePainter extends CustomPainter {
     for (final p in _particles) {
       // Drift upward slowly
       final y = (p.y - progress * p.speed * 100) % 1.0;
-      final x = p.x +
-          sin(progress * 2 * pi + p.phase) * 0.01 +
-          (mouseX - 0.5) * 0.02;
+      final x =
+          p.x + sin(progress * 2 * pi + p.phase) * 0.01 + (mouseX - 0.5) * 0.02;
 
       final opacity = (sin(progress * 2 * pi + p.phase) + 1) / 2 * 0.4 + 0.1;
       paint.color = accent.withValues(alpha: opacity);
 
-      canvas.drawCircle(
-        Offset(x * size.width, y * size.height),
-        p.size,
-        paint,
-      );
+      canvas.drawCircle(Offset(x * size.width, y * size.height), p.size, paint);
     }
   }
 

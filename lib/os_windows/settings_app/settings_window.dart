@@ -412,7 +412,6 @@ class SettingsWindow extends StatelessWidget {
     final cursors = [
       {'id': 'line', 'label': 'Line', 'preview': '|'},
       {'id': 'block', 'label': 'Block', 'preview': '█'},
-      {'id': 'underline', 'label': 'Underline', 'preview': '_'},
     ];
 
     return _settingsCard(
@@ -431,13 +430,13 @@ class SettingsWindow extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
+                      horizontal: 24,
+                      vertical: 12,
                     ),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? settings.accentColor.withValues(alpha: 0.2)
-                          : AppColors.deepBlue.withValues(alpha: 0.3),
+                          : settings.surface.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
                         color: isSelected
@@ -453,10 +452,10 @@ class SettingsWindow extends StatelessWidget {
                             color: isSelected
                                 ? settings.accentColor
                                 : Colors.white60,
-                            fontSize: 18,
+                            fontSize: 20,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 6),
                         Text(
                           c['label']!,
                           style: AppTextStyles.label.copyWith(

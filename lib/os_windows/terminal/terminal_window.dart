@@ -114,9 +114,6 @@ class TerminalWindow extends StatelessWidget {
                 style: AppTextStyles.terminal.copyWith(color: Colors.white),
                 cursorColor: settings.accentColor,
                 cursorWidth: settings.cursorStyle.value == 'block' ? 10.0 : 2.0,
-                cursorHeight: settings.cursorStyle.value == 'underline'
-                    ? 2.0
-                    : null,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   isDense: true,
