@@ -98,7 +98,7 @@ class TerminalController extends GetxController {
 
     inputController.clear();
     currentInput.value = '';
-    _scrollToBottom();
+    scrollToBottom();
   }
 
   // ─── COMMAND PROCESSING ───────────────────────────────────
@@ -179,7 +179,7 @@ class TerminalController extends GetxController {
     final result = TerminalCommands.process(command, this);
     outputLines.addAll(result);
     outputLines.add(TerminalLine('', TerminalLineType.output));
-    _scrollToBottom();
+    scrollToBottom();
   }
 
   Future<void> addLinesWithDelay(
@@ -189,7 +189,7 @@ class TerminalController extends GetxController {
     for (final line in lines) {
       await Future.delayed(delay);
       outputLines.add(line);
-      _scrollToBottom();
+      scrollToBottom();
     }
   }
 
@@ -224,7 +224,7 @@ class TerminalController extends GetxController {
         outputLines.add(
           TerminalLine(matches.join('    '), TerminalLineType.output),
         );
-        _scrollToBottom();
+        scrollToBottom();
       }
       return;
     }
@@ -246,7 +246,7 @@ class TerminalController extends GetxController {
         outputLines.add(
           TerminalLine(matches.join('    '), TerminalLineType.output),
         );
-        _scrollToBottom();
+        scrollToBottom();
       }
       return;
     }
@@ -306,7 +306,7 @@ class TerminalController extends GetxController {
       outputLines.add(
         TerminalLine(matches.join('    '), TerminalLineType.output),
       );
-      _scrollToBottom();
+      scrollToBottom();
     }
   }
 
@@ -332,7 +332,7 @@ class TerminalController extends GetxController {
   }
 
   // ─── SCROLL ───────────────────────────────────────────────
-  void _scrollToBottom() {
+  void scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {
         scrollController.animateTo(

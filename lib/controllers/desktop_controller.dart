@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 
 class WindowState {
   Offset offset;
@@ -61,21 +62,28 @@ class DesktopController extends GetxController {
     final isCurrentlyOpen = _windows[id]!.value.isOpen;
 
     for (final key in _windows.keys) {
-      final current = _windows[key]!.value;
       _windows[key]!.value = WindowState(
-        offset: current.offset,
-        size: current.size,
+        offset: _windows[key]!.value.offset,
+        size: _windows[key]!.value.size,
         isOpen: false,
       );
     }
 
     if (!isCurrentlyOpen) {
-      final current = _windows[id]!.value;
       _windows[id]!.value = WindowState(
-        offset: current.offset,
-        size: current.size,
+        offset: _windows[id]!.value.offset,
+        size: _windows[id]!.value.size,
         isOpen: true,
       );
+      _onWindowOpened(id);
+    }
+  }
+
+  void _onWindowOpened(String id) {
+    if (id == 'terminal') {
+      Future.delayed(const Duration(milliseconds: 150), () {
+        Get.find<TerminalController>().scrollToBottom();
+      });
     }
   }
 

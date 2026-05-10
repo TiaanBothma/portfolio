@@ -7,7 +7,6 @@
 =======
 Fixes:
 ======
-apt-get install certifications doesn't open vault in the certifications path (same with the other paths)
 when go to terminal and type command then go to other window / application then go back to terminal then it is not automatically at the bottom then i have to scroll (so each time i swtich back to the terminaol then it starts at the top of the terminal then i have to scroll manually to the bottom each time)
 More options in the settings app
 make taskbar translucent
