@@ -7,7 +7,6 @@ import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/os_windows/vault/vault_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 import 'package:web/web.dart' as web;
@@ -17,32 +16,34 @@ class VaultWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.find<SettingsController>();
+
     return Obx(
       () => Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.black.withValues(
-            alpha: Get.find<SettingsController>().windowTransparency.value,
+          color: settings.background.withValues(
+            alpha: settings.windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: AppColors.blue.withValues(alpha: 0.5),
+            color: settings.accentColor.withValues(alpha: 0.5),
             width: 1,
           ),
         ),
         child: Column(
           children: [
-            _buildTitleBar(),
-            _buildToolBar(),
-            Expanded(child: _buildBody()),
+            _buildTitleBar(settings),
+            _buildToolBar(settings),
+            Expanded(child: _buildBody(settings)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
 
     return GestureDetector(
@@ -50,10 +51,16 @@ class VaultWindow extends StatelessWidget {
       child: Container(
         height: 32,
         decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.9),
+          color: settings.surface.withValues(alpha: 0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
+          ),
+          border: Border(
+            bottom: BorderSide(
+              color: settings.accentColor.withValues(alpha: 0.3),
+              width: 1,
+            ),
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -78,40 +85,37 @@ class VaultWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildToolBar() {
+  Widget _buildToolBar(SettingsController settings) {
     final vault = Get.find<VaultController>();
 
     return Obx(
       () => Container(
         height: 36,
-        color: AppColors.deepBlue.withValues(alpha: 0.4),
+        color: settings.surface.withValues(alpha: 0.4),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           children: [
-            // Back button
             _toolbarButton(
               icon: PhosphorIconsRegular.arrowLeft,
               enabled: vault.canGoBack,
               onTap: vault.goBack,
             ),
             const SizedBox(width: 4),
-            // Home button
             _toolbarButton(
               icon: PhosphorIconsRegular.house,
               enabled: true,
               onTap: vault.goHome,
             ),
             const SizedBox(width: 12),
-            // Path bar
             Expanded(
               child: Container(
                 height: 24,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: AppColors.black.withValues(alpha: 0.4),
+                  color: settings.background.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(
-                    color: AppColors.blue.withValues(alpha: 0.3),
+                    color: settings.accentColor.withValues(alpha: 0.3),
                   ),
                 ),
                 child: Align(
@@ -159,24 +163,24 @@ class VaultWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(SettingsController settings) {
     return Row(
       children: [
-        _buildSidebar(),
-        _buildVerticalDivider(),
+        _buildSidebar(settings),
+        _buildVerticalDivider(settings),
         Expanded(child: _buildFilePanel()),
-        _buildVerticalDivider(),
-        _buildPreviewPanel(),
+        _buildVerticalDivider(settings),
+        _buildPreviewPanel(settings),
       ],
     );
   }
 
-  Widget _buildSidebar() {
+  Widget _buildSidebar(SettingsController settings) {
     final vault = Get.find<VaultController>();
 
     return Container(
       width: 160,
-      color: AppColors.deepBlue.withValues(alpha: 0.2),
+      color: settings.surface.withValues(alpha: 0.2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -298,7 +302,6 @@ class VaultWindow extends StatelessWidget {
   Widget _folderItem(VaultFolder folder, VaultController vault) {
     return Obx(() {
       final isSelected = vault.selectedFolder.value?.name == folder.name;
-
       return _HoverItem(
         onTap: () => vault.selectFolder(folder),
         onDoubleTap: () => vault.openFolder(folder),
@@ -307,9 +310,9 @@ class VaultWindow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 PhosphorIconsFill.folder,
-                color: const Color(0xFF6B8AFF),
+                color: Color(0xFF6B8AFF),
                 size: 16,
               ),
               const SizedBox(width: 10),
@@ -339,7 +342,6 @@ class VaultWindow extends StatelessWidget {
   Widget _fileItem(VaultFile file, VaultController vault) {
     return Obx(() {
       final isSelected = vault.selectedFile.value?.name == file.name;
-
       return _HoverItem(
         onTap: () => vault.selectFile(file),
         onDoubleTap: () {
@@ -398,7 +400,7 @@ class VaultWindow extends StatelessWidget {
     });
   }
 
-  Widget _buildPreviewPanel() {
+  Widget _buildPreviewPanel(SettingsController settings) {
     final vault = Get.find<VaultController>();
 
     return Obx(() {
@@ -407,17 +409,17 @@ class VaultWindow extends StatelessWidget {
 
       return Container(
         width: 220,
-        color: AppColors.deepBlue.withValues(alpha: 0.2),
+        color: settings.surface.withValues(alpha: 0.2),
         child: file != null
-            ? _filePreview(file)
+            ? _filePreview(file, settings)
             : folder != null
-            ? _folderPreview(folder)
+            ? _folderPreview(folder, settings)
             : _emptyPreview(),
       );
     });
   }
 
-  Widget _filePreview(VaultFile file) {
+  Widget _filePreview(VaultFile file, SettingsController settings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -425,16 +427,18 @@ class VaultWindow extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.black.withValues(alpha: 0.3),
+            color: settings.background.withValues(alpha: 0.3),
             border: Border(
-              bottom: BorderSide(color: AppColors.blue.withValues(alpha: 0.2)),
+              bottom: BorderSide(
+                color: settings.accentColor.withValues(alpha: 0.2),
+              ),
             ),
           ),
           child: Column(
             children: [
               Icon(
                 PhosphorIconsRegular.fileText,
-                color: AppColors.blue,
+                color: settings.accentColor,
                 size: 36,
               ),
               const SizedBox(height: 8),
@@ -466,7 +470,7 @@ class VaultWindow extends StatelessWidget {
     );
   }
 
-  Widget _folderPreview(VaultFolder folder) {
+  Widget _folderPreview(VaultFolder folder, SettingsController settings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -474,16 +478,18 @@ class VaultWindow extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.black.withValues(alpha: 0.3),
+            color: settings.background.withValues(alpha: 0.3),
             border: Border(
-              bottom: BorderSide(color: AppColors.blue.withValues(alpha: 0.2)),
+              bottom: BorderSide(
+                color: settings.accentColor.withValues(alpha: 0.2),
+              ),
             ),
           ),
           child: Column(
             children: [
-              Icon(
+              const Icon(
                 PhosphorIconsFill.folder,
-                color: const Color(0xFF6B8AFF),
+                color: Color(0xFF6B8AFF),
                 size: 36,
               ),
               const SizedBox(height: 8),
@@ -550,7 +556,7 @@ class VaultWindow extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             PhosphorIconsRegular.selectionSlash,
             color: Colors.white12,
             size: 32,
@@ -568,8 +574,11 @@ class VaultWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildVerticalDivider() {
-    return Container(width: 1, color: AppColors.blue.withValues(alpha: 0.15));
+  Widget _buildVerticalDivider(SettingsController settings) {
+    return Container(
+      width: 1,
+      color: settings.accentColor.withValues(alpha: 0.15),
+    );
   }
 }
 
@@ -595,6 +604,8 @@ class _HoverItemState extends State<_HoverItem> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.find<SettingsController>();
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
@@ -606,14 +617,14 @@ class _HoverItemState extends State<_HoverItem> {
           duration: const Duration(milliseconds: 150),
           decoration: BoxDecoration(
             color: widget.selected
-                ? AppColors.blue.withValues(alpha: 0.25)
+                ? settings.accentColor.withValues(alpha: 0.25)
                 : _hovered
                 ? Colors.white.withValues(alpha: 0.05)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(4),
             border: Border.all(
               color: widget.selected
-                  ? AppColors.blue.withValues(alpha: 0.5)
+                  ? settings.accentColor.withValues(alpha: 0.5)
                   : Colors.transparent,
             ),
           ),

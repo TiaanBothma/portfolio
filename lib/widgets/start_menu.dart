@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 
 class StartMenu extends StatelessWidget {
@@ -13,100 +13,117 @@ class StartMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 280,
-      decoration: BoxDecoration(
-        color: AppColors.deepBlue.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.blue.withValues(alpha: 0.5)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildProfile(),
-          _buildDivider(),
-          _buildSection('QUICK LAUNCH', [
-            _buildItem(
-              icon: PhosphorIconsRegular.terminalWindow,
-              label: 'Terminal',
-              onTap: () {
-                Get.find<DesktopController>().toggleWindow('terminal');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-            _buildItem(
-              icon: PhosphorIconsRegular.browser,
-              label: 'Browser',
-              onTap: () {
-                Get.find<DesktopController>().toggleWindow('browser');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-            _buildItem(
-              icon: PhosphorIconsRegular.vault,
-              label: 'Vault',
-              onTap: () {
-                Get.find<DesktopController>().toggleWindow('vault');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-          ]),
-          _buildDivider(),
-          _buildSection('FIND ME ON', [
-            _buildItem(
-              icon: PhosphorIconsRegular.filePdf,
-              label: 'CV',
-              onTap: () {
-                Get.find<DesktopController>().toggleWindow('browser');
-                Get.find<BrowserController>().openNewTab(
-                  title: 'CV',
-                  url: 'cv',
-                );
-                Get.find<StartMenuController>().close();
-              },
-            ),
-            _buildItem(
-              icon: PhosphorIconsRegular.linkedinLogo,
-              label: 'LinkedIn',
-              onTap: () {
-                final desktop = Get.find<DesktopController>();
-                final browser = Get.find<BrowserController>();
-                desktop.toggleWindow('browser');
-                browser.openNewTab(title: 'LinkedIn', url: 'linkedin');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-            _buildItem(
-              icon: PhosphorIconsRegular.githubLogo,
-              label: 'GitHub',
-              onTap: () {
-                final desktop = Get.find<DesktopController>();
-                final browser = Get.find<BrowserController>();
-                desktop.toggleWindow('browser');
-                browser.openNewTab(title: 'GitHub', url: 'github');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-            _buildItem(
-              icon: PhosphorIconsRegular.handCoins,
-              label: 'Fiverr',
-              onTap: () {
-                final desktop = Get.find<DesktopController>();
-                final browser = Get.find<BrowserController>();
-                desktop.toggleWindow('browser');
-                browser.openNewTab(title: 'Fiverr', url: 'fiverr');
-                Get.find<StartMenuController>().close();
-              },
-            ),
-          ]),
-          _buildDivider(),
-          _buildFooter(),
-        ],
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        width: 280,
+        decoration: BoxDecoration(
+          color: settings.surface.withValues(alpha: 0.95),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.5),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildProfile(settings),
+            _buildDivider(settings),
+            _buildSection('QUICK LAUNCH', [
+              _buildItem(
+                icon: PhosphorIconsRegular.terminalWindow,
+                label: 'Terminal',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('terminal');
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.browser,
+                label: 'Browser',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('browser');
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.vault,
+                label: 'Vault',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('vault');
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.gear,
+                label: 'Settings',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('settings');
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+            ], settings),
+            _buildDivider(settings),
+            _buildSection('FIND ME ON', [
+              _buildItem(
+                icon: PhosphorIconsRegular.filePdf,
+                label: 'CV',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('browser');
+                  Get.find<BrowserController>().openNewTab(
+                    title: 'CV',
+                    url: 'cv',
+                  );
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.linkedinLogo,
+                label: 'LinkedIn',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('browser');
+                  Get.find<BrowserController>().openNewTab(
+                    title: 'LinkedIn',
+                    url: 'linkedin',
+                  );
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.githubLogo,
+                label: 'GitHub',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('browser');
+                  Get.find<BrowserController>().openNewTab(
+                    title: 'GitHub',
+                    url: 'github',
+                  );
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+              _buildItem(
+                icon: PhosphorIconsRegular.handCoins,
+                label: 'Fiverr',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('browser');
+                  Get.find<BrowserController>().openNewTab(
+                    title: 'Fiverr',
+                    url: 'fiverr',
+                  );
+                  Get.find<StartMenuController>().close();
+                },
+              ),
+            ], settings),
+            _buildDivider(settings),
+            _buildFooter(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildProfile() {
+  Widget _buildProfile(SettingsController settings) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -116,9 +133,9 @@ class StartMenu extends StatelessWidget {
             height: 44,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.purple.withValues(alpha: 0.4),
+              color: settings.muted.withValues(alpha: 0.4),
               border: Border.all(
-                color: AppColors.blue.withValues(alpha: 0.5),
+                color: settings.accentColor.withValues(alpha: 0.5),
                 width: 1,
               ),
             ),
@@ -148,7 +165,11 @@ class StartMenu extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(String title, List<Widget> items) {
+  Widget _buildSection(
+    String title,
+    List<Widget> items,
+    SettingsController settings,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
@@ -179,11 +200,11 @@ class StartMenu extends StatelessWidget {
     return _StartMenuItem(icon: icon, label: label, onTap: onTap);
   }
 
-  Widget _buildDivider() {
+  Widget _buildDivider(SettingsController settings) {
     return Divider(
       height: 1,
       thickness: 1,
-      color: AppColors.blue.withValues(alpha: 0.2),
+      color: settings.accentColor.withValues(alpha: 0.2),
     );
   }
 
@@ -227,6 +248,8 @@ class _StartMenuItemState extends State<_StartMenuItem> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.find<SettingsController>();
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
@@ -236,7 +259,7 @@ class _StartMenuItemState extends State<_StartMenuItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           color: _hovered
-              ? AppColors.blue.withValues(alpha: 0.2)
+              ? settings.accentColor.withValues(alpha: 0.2)
               : Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Row(
