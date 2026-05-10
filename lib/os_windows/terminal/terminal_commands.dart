@@ -131,7 +131,6 @@ class TerminalCommands {
     _out('  cd ..                — go up one level'),
     _out('  cd ~                 — go to root'),
     _out('  cat [file]           — read a file'),
-    _out('  cat cv.txt           — alias for cv -view'),
     _out('  pwd                  — print current directory path'),
     _out(''),
     _out('  NAVIGATION'),

@@ -5,6 +5,7 @@ import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/os_windows/terminal/terminal_commands.dart';
+import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:web/web.dart' as web;
 
 class TerminalController extends GetxController {
@@ -517,22 +518,20 @@ class TerminalController extends GetxController {
   Future<void> _aptInstall(String package) async {
     final desktop = Get.find<DesktopController>();
 
-    // Map package names to window ids
     final packageMap = {
-      'terminal': 'terminal',
-      'browser': 'browser',
-      'vault': 'vault',
-      'files': 'vault',
-      'notepad': 'notepad',
-      'settings': 'settings',
-      'imageviewer': 'imageviewer',
-      'image-viewer': 'imageviewer',
-      'image_viewer': 'imageviewer',
-      'cv': null, // special case
-      'experience': 'vault',
-      'projects': 'vault',
-      'education': 'vault',
-      'certifications': 'vault',
+      'terminal': {'window': 'terminal', 'folder': null},
+      'browser': {'window': 'browser', 'folder': null},
+      'vault': {'window': 'vault', 'folder': null},
+      'files': {'window': 'vault', 'folder': null},
+      'notepad': {'window': 'notepad', 'folder': null},
+      'settings': {'window': 'settings', 'folder': null},
+      'imageviewer': {'window': 'imageviewer', 'folder': null},
+      'image-viewer': {'window': 'imageviewer', 'folder': null},
+      'cv': {'window': null, 'folder': null},
+      'experience': {'window': 'vault', 'folder': 'Experience'},
+      'projects': {'window': 'vault', 'folder': 'Projects'},
+      'education': {'window': 'vault', 'folder': 'Education'},
+      'certifications': {'window': 'vault', 'folder': 'Certifications'},
     };
 
     // Special readable names for output
@@ -625,13 +624,23 @@ class TerminalController extends GetxController {
 
     await Future.delayed(const Duration(milliseconds: 400));
 
-    // Open the window or handle special cases
     if (package == 'cv') {
       web.window.open('/cv.pdf', '_blank');
     } else {
-      final windowId = packageMap[package];
-      if (windowId != null) {
-        desktop.toggleWindow(windowId);
+      final entry = packageMap[package];
+      if (entry != null) {
+        final windowId = entry['window'];
+        final folder = entry['folder'];
+
+        if (windowId != null) {
+          desktop.toggleWindow(windowId);
+
+          // Navigate to specific folder if specified
+          if (folder != null) {
+            await Future.delayed(const Duration(milliseconds: 200));
+            Get.find<VaultController>().navigateToFolder(folder);
+          }
+        }
       }
     }
   }

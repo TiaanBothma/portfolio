@@ -103,8 +103,6 @@ class SettingsController extends GetxController {
   Color get surfaceAlt => palette['surfaceAlt'] as Color;
   Color get muted => palette['muted'] as Color;
 
-  // The accent color dot shown in the palette picker
-  // Returns just the accent color of each palette for the circle preview
   static Color paletteAccent(int index) => palettes[index]['accent'] as Color;
 
   @override
@@ -115,6 +113,13 @@ class SettingsController extends GetxController {
 
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
+
+    // Check for previous underline settings applied
+    final savedCursor = prefs.getString(_keyCursorStyle) ?? 'line';
+    cursorStyle.value = ['line', 'block'].contains(savedCursor)
+        ? savedCursor
+        : 'line';
+
     wallpaper.value = prefs.getString(_keyWallpaper) ?? 'neural';
     windowTransparency.value = prefs.getDouble(_keyTransparency) ?? 0.92;
     clock24hr.value = prefs.getBool(_keyClock24hr) ?? true;

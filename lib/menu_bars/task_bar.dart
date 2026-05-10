@@ -16,7 +16,7 @@ class Taskbar extends StatelessWidget {
       child: Container(
         height: 60,
         width: double.infinity,
-        color: Colors.black.withValues(alpha: 0.3),
+        color: Colors.transparent,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: [

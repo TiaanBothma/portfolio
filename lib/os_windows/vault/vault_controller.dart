@@ -44,5 +44,23 @@ class VaultController extends GetxController {
     selectedFile.value = null;
   }
 
+  void navigateToFolder(String folderName) {
+    // Reset to root first
+    navigationStack.clear();
+    currentFolder.value = FileSystemData.root;
+    selectedFile.value = null;
+    selectedFolder.value = null;
+
+    // Find and navigate to the target folder
+    final match = FileSystemData.root.subFolders.firstWhereOrNull(
+      (f) => f.name.toLowerCase() == folderName.toLowerCase(),
+    );
+
+    if (match != null) {
+      navigationStack.add(FileSystemData.root);
+      currentFolder.value = match;
+    }
+  }
+
   bool get canGoBack => navigationStack.isNotEmpty;
 }

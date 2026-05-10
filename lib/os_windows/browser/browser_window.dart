@@ -8,7 +8,6 @@ import 'package:portfolio/os_windows/browser/browser_pages.dart/cv_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/fiverr_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/github_page.dart';
 import 'package:portfolio/os_windows/browser/browser_pages.dart/linkedin_page.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 import 'browser_controller.dart';
@@ -18,23 +17,25 @@ class BrowserWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.find<SettingsController>();
+
     return Obx(
       () => Container(
         decoration: BoxDecoration(
-          color: AppColors.black.withValues(
-            alpha: Get.find<SettingsController>().windowTransparency.value,
+          color: settings.background.withValues(
+            alpha: settings.windowTransparency.value,
           ),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: AppColors.blue.withValues(alpha: 0.5),
+            color: settings.accentColor.withValues(alpha: 0.5),
             width: 1,
           ),
         ),
         child: Column(
           children: [
-            _buildTitleBar(),
-            _buildTabBar(),
-            _buildAddressBar(),
+            _buildTitleBar(settings),
+            _buildTabBar(settings),
+            _buildAddressBar(settings),
             const Expanded(child: _BrowserContent()),
           ],
         ),
@@ -42,7 +43,7 @@ class BrowserWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
 
     return GestureDetector(
@@ -50,10 +51,16 @@ class BrowserWindow extends StatelessWidget {
       child: Container(
         height: 32,
         decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.9),
+          color: settings.surface.withValues(alpha: 0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
+          ),
+          border: Border(
+            bottom: BorderSide(
+              color: settings.accentColor.withValues(alpha: 0.3),
+              width: 1,
+            ),
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -68,13 +75,13 @@ class BrowserWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildTabBar() {
+  Widget _buildTabBar(SettingsController settings) {
     final browser = Get.find<BrowserController>();
 
     return Obx(
       () => Container(
         height: 36,
-        color: AppColors.deepBlue.withValues(alpha: 0.6),
+        color: settings.surface.withValues(alpha: 0.6),
         child: Row(
           children: [
             Expanded(
@@ -83,7 +90,6 @@ class BrowserWindow extends StatelessWidget {
                 itemCount: browser.tabs.length,
                 itemBuilder: (context, index) {
                   final tab = browser.tabs[index];
-                  // Each tab item has its own Obx watching activeTabId
                   return Obx(() {
                     final isActive = tab.id == browser.activeTabId.value;
                     return MouseRegion(
@@ -98,12 +104,12 @@ class BrowserWindow extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           decoration: BoxDecoration(
                             color: isActive
-                                ? AppColors.black.withValues(alpha: 0.6)
+                                ? settings.background.withValues(alpha: 0.6)
                                 : Colors.transparent,
                             border: Border(
                               bottom: BorderSide(
                                 color: isActive
-                                    ? AppColors.blue
+                                    ? settings.accentColor
                                     : Colors.transparent,
                                 width: 2,
                               ),
@@ -136,24 +142,26 @@ class BrowserWindow extends StatelessWidget {
                 },
               ),
             ),
-            _NewTabButton(onTap: () => browser.openNewTab()),
+            _NewTabButton(
+              onTap: () => browser.openNewTab(),
+              accentColor: settings.accentColor,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildAddressBar() {
+  Widget _buildAddressBar(SettingsController settings) {
     final browser = Get.find<BrowserController>();
 
     return Obx(
       () => Container(
         height: 40,
-        color: AppColors.black.withValues(alpha: 0.4),
+        color: settings.background.withValues(alpha: 0.4),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Row(
           children: [
-            // Back button — goes to home
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
@@ -166,7 +174,6 @@ class BrowserWindow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            // Refresh button — rebuilds current page
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
@@ -188,15 +195,14 @@ class BrowserWindow extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            // URL bar
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.deepBlue.withValues(alpha: 0.5),
+                  color: settings.surface.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(
-                    color: AppColors.blue.withValues(alpha: 0.3),
+                    color: settings.accentColor.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -222,7 +228,6 @@ class _BrowserContent extends StatelessWidget {
 
     return Obx(() {
       final url = browser.activeTab?.url ?? 'home';
-
       switch (url) {
         case 'home':
           return const BrowserHomePage();
@@ -282,7 +287,8 @@ class _CloseTabButtonState extends State<_CloseTabButton> {
 
 class _NewTabButton extends StatefulWidget {
   final VoidCallback onTap;
-  const _NewTabButton({required this.onTap});
+  final Color accentColor;
+  const _NewTabButton({required this.onTap, required this.accentColor});
 
   @override
   State<_NewTabButton> createState() => _NewTabButtonState();
@@ -304,7 +310,7 @@ class _NewTabButtonState extends State<_NewTabButton> {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
             color: _hovered
-                ? AppColors.blue.withValues(alpha: 0.2)
+                ? widget.accentColor.withValues(alpha: 0.2)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(4),
           ),
