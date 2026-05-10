@@ -3,20 +3,20 @@
 !! Dynamic System Status Monitor
 !! Career Timeline window 
 !! Environment Variables: window + terminal command
+!! Animations for when opening / closing windows
 
 =======
 Fixes:
 ======
 Settings App new settings:
 bottom (current) or Left side like a classic Linux dock
-TopBar date display — Toggle showing the date next to the clock. Sun, 10 May next to 14:32
-Status card visibility — Toggle the status card on the desktop on or off. Some people might want a cleaner desktop
 Terminal font size — You removed global font size but terminal specifically makes sense. Slider from 10px to 16px
 Taskbar icon labels — Toggle showing the text labels under dock icons (Terminal, Browser, Vault) or hiding them for a cleaner minimal dock, just icons
-Animation speed — A slider for Fast / Normal / Slow that affects window open/close transitions and the neural network wallpaper particle speed. Small but satisfying.
 Terminal welcome message — Toggle the welcome message that prints on terminal open on or off. Power users turn it off.
 
+
 Make warning in github page red color or something that stands out but not too much
+Animation speed — A slider for Fast / Normal / Slow that affects window open/close transitions and the neural network wallpaper particle speed. Small but satisfying.
 
 
 ================

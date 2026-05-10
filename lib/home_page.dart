@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_window.dart';
 import 'package:portfolio/os_windows/notepad/notepad_window.dart';
@@ -21,7 +23,17 @@ class HomePage extends StatelessWidget {
         MainLayout(
           child: Stack(
             children: [
-              const Positioned(top: 35, left: 20, child: StatusCard()),
+              Obx(() {
+                final settings = Get.find<SettingsController>();
+                return Positioned(
+                  top: 35,
+                  left: 20,
+                  child: Visibility(
+                    visible: settings.showStatusCard.value,
+                    child: const StatusCard(),
+                  ),
+                );
+              }),
               const DraggableResizableWindow(
                 windowId: 'terminal',
                 minWidth: 400,

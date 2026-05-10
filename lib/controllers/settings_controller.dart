@@ -9,6 +9,7 @@ class SettingsController extends GetxController {
   static const _keyPaletteIndex = 'paletteIndex';
   static const _keyCursorStyle = 'cursorStyle';
   static const _keyShowDate = 'showDate';
+  static const _keyShowStatusCard = 'showStatusCard';
 
   // Observables
   final wallpaper = 'neural'.obs;
@@ -17,6 +18,7 @@ class SettingsController extends GetxController {
   final paletteIndex = 0.obs;
   final cursorStyle = 'line'.obs;
   final showDate = true.obs;
+  final showStatusCard = true.obs;
 
   // Full palette presets
   static const List<Map<String, dynamic>> palettes = [
@@ -128,6 +130,7 @@ class SettingsController extends GetxController {
     paletteIndex.value = prefs.getInt(_keyPaletteIndex) ?? 0;
     cursorStyle.value = prefs.getString(_keyCursorStyle) ?? 'line';
     showDate.value = prefs.getBool(_keyShowDate) ?? true;
+    showStatusCard.value = prefs.getBool(_keyShowStatusCard) ?? true;
   }
 
   Future<void> setWallpaper(String id) async {
@@ -160,6 +163,12 @@ class SettingsController extends GetxController {
     await prefs.setBool(_keyShowDate, value);
   }
 
+  Future<void> setShowStatusCard(bool value) async {
+    showStatusCard.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyShowStatusCard, value);
+  }
+
   Future<void> setCursorStyle(String style) async {
     cursorStyle.value = style;
     final prefs = await SharedPreferences.getInstance();
@@ -175,6 +184,8 @@ class SettingsController extends GetxController {
     paletteIndex.value = 0;
     cursorStyle.value = 'line';
     showDate.value = true;
+    showStatusCard.value = true;
+    await prefs.remove(_keyShowStatusCard);
     await prefs.remove(_keyShowDate);
   }
 }

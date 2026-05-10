@@ -49,6 +49,10 @@ class SettingsWindow extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildClockSection(),
                     const SizedBox(height: 24),
+                    _buildSectionLabel('DESKTOP'),
+                    const SizedBox(height: 12),
+                    _buildDesktopSection(),
+                    const SizedBox(height: 24),
                     _buildSectionLabel('TERMINAL'),
                     const SizedBox(height: 12),
                     _buildCursorSection(),
@@ -369,6 +373,63 @@ class SettingsWindow extends StatelessWidget {
                 min: 0.85,
                 max: 1.0,
                 onChanged: settings.setTransparency,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ─── Desktop ─────────────────────────────────────────────
+  Widget _buildDesktopSection() {
+    final settings = Get.find<SettingsController>();
+
+    return _settingsCard(
+      icon: PhosphorIconsRegular.monitor,
+      title: 'Desktop',
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Show status card',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white70,
+                fontSize: 12,
+              ),
+            ),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () =>
+                    settings.setShowStatusCard(!settings.showStatusCard.value),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  width: 44,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: settings.showStatusCard.value
+                        ? settings.accentColor
+                        : Colors.white24,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: AnimatedAlign(
+                    duration: const Duration(milliseconds: 150),
+                    alignment: settings.showStatusCard.value
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
