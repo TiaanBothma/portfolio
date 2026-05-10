@@ -385,20 +385,70 @@ class SettingsWindow extends StatelessWidget {
       icon: PhosphorIconsRegular.clock,
       title: 'Clock Format',
       child: Obx(
-        () => Row(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _toggleOption(
-              label: '24-hour',
-              selected: settings.clock24hr.value,
-              onTap: () => settings.setClock24hr(true),
-              accentColor: settings.accentColor,
+            Row(
+              children: [
+                _toggleOption(
+                  label: '24-hour',
+                  selected: settings.clock24hr.value,
+                  onTap: () => settings.setClock24hr(true),
+                  accentColor: settings.accentColor,
+                ),
+                const SizedBox(width: 12),
+                _toggleOption(
+                  label: '12-hour',
+                  selected: !settings.clock24hr.value,
+                  onTap: () => settings.setClock24hr(false),
+                  accentColor: settings.accentColor,
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            _toggleOption(
-              label: '12-hour',
-              selected: !settings.clock24hr.value,
-              onTap: () => settings.setClock24hr(false),
-              accentColor: settings.accentColor,
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Show date in top bar',
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => settings.setShowDate(!settings.showDate.value),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 150),
+                      width: 44,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: settings.showDate.value
+                            ? settings.accentColor
+                            : Colors.white24,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: AnimatedAlign(
+                        duration: const Duration(milliseconds: 150),
+                        alignment: settings.showDate.value
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

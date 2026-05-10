@@ -7,13 +7,21 @@
 =======
 Fixes:
 ======
-when go to terminal and type command then go to other window / application then go back to terminal then it is not automatically at the bottom then i have to scroll (so each time i swtich back to the terminaol then it starts at the top of the terminal then i have to scroll manually to the bottom each time)
-More options in the settings app
-make taskbar translucent
+Settings App new settings:
+bottom (current) or Left side like a classic Linux dock
+TopBar date display — Toggle showing the date next to the clock. Sun, 10 May next to 14:32
+Status card visibility — Toggle the status card on the desktop on or off. Some people might want a cleaner desktop
+Terminal font size — You removed global font size but terminal specifically makes sense. Slider from 10px to 16px
+Taskbar icon labels — Toggle showing the text labels under dock icons (Terminal, Browser, Vault) or hiding them for a cleaner minimal dock, just icons
+Animation speed — A slider for Fast / Normal / Slow that affects window open/close transitions and the neural network wallpaper particle speed. Small but satisfying.
+Terminal welcome message — Toggle the welcome message that prints on terminal open on or off. Power users turn it off.
+
+Make warning in github page red color or something that stands out but not too much
 
 
 ================
 Version History:
 ================
 V3.1.0 -> Full palette change in the settings, live wallpaper updated and improved, terminal cv commands fixed, Fixed cv page and made more intersting
-V3.2.0 -> New terminal commands, cv page ui improvements, updated settings app, updates desktop UI, 
+V3.2.0 -> New terminal commands, cv page ui improvements, updated settings app, updates desktop UI, improved terminal functionality
+V3.3.0 -> Settings App improvement: 

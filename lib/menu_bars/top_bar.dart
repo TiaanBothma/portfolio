@@ -33,8 +33,11 @@ class _TopBarState extends State<TopBar> {
   String _currentTime() {
     final settings = Get.find<SettingsController>();
     final now = DateTime.now();
+
+    String time;
     if (settings.clock24hr.value) {
-      return '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+      time =
+          '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
     } else {
       final hour = now.hour > 12
           ? now.hour - 12
@@ -42,8 +45,32 @@ class _TopBarState extends State<TopBar> {
           ? 12
           : now.hour;
       final period = now.hour >= 12 ? 'PM' : 'AM';
-      return '${hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} $period';
+      time =
+          '${hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} $period';
     }
+
+    if (settings.showDate.value) {
+      final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      final months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+      final day = days[now.weekday - 1];
+      final month = months[now.month - 1];
+      return '$day, $month ${now.day}  $time';
+    }
+
+    return time;
   }
 
   @override
