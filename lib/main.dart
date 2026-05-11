@@ -13,6 +13,7 @@ import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/widgets/device_guard.dart';
 
 void main() {
+  Get.put(SettingsController());
   Get.put(DesktopController());
   Get.put(TerminalController());
   Get.put(BrowserController());
@@ -20,7 +21,6 @@ void main() {
   Get.put(VaultController());
   Get.put(NotepadController());
   Get.put(ImageViewerController());
-  Get.put(SettingsController());
 
   runApp(const MyApp());
 }

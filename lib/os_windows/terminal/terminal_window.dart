@@ -66,6 +66,8 @@ class TerminalWindow extends StatelessWidget {
   }
 
   Widget _buildOutput(TerminalController terminal) {
+    final settings = Get.find<SettingsController>();
+
     return Obx(
       () => ListView.builder(
         controller: terminal.scrollController,
@@ -77,6 +79,7 @@ class TerminalWindow extends StatelessWidget {
             line.text,
             style: AppTextStyles.terminal.copyWith(
               color: _lineColor(line.type),
+              fontSize: settings.terminalFontSize.value,
             ),
           );
         },
@@ -84,7 +87,10 @@ class TerminalWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildInputRow(TerminalController terminal, SettingsController settings) {
+  Widget _buildInputRow(
+    TerminalController terminal,
+    SettingsController settings,
+  ) {
     final settings = Get.find<SettingsController>();
 
     return Container(

@@ -10,6 +10,10 @@ class SettingsController extends GetxController {
   static const _keyCursorStyle = 'cursorStyle';
   static const _keyShowDate = 'showDate';
   static const _keyShowStatusCard = 'showStatusCard';
+  static const _keyDockPosition = 'dockPosition';
+  static const _keyTerminalFontSize = 'terminalFontSize';
+  static const _keyShowDockLabels = 'showDockLabels';
+  static const _keyTerminalWelcome = 'terminalWelcome';
 
   // Observables
   final wallpaper = 'neural'.obs;
@@ -19,6 +23,10 @@ class SettingsController extends GetxController {
   final cursorStyle = 'line'.obs;
   final showDate = true.obs;
   final showStatusCard = true.obs;
+  final dockPosition = 'bottom'.obs;
+  final terminalFontSize = 13.0.obs;
+  final showDockLabels = true.obs;
+  final terminalWelcome = 'message'.obs;
 
   // Full palette presets
   static const List<Map<String, dynamic>> palettes = [
@@ -131,6 +139,10 @@ class SettingsController extends GetxController {
     cursorStyle.value = prefs.getString(_keyCursorStyle) ?? 'line';
     showDate.value = prefs.getBool(_keyShowDate) ?? true;
     showStatusCard.value = prefs.getBool(_keyShowStatusCard) ?? true;
+    dockPosition.value = prefs.getString(_keyDockPosition) ?? 'bottom';
+    terminalFontSize.value = prefs.getDouble(_keyTerminalFontSize) ?? 13.0;
+    showDockLabels.value = prefs.getBool(_keyShowDockLabels) ?? true;
+    terminalWelcome.value = prefs.getString(_keyTerminalWelcome) ?? 'message';
   }
 
   Future<void> setWallpaper(String id) async {
@@ -175,6 +187,30 @@ class SettingsController extends GetxController {
     await prefs.setString(_keyCursorStyle, style);
   }
 
+  Future<void> setDockPosition(String position) async {
+    dockPosition.value = position;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyDockPosition, position);
+  }
+
+  Future<void> setTerminalFontSize(double size) async {
+    terminalFontSize.value = size;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_keyTerminalFontSize, size);
+  }
+
+  Future<void> setShowDockLabels(bool value) async {
+    showDockLabels.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyShowDockLabels, value);
+  }
+
+  Future<void> setTerminalWelcome(String value) async {
+    terminalWelcome.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyTerminalWelcome, value);
+  }
+
   Future<void> resetToDefaults() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -185,7 +221,15 @@ class SettingsController extends GetxController {
     cursorStyle.value = 'line';
     showDate.value = true;
     showStatusCard.value = true;
+    dockPosition.value = 'bottom';
+    terminalFontSize.value = 13.0;
+    showDockLabels.value = true;
+    terminalWelcome.value = 'message';
     await prefs.remove(_keyShowStatusCard);
     await prefs.remove(_keyShowDate);
+    await prefs.remove(_keyDockPosition);
+    await prefs.remove(_keyTerminalFontSize);
+    await prefs.remove(_keyShowDockLabels);
+    await prefs.remove(_keyTerminalWelcome);
   }
 }

@@ -41,6 +41,8 @@ class SettingsWindow extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildWallpaperSection(),
                     const SizedBox(height: 24),
+                    _buildDockSection(),
+                    const SizedBox(height: 24),
                     _buildAccentColorSection(),
                     const SizedBox(height: 24),
                     _buildTransparencySection(),
@@ -52,10 +54,10 @@ class SettingsWindow extends StatelessWidget {
                     _buildSectionLabel('DESKTOP'),
                     const SizedBox(height: 12),
                     _buildDesktopSection(),
+                    const SizedBox(height: 12),
+                    _buildTerminalSection(),
                     const SizedBox(height: 24),
                     _buildSectionLabel('TERMINAL'),
-                    const SizedBox(height: 12),
-                    _buildCursorSection(),
                     const SizedBox(height: 32),
                     _buildResetButton(),
                   ],
@@ -322,6 +324,332 @@ class SettingsWindow extends StatelessWidget {
     );
   }
 
+  Widget _buildDockSection() {
+    final settings = Get.find<SettingsController>();
+
+    return _settingsCard(
+      icon: PhosphorIconsRegular.appWindow,
+      title: 'Dock',
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Dock position
+            Text(
+              'Position',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white54,
+                fontSize: 11,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                _toggleOption(
+                  label: 'Bottom',
+                  selected: settings.dockPosition.value == 'bottom',
+                  onTap: () => settings.setDockPosition('bottom'),
+                  accentColor: settings.accentColor,
+                ),
+                const SizedBox(width: 12),
+                _toggleOption(
+                  label: 'Left',
+                  selected: settings.dockPosition.value == 'left',
+                  onTap: () => settings.setDockPosition('left'),
+                  accentColor: settings.accentColor,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Icon labels toggle
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Show icon labels',
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+                _buildToggleSwitch(
+                  value: settings.showDockLabels.value,
+                  accentColor: settings.accentColor,
+                  onTap: () => settings.setShowDockLabels(
+                    !settings.showDockLabels.value,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTerminalSection() {
+    final settings = Get.find<SettingsController>();
+
+    return _settingsCard(
+      icon: PhosphorIconsRegular.terminalWindow,
+      title: 'Terminal',
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Cursor style
+            Text(
+              'Cursor Style',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white54,
+                fontSize: 11,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                _buildCursorOption('line', '|', 'Line', settings),
+                const SizedBox(width: 12),
+                _buildCursorOption('block', '█', 'Block', settings),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Font size slider
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Font Size',
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white54,
+                    fontSize: 11,
+                  ),
+                ),
+                Text(
+                  '${settings.terminalFontSize.value.toInt()}px',
+                  style: AppTextStyles.label.copyWith(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+            SliderTheme(
+              data: SliderThemeData(
+                activeTrackColor: settings.accentColor,
+                inactiveTrackColor: settings.surface.withValues(alpha: 0.5),
+                thumbColor: settings.accentColor,
+                overlayColor: settings.accentColor.withValues(alpha: 0.2),
+                trackHeight: 3,
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+              ),
+              child: Slider(
+                value: settings.terminalFontSize.value,
+                min: 10,
+                max: 16,
+                divisions: 6,
+                onChanged: settings.setTerminalFontSize,
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Welcome message
+            Text(
+              'On Open',
+              style: AppTextStyles.label.copyWith(
+                color: Colors.white54,
+                fontSize: 11,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Column(
+              children: [
+                _welcomeOption(
+                  id: 'message',
+                  label: 'Welcome message',
+                  description: 'Show the default welcome text',
+                  settings: settings,
+                ),
+                const SizedBox(height: 6),
+                _welcomeOption(
+                  id: 'neofetch',
+                  label: 'Neofetch',
+                  description: 'Run neofetch automatically on open',
+                  settings: settings,
+                ),
+                const SizedBox(height: 6),
+                _welcomeOption(
+                  id: 'none',
+                  label: 'Nothing',
+                  description: 'Start with a blank terminal',
+                  settings: settings,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCursorOption(
+    String id,
+    String preview,
+    String label,
+    SettingsController settings,
+  ) {
+    final isSelected = settings.cursorStyle.value == id;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => settings.setCursorStyle(id),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? settings.accentColor.withValues(alpha: 0.2)
+                : settings.surface.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: isSelected ? settings.accentColor : Colors.white24,
+            ),
+          ),
+          child: Column(
+            children: [
+              Text(
+                preview,
+                style: AppTextStyles.terminal.copyWith(
+                  color: isSelected ? settings.accentColor : Colors.white60,
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                style: AppTextStyles.label.copyWith(
+                  color: isSelected ? Colors.white : Colors.white54,
+                  fontSize: 11,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _welcomeOption({
+    required String id,
+    required String label,
+    required String description,
+    required SettingsController settings,
+  }) {
+    final isSelected = settings.terminalWelcome.value == id;
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => settings.setTerminalWelcome(id),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? settings.accentColor.withValues(alpha: 0.15)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: isSelected
+                  ? settings.accentColor.withValues(alpha: 0.5)
+                  : Colors.white12,
+            ),
+          ),
+          child: Row(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isSelected ? settings.accentColor : Colors.transparent,
+                  border: Border.all(
+                    color: isSelected ? settings.accentColor : Colors.white38,
+                    width: 2,
+                  ),
+                ),
+                child: isSelected
+                    ? const Icon(Icons.check, color: Colors.white, size: 10)
+                    : null,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      label,
+                      style: AppTextStyles.label.copyWith(
+                        color: isSelected ? Colors.white : Colors.white70,
+                        fontSize: 12,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                    Text(
+                      description,
+                      style: AppTextStyles.label.copyWith(
+                        color: Colors.white30,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildToggleSwitch({
+    required bool value,
+    required Color accentColor,
+    required VoidCallback onTap,
+  }) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          width: 44,
+          height: 24,
+          decoration: BoxDecoration(
+            color: value ? accentColor : Colors.white24,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: AnimatedAlign(
+            duration: const Duration(milliseconds: 150),
+            alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+            child: Container(
+              width: 20,
+              height: 20,
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   // ─── TRANSPARENCY ───────────────────────────────────────
   Widget _buildTransparencySection() {
     final settings = Get.find<SettingsController>();
@@ -512,75 +840,6 @@ class SettingsWindow extends StatelessWidget {
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  // ─── CURSOR ─────────────────────────────────────────────
-  Widget _buildCursorSection() {
-    final settings = Get.find<SettingsController>();
-    final cursors = [
-      {'id': 'line', 'label': 'Line', 'preview': '|'},
-      {'id': 'block', 'label': 'Block', 'preview': '█'},
-    ];
-
-    return _settingsCard(
-      icon: PhosphorIconsRegular.terminalWindow,
-      title: 'Terminal Cursor',
-      child: Obx(
-        () => Row(
-          children: cursors.map((c) {
-            final isSelected = settings.cursorStyle.value == c['id'];
-            return Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () => settings.setCursorStyle(c['id'] as String),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 150),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? settings.accentColor.withValues(alpha: 0.2)
-                          : settings.surface.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: isSelected
-                            ? settings.accentColor
-                            : Colors.white24,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          c['preview']!,
-                          style: AppTextStyles.terminal.copyWith(
-                            color: isSelected
-                                ? settings.accentColor
-                                : Colors.white60,
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          c['label']!,
-                          style: AppTextStyles.label.copyWith(
-                            color: isSelected ? Colors.white : Colors.white54,
-                            fontSize: 11,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
         ),
       ),
     );

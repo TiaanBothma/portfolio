@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/os_windows/terminal/terminal_commands.dart';
@@ -71,15 +72,30 @@ class TerminalController extends GetxController {
 
   // ─── WELCOME ──────────────────────────────────────────────
   void _printWelcome() {
-    outputLines.addAll([
-      TerminalLine('Welcome to Tiaan Bothma OS', TerminalLineType.output),
-      TerminalLine(
-        'Type "help" for essential commands or "man -a" for all commands.',
-        TerminalLineType.output,
-      ),
-      TerminalLine('', TerminalLineType.output),
-    ]);
+    final settings = Get.find<SettingsController>();
+
+    switch (settings.terminalWelcome.value) {
+      case 'none':
+        return;
+      case 'neofetch':
+        outputLines.addAll(_neofetchLines());
+        outputLines.add(TerminalLine('', TerminalLineType.output));
+        return;
+      default:
+        outputLines.addAll([
+          TerminalLine('Welcome to Tiaan Bothma OS', TerminalLineType.output),
+          TerminalLine(
+            'Type "help" for essential commands or "man -a" for all commands.',
+            TerminalLineType.output,
+          ),
+          TerminalLine('', TerminalLineType.output),
+        ]);
+    }
   }
+
+  List<TerminalLine> _neofetchLines() {
+  return TerminalCommands.neofetchLines();
+}
 
   // ─── INPUT ────────────────────────────────────────────────
   void onInputChanged(String value) {

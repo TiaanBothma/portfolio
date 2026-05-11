@@ -8,6 +8,8 @@ import 'package:web/web.dart' as web;
 class TerminalCommands {
   TerminalCommands._();
 
+  static List<TerminalLine> neofetchLines() => _neofetch();
+
   static List<TerminalLine> process(
     String command,
     TerminalController terminal,

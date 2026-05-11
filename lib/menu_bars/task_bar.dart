@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/themes/colors.dart';
@@ -11,52 +12,98 @@ class Taskbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: Container(
-        height: 60,
-        width: double.infinity,
-        color: Colors.transparent,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            const _LogoButton(),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _DockIcon(
-                  icon: PhosphorIconsBold.terminalWindow,
-                  label: 'Terminal',
-                  onTap: () =>
-                      Get.find<DesktopController>().toggleWindow('terminal'),
-                ),
+    final settings = Get.find<SettingsController>();
 
-                _DockIcon(
-                  icon: PhosphorIconsRegular.vault,
-                  label: 'Vault',
-                  onTap: () =>
-                      Get.find<DesktopController>().toggleWindow('vault'),
-                ),
-                _DockIcon(
-                  icon: PhosphorIconsBold.browser,
-                  label: 'Browser',
-                  onTap: () =>
-                      Get.find<DesktopController>().toggleWindow('browser'),
-                ),
-                _DockIcon(
-                  icon: PhosphorIconsRegular.gear,
-                  label: 'Settings',
-                  onTap: () =>
-                      Get.find<DesktopController>().toggleWindow('settings'),
-                ),
-              ],
+    return Obx(() {
+      final isLeft = settings.dockPosition.value == 'left';
+
+      return SizedBox(
+        width: isLeft ? 70 : double.infinity,
+        height: isLeft ? double.infinity : 60,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: isLeft ? 70 : double.infinity,
+              height: isLeft ? double.infinity : 60,
+              color: Colors.transparent,
+              padding: EdgeInsets.symmetric(
+                horizontal: isLeft ? 0 : 16,
+                vertical: isLeft ? 16 : 0,
+              ),
+              child: isLeft
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const _LogoButton(),
+                        const SizedBox(height: 8),
+                        _DockIcon(
+                          icon: PhosphorIconsBold.terminalWindow,
+                          label: 'Terminal',
+                          onTap: () => Get.find<DesktopController>()
+                              .toggleWindow('terminal'),
+                        ),
+                        _DockIcon(
+                          icon: PhosphorIconsBold.browser,
+                          label: 'Browser',
+                          onTap: () => Get.find<DesktopController>()
+                              .toggleWindow('browser'),
+                        ),
+                        _DockIcon(
+                          icon: PhosphorIconsRegular.vault,
+                          label: 'Vault',
+                          onTap: () => Get.find<DesktopController>()
+                              .toggleWindow('vault'),
+                        ),
+                        _DockIcon(
+                          icon: PhosphorIconsRegular.gear,
+                          label: 'Settings',
+                          onTap: () => Get.find<DesktopController>()
+                              .toggleWindow('settings'),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        const _LogoButton(),
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _DockIcon(
+                              icon: PhosphorIconsBold.terminalWindow,
+                              label: 'Terminal',
+                              onTap: () => Get.find<DesktopController>()
+                                  .toggleWindow('terminal'),
+                            ),
+                            _DockIcon(
+                              icon: PhosphorIconsBold.browser,
+                              label: 'Browser',
+                              onTap: () => Get.find<DesktopController>()
+                                  .toggleWindow('browser'),
+                            ),
+                            _DockIcon(
+                              icon: PhosphorIconsRegular.vault,
+                              label: 'Vault',
+                              onTap: () => Get.find<DesktopController>()
+                                  .toggleWindow('vault'),
+                            ),
+                            _DockIcon(
+                              icon: PhosphorIconsRegular.gear,
+                              label: 'Settings',
+                              onTap: () => Get.find<DesktopController>()
+                                  .toggleWindow('settings'),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
             ),
-            const Spacer(),
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -109,22 +156,34 @@ class _DockIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: onTap,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, color: Colors.white, size: 28),
-              const SizedBox(height: 2),
-              Text(label, style: AppTextStyles.label),
-            ],
+    final settings = Get.find<SettingsController>();
+
+    return Obx(() {
+      final isLeft = settings.dockPosition.value == 'left';
+      final showLabels = settings.showDockLabels.value;
+
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: isLeft ? 0 : 10,
+          vertical: isLeft ? 8 : 0,
+        ),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: onTap,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: Colors.white, size: 28),
+                if (showLabels) ...[
+                  const SizedBox(height: 2),
+                  Text(label, style: AppTextStyles.label),
+                ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
