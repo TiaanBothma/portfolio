@@ -32,12 +32,7 @@ class FileSystemData {
   static final VaultFolder root = VaultFolder(
     name: 'Tiaan Bothma OS',
     subFolders: [_experience, _projects, _education, _certifications, _system],
-    files: [
-        VaultFile(
-      name: 'cv.pdf',
-      externalUrl: '/cv.pdf',
-    ),
-    ]
+    files: [VaultFile(name: 'cv.pdf', externalUrl: '/cv.pdf')],
   );
 
   // === EXPERIENCE ===========================================
@@ -352,7 +347,6 @@ AWARDS:
   static final VaultFolder _system = VaultFolder(
     name: 'System',
     files: [
-      
       VaultFile(
         name: 'README.txt',
         content:
@@ -392,15 +386,16 @@ ${PortfolioData.linkedin}
 ''',
       ),
       VaultFile(
-  name: 'version.txt',
-  content: '''Tiaan Bothma OS
+        name: 'version.txt',
+        content:
+            '''Tiaan Bothma OS
 Version: ${PortfolioData.version}
 =========================================
 
 CURRENT VERSION: ${PortfolioData.version}
 
 CHANGELOG:
-  v1.0.0 — Initial Release
+  v1.0.0 - Initial Release
   =======================
   + Initial Release
   + Custom OS logo designed and created
@@ -410,7 +405,7 @@ CHANGELOG:
   + Draggable and resizable windows
   + Mobile blocking (desktop only)
 
-  v1.1.0 — Terminal Improvements
+  v1.1.0 - Terminal Improvements
   ===============================
   + Neofetch command with ASCII logo
   + Terminal command history (arrow up / down)
@@ -418,13 +413,13 @@ CHANGELOG:
   + Additional terminal commands and responses
   + Improved terminal feel and behaviour
 
-  v1.2.0 — Pages and Navigation
+  v1.2.0 - Pages and Navigation
   ==============================
   + Improved UI across the OS
   + Navigation to real social profiles
   + External links open in new browser tab
 
-  v2.0.0 — Major Update
+  v2.0.0 - Major Update
   ======================
   + Vault file and folder application
   + Improved LinkedIn page with banner
@@ -437,7 +432,7 @@ CHANGELOG:
   + Improved window sizing and feel
   + About section and system files added
 
-  v2.1.0 — UI/UX and Notepad Improvements
+  v2.1.0 - UI/UX and Notepad Improvements
   ========================================
   + Image viewer for viewing certificates
   + URLs clickable inside Notepad
@@ -445,7 +440,7 @@ CHANGELOG:
   + Better UI/UX control and smoother experience
   + Minor fixes and small feature additions
 
-  v2.2.0 — Terminal Expansion
+  v2.2.0 - Terminal Expansion
   ============================
   + New terminal commands (ssh, ping, open, ls, cd, cat)
   + File system navigation inside terminal
@@ -453,35 +448,69 @@ CHANGELOG:
   + Delayed output for realistic commands
   + Improved terminal functionality and usability
 
-  v2.3.0 — Browser Upgrade
+  v2.3.0 - Browser Upgrade
   =========================
   + CV page added to browser
   + Improved browser tab highlighting
   + Tab close and new tab button hover effects
   + UI fixes and refinements
 
-  v2.4.0 — CV and GitHub Improvements
+  v2.4.0 - CV and GitHub Improvements
   =====================================
   + CV accessible from Vault, terminal and browser
   + CV open / download / print now working on hosted site
   + GitHub page real API stats (language breakdown, stars)
+  + Private repositories notice added to GitHub page
 
-  v3.0.0 — Settings App
+  v3.0.0 - Settings App
   ======================
   + Settings application with persistent preferences
-  + Dynamic live wallpaper
-  + Wallpaper options to choose from
-  + Accent color presets
-  + Window transparency slider
+  + Dynamic Neural Network live wallpaper
+  + Multiple wallpaper options
+  + Accent color presets (5 colors)
+  + Window transparency slider (85% to 100%)
   + Clock format toggle (12hr vs 24hr)
-  + Terminal cursor style (line, block, underline)
+  + Terminal cursor style (line, block)
   + Reset settings to default button
-  + Settings saved across sessions
+  + Settings saved across sessions with shared_preferences
+
+  v3.1.0 - Full Palette System
+  ==============================
+  + Full OS color palette change
+  + Live wallpaper updated with accent color reactivity
+  + Live wallpaper visibility and dot size improved
+  + Terminal CV commands fixed and improved
+  + CV page redesigned
+
+  v3.2.0 - Terminal and Settings Expansion
+  ==========================================
+  + New terminal commands
+  + apt-get install command in the terminal
+  + CV page UI improvements
+  + Dynamic palette applied to more windows
+  + Settings app section and layout improvements
+  + More Settings in the Settings app
+
+  v3.3.0 - Desktop and Terminal Customization
+  =============================================
+  + Dock position setting
+  + Terminal font size slider
+  + Taskbar icon labels toggle
+  + Terminal welcome message customization
+  + Status card visibility toggle
+  + Desktop UI improvements and polish
+
+  v3.4.0 - Animations and GitHub UI
+  ===================================
+  + Window open and close animations
+  + Animation speed setting added
+  + GitHub private repositories notice redesigned
+  + Minor fixes across the OS
 
 =========================================
 Built with Flutter Web
 ''',
-),
+      ),
     ],
   );
 }
