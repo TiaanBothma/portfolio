@@ -1,15 +1,13 @@
+!! Animation speed — A slider for Fast / Normal / Slow that affects window open/close transitions and the neural network wallpaper particle speed. Small but satisfying.
 !! SSH home server simulation
 !! Case Study window
 !! Dynamic System Status Monitor
 !! Career Timeline window 
 !! Environment Variables: window + terminal command
-!! Animations for when opening / closing windows
 
 =======
 Fixes:
 ======
-Make warning in github page red color or something that stands out but not too much
-Animation speed — A slider for Fast / Normal / Slow that affects window open/close transitions and the neural network wallpaper particle speed. Small but satisfying.
 
 
 ================
@@ -18,3 +16,4 @@ Version History:
 V3.1.0 -> Full palette change in the settings, live wallpaper updated and improved, terminal cv commands fixed, Fixed cv page and made more intersting
 V3.2.0 -> New terminal commands, cv page ui improvements, updated settings app, updates desktop UI, improved terminal functionality
 V3.3.0 -> Settings App improvement: dock position (bottom or left), terminal font size, taskbar icon labales (should labels show on taskbar), terminal customization / terminal welcome message customization, Dynamic color change added to more windows
+V3.4.0 -> Animations on the windows, github page ui update

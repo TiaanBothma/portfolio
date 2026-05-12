@@ -957,41 +957,122 @@ class _GitHubPageState extends State<GitHubPage> {
   Widget _buildPrivateReposNotice() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF21262D),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: const Color(0xFF3D444D), width: 1),
+        color: const Color(0xFF2D1515),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: const Color(0xFFE5534B).withValues(alpha: 0.6),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFE5534B).withValues(alpha: 0.08),
+            blurRadius: 12,
+            spreadRadius: 0,
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            PhosphorIconsRegular.lockKey,
-            color: Color(0xFF8B949E),
-            size: 16,
+          // Icon container with background
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE5534B).withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Icon(
+              PhosphorIconsRegular.lockKey,
+              color: Color(0xFFE5534B),
+              size: 16,
+            ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Most production repositories are private',
-                  style: AppTextStyles.body.copyWith(
-                    color: const Color(0xFFE6EDF3),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
+                // Header row with badge
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Most production repositories are private',
+                        style: AppTextStyles.body.copyWith(
+                          color: const Color(0xFFE6EDF3),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE5534B).withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: const Color(0xFFE5534B).withValues(alpha: 0.4),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFE5534B),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          const Text(
+                            'Important',
+                            style: TextStyle(
+                              color: Color(0xFFE5534B),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
-                  'The majority of my work — including full-stack Flutter apps built for real clients at 18INK Productions and MyEncore CC — lives in private repositories due to client confidentiality. The repos shown here represent personal and open projects.',
+                  'The majority of my work (including full-stack Flutter apps built for real clients at 18INK Productions and MyEncore CC) lives in private repositories due to client confidentiality. The repos shown here represent personal and open projects.',
                   style: AppTextStyles.label.copyWith(
                     color: const Color(0xFF8B949E),
                     fontSize: 12,
                     height: 1.6,
                   ),
+                ),
+                const SizedBox(height: 10),
+                // Bottom note
+                Row(
+                  children: [
+                    const Icon(
+                      PhosphorIconsRegular.info,
+                      color: Color(0xFFE5534B),
+                      size: 12,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      'Contact me directly to discuss production project details.',
+                      style: AppTextStyles.label.copyWith(
+                        color: const Color(0xFFE5534B).withValues(alpha: 0.8),
+                        fontSize: 11,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
