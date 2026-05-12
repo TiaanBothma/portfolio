@@ -47,16 +47,19 @@ class _NeuralNetworkWallpaperState extends State<NeuralNetworkWallpaper>
   }
 
   void _updateNodes(Size size) {
-    for (final node in _nodes) {
-      node.position += node.velocity;
+    final settings = Get.find<SettingsController>();
+    // Fast = 0.5 means faster particles, Slow = 2.0 means slower
+    // So we invert — divide by animationSpeed to get particle speed
+    final speedMultiplier = 1.0 / settings.animationSpeed.value;
 
-      // Dampen velocity
+    for (final node in _nodes) {
+      node.position += node.velocity * speedMultiplier;
+
       final speed = node.velocity.distance;
       if (speed > 1.0) {
         node.velocity = node.velocity / speed * 1.0;
       }
 
-      // Bounce off edges
       if (node.position.dx < 0 || node.position.dx > size.width) {
         node.velocity = Offset(-node.velocity.dx, node.velocity.dy);
         node.position = Offset(

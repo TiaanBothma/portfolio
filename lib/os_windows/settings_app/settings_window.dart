@@ -41,6 +41,8 @@ class SettingsWindow extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildWallpaperSection(),
                     const SizedBox(height: 24),
+                    _buildAnimationSpeedSection(),
+                    const SizedBox(height: 24),
                     _buildDockSection(),
                     const SizedBox(height: 24),
                     _buildAccentColorSection(),
@@ -115,6 +117,63 @@ class SettingsWindow extends StatelessWidget {
         color: Colors.white30,
         fontSize: 10,
         letterSpacing: 1.5,
+      ),
+    );
+  }
+
+  Widget _buildAnimationSpeedSection() {
+    final settings = Get.find<SettingsController>();
+
+    final options = [
+      {'label': 'Fast', 'value': 0.5},
+      {'label': 'Normal', 'value': 1.0},
+      {'label': 'Slow', 'value': 2.0},
+    ];
+
+    return _settingsCard(
+      icon: PhosphorIconsRegular.lightning,
+      title: 'Animation Speed',
+      child: Obx(
+        () => Row(
+          children: options.map((o) {
+            final isSelected =
+                settings.animationSpeed.value == o['value'] as double;
+            return Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => settings.setAnimationSpeed(o['value'] as double),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? settings.accentColor.withValues(alpha: 0.2)
+                          : settings.surface.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: isSelected
+                            ? settings.accentColor
+                            : Colors.white24,
+                      ),
+                    ),
+                    child: Text(
+                      o['label'] as String,
+                      style: AppTextStyles.label.copyWith(
+                        color: isSelected ? Colors.white : Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

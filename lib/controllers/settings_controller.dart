@@ -14,6 +14,7 @@ class SettingsController extends GetxController {
   static const _keyTerminalFontSize = 'terminalFontSize';
   static const _keyShowDockLabels = 'showDockLabels';
   static const _keyTerminalWelcome = 'terminalWelcome';
+  static const _keyAnimationSpeed = 'animationSpeed';
 
   // Observables
   final wallpaper = 'neural'.obs;
@@ -27,6 +28,7 @@ class SettingsController extends GetxController {
   final terminalFontSize = 13.0.obs;
   final showDockLabels = true.obs;
   final terminalWelcome = 'message'.obs;
+  final animationSpeed = 1.0.obs;
 
   // Full palette presets
   static const List<Map<String, dynamic>> palettes = [
@@ -175,6 +177,12 @@ class SettingsController extends GetxController {
     await prefs.setBool(_keyShowDate, value);
   }
 
+  Future<void> setAnimationSpeed(double value) async {
+    animationSpeed.value = value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_keyAnimationSpeed, value);
+  }
+
   Future<void> setShowStatusCard(bool value) async {
     showStatusCard.value = value;
     final prefs = await SharedPreferences.getInstance();
@@ -211,6 +219,9 @@ class SettingsController extends GetxController {
     await prefs.setString(_keyTerminalWelcome, value);
   }
 
+  Duration get windowAnimDuration =>
+      Duration(milliseconds: (180 * animationSpeed.value).toInt());
+
   Future<void> resetToDefaults() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -231,5 +242,7 @@ class SettingsController extends GetxController {
     await prefs.remove(_keyTerminalFontSize);
     await prefs.remove(_keyShowDockLabels);
     await prefs.remove(_keyTerminalWelcome);
+    animationSpeed.value = 1.0;
+    await prefs.remove(_keyAnimationSpeed);
   }
 }

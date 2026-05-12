@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 
 class DraggableResizableWindow extends StatefulWidget {
   final Widget child;
@@ -40,9 +41,10 @@ class _DraggableResizableWindowState extends State<DraggableResizableWindow>
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
 
-    _fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeOut),
-    );
+    _fadeAnim = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeOut));
   }
 
   @override
@@ -51,7 +53,14 @@ class _DraggableResizableWindowState extends State<DraggableResizableWindow>
     super.dispose();
   }
 
+  void _updateAnimationDuration() {
+    final settings = Get.find<SettingsController>();
+    _animController.duration = settings.windowAnimDuration;
+  }
+
   void _handleVisibilityChange(bool isOpen) {
+    _updateAnimationDuration();
+
     if (isOpen && !_wasOpen) {
       _animController.forward(from: 0.0);
     } else if (!isOpen && _wasOpen) {
@@ -67,7 +76,6 @@ class _DraggableResizableWindowState extends State<DraggableResizableWindow>
     return Obx(() {
       final state = controller.getWindowRx(widget.windowId).value;
 
-      // Trigger animation when open state changes
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _handleVisibilityChange(state.isOpen);
       });
