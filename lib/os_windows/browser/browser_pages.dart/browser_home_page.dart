@@ -1,9 +1,8 @@
-// os_windows/browser/browser_pages/browser_home_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 
 class BrowserHomePage extends StatefulWidget {
@@ -53,20 +52,24 @@ class _BrowserHomePageState extends State<BrowserHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.black.withValues(alpha: 0.6),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildGreeting(),
-          const SizedBox(height: 48),
-          _buildPinnedSites(),
-        ],
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        color: settings.background.withValues(alpha: 0.6),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildGreeting(settings),
+            const SizedBox(height: 48),
+            _buildPinnedSites(settings),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildGreeting() {
+  Widget _buildGreeting(SettingsController settings) {
     return Column(
       children: [
         Text(
@@ -89,14 +92,14 @@ class _BrowserHomePageState extends State<BrowserHomePage> {
     );
   }
 
-  Widget _buildPinnedSites() {
+  Widget _buildPinnedSites(SettingsController settings) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: _sites.map((site) => _buildSiteCard(site)).toList(),
+      children: _sites.map((site) => _buildSiteCard(site, settings)).toList(),
     );
   }
 
-  Widget _buildSiteCard(_PinnedSite site) {
+  Widget _buildSiteCard(_PinnedSite site, SettingsController settings) {
     final isHovered = _hoveredId == site.id;
     final browser = Get.find<BrowserController>();
 
@@ -115,12 +118,12 @@ class _BrowserHomePageState extends State<BrowserHomePage> {
           decoration: BoxDecoration(
             color: isHovered
                 ? site.accentColor.withValues(alpha: 0.15)
-                : AppColors.deepBlue.withValues(alpha: 0.5),
+                : settings.surface.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isHovered
                   ? site.accentColor.withValues(alpha: 0.8)
-                  : AppColors.blue.withValues(alpha: 0.3),
+                  : settings.accentColor.withValues(alpha: 0.3),
               width: 1,
             ),
           ),

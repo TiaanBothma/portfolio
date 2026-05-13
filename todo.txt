@@ -7,11 +7,8 @@
 =======
 Fixes:
 ======
-Welcome message in the settings doesn't work. When selecting neofetch or none and refresh the page and open terminal again, the default welcome message displays
-Animation speed setting doesn't save. After refresh it reverts back to 'Normal'
-
 
 ================
 Version History:
 ================
-V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists
+V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists, color settings added to more windows and UI improvements

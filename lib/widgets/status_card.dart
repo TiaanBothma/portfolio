@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/themes/colors.dart';
+import 'package:get/get.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/themes/text_style.dart';
 
 class StatusCard extends StatelessWidget {
@@ -7,34 +8,37 @@ class StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      decoration: BoxDecoration(
-        color: AppColors.deepBlue.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildHeader(),
-          Divider(
-            height: 1,
-            thickness: 1,
-            color: AppColors.blue.withValues(alpha: 0.3),
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        width: 300,
+        decoration: BoxDecoration(
+          color: settings.surface.withValues(alpha: 0.55),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.5),
+            width: 1,
           ),
-          _buildStatusRows(),
-        
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildHeader(settings),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: settings.accentColor.withValues(alpha: 0.3),
+            ),
+            _buildStatusRows(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(SettingsController settings) {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -92,6 +96,4 @@ class StatusCard extends StatelessWidget {
       ),
     );
   }
-
-
 }

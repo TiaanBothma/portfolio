@@ -65,7 +65,6 @@ class TerminalCommands {
       return [_err('sudo: command not permitted outside of apt update')];
     }
 
-
     // ── PORTFOLIO COMMANDS ────────────────────────────────
     switch (lower) {
       case 'help':
@@ -231,26 +230,26 @@ class TerminalCommands {
           _out('Displays ASCII logo and OS info side by side.'),
         ];
       case 'apt-get':
-case 'apt':
-  return [
-    _out('APT — Package manager'),
-    _out(''),
-    _out('Usage: sudo apt-get install [package]'),
-    _out('       apt-get install [package]'),
-    _out('       apt install [package]'),
-    _out(''),
-    _out('Available packages:'),
-    _out('  terminal        — open Terminal'),
-    _out('  browser         — open Browser'),
-    _out('  vault           — open Vault'),
-    _out('  notepad         — open Notepad'),
-    _out('  settings        — open Settings'),
-    _out('  cv              — open CV as PDF'),
-    _out('  experience      — open Vault (Experience)'),
-    _out('  projects        — open Vault (Projects)'),
-    _out('  education       — open Vault (Education)'),
-    _out('  certifications  — open Vault (Certifications)'),
-  ];
+      case 'apt':
+        return [
+          _out('APT — Package manager'),
+          _out(''),
+          _out('Usage: sudo apt-get install [package]'),
+          _out('       apt-get install [package]'),
+          _out('       apt install [package]'),
+          _out(''),
+          _out('Available packages:'),
+          _out('  terminal        — open Terminal'),
+          _out('  browser         — open Browser'),
+          _out('  vault           — open Vault'),
+          _out('  notepad         — open Notepad'),
+          _out('  settings        — open Settings'),
+          _out('  cv              — open CV as PDF'),
+          _out('  experience      — open Vault (Experience)'),
+          _out('  projects        — open Vault (Projects)'),
+          _out('  education       — open Vault (Education)'),
+          _out('  certifications  — open Vault (Certifications)'),
+        ];
       default:
         return [_err('man: no manual entry for $command')];
     }
@@ -485,7 +484,7 @@ case 'apt':
       'Uni      ${PortfolioData.university}',
       'Status   ${PortfolioData.status}',
       '',
-      '       ███ ███ ███ ███ ███',
+      '    ███ ███ ███ ███ ███',
     ];
 
     final lines = <TerminalLine>[];

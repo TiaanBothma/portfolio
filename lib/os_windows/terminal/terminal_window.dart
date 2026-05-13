@@ -91,8 +91,6 @@ class TerminalWindow extends StatelessWidget {
     TerminalController terminal,
     SettingsController settings,
   ) {
-    final settings = Get.find<SettingsController>();
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(

@@ -81,10 +81,16 @@ class SettingsWindow extends StatelessWidget {
       child: Container(
         height: 32,
         decoration: BoxDecoration(
-          color: AppColors.deepBlue.withValues(alpha: 0.9),
+          color: settings.surface.withValues(alpha: 0.9),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
+          ),
+          border: Border(
+            bottom: BorderSide(
+              color: settings.accentColor.withValues(alpha: 0.3),
+              width: 1,
+            ),
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12),
