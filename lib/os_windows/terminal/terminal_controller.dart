@@ -59,7 +59,16 @@ class TerminalController extends GetxController {
       }
       return KeyEventResult.ignored;
     };
-    _printWelcome();
+
+    // Wait for settings to finish loading before printing welcome
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final settings = Get.find<SettingsController>();
+      await Future.doWhile(() async {
+        await Future.delayed(const Duration(milliseconds: 50));
+        return !settings.loaded.value;
+      });
+      _printWelcome();
+    });
   }
 
   @override
@@ -94,8 +103,8 @@ class TerminalController extends GetxController {
   }
 
   List<TerminalLine> _neofetchLines() {
-  return TerminalCommands.neofetchLines();
-}
+    return TerminalCommands.neofetchLines();
+  }
 
   // ─── INPUT ────────────────────────────────────────────────
   void onInputChanged(String value) {

@@ -29,6 +29,7 @@ class SettingsController extends GetxController {
   final showDockLabels = true.obs;
   final terminalWelcome = 'message'.obs;
   final animationSpeed = 1.0.obs;
+  final loaded = false.obs;
 
   // Full palette presets
   static const List<Map<String, dynamic>> palettes = [
@@ -127,13 +128,6 @@ class SettingsController extends GetxController {
 
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
-
-    // Check for previous underline settings applied
-    final savedCursor = prefs.getString(_keyCursorStyle) ?? 'line';
-    cursorStyle.value = ['line', 'block'].contains(savedCursor)
-        ? savedCursor
-        : 'line';
-
     wallpaper.value = prefs.getString(_keyWallpaper) ?? 'neural';
     windowTransparency.value = prefs.getDouble(_keyTransparency) ?? 0.92;
     clock24hr.value = prefs.getBool(_keyClock24hr) ?? true;
@@ -145,6 +139,15 @@ class SettingsController extends GetxController {
     terminalFontSize.value = prefs.getDouble(_keyTerminalFontSize) ?? 13.0;
     showDockLabels.value = prefs.getBool(_keyShowDockLabels) ?? true;
     terminalWelcome.value = prefs.getString(_keyTerminalWelcome) ?? 'message';
+    animationSpeed.value =
+        double.tryParse(prefs.getString(_keyAnimationSpeed) ?? '1.0') ?? 1.0;
+
+    final savedCursor = prefs.getString(_keyCursorStyle) ?? 'line';
+    cursorStyle.value = ['line', 'block'].contains(savedCursor)
+        ? savedCursor
+        : 'line';
+
+    loaded.value = true; // signal that loading is complete
   }
 
   Future<void> setWallpaper(String id) async {
@@ -180,7 +183,7 @@ class SettingsController extends GetxController {
   Future<void> setAnimationSpeed(double value) async {
     animationSpeed.value = value;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble(_keyAnimationSpeed, value);
+    await prefs.setString(_keyAnimationSpeed, value.toString());
   }
 
   Future<void> setShowStatusCard(bool value) async {
