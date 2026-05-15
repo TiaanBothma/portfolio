@@ -1,14 +1,22 @@
-!! SSH home server simulation
 !! Case Study window
-!! Dynamic System Status Monitor
 !! Career Timeline window 
 !! Environment Variables: window + terminal command
+!! SSH home server simulation
 
 =======
 Fixes:
 ======
+!! System Status Monitor:
+System status monitor processes and variables fix + more realistic
+System status monitor shows the real RAM that the website is currently using
+Something to do in monitor app (just to keep the user busy and add cool features ; what could this features be?)
+User can end processess
+User can end process like for example status window which will hide it (like the setting but it will not save just for the current session)
+
+
 
 ================
 Version History:
 ================
 V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists, color settings added to more windows and UI improvements
+V4.0.0 -> System status monitor demo

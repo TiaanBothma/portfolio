@@ -63,6 +63,14 @@ class StartMenu extends StatelessWidget {
                   Get.find<StartMenuController>().close();
                 },
               ),
+              _buildItem(
+                icon: PhosphorIconsRegular.chartLine,
+                label: 'Monitor',
+                onTap: () {
+                  Get.find<DesktopController>().toggleWindow('monitor');
+                  Get.find<StartMenuController>().close();
+                },
+              ),
             ], settings),
             _buildDivider(settings),
             _buildSection('FIND ME ON', [

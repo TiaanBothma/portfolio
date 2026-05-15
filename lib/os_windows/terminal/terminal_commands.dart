@@ -89,6 +89,11 @@ class TerminalCommands {
         return _neofetch();
       case 'pwd':
         return [_out(terminal.promptPath)];
+      case 'top':
+      case 'htop':
+      case 'monitor':
+        Get.find<DesktopController>().toggleWindow('monitor');
+        return [_out('Opening system monitor...'), _out('')];
       default:
         return [_err('command not found: $command — type "help" or "man -a"')];
     }
@@ -138,6 +143,7 @@ class TerminalCommands {
     _out('  ssh [site]           — connect to a profile'),
     _out('  open [app]           — open an OS application'),
     _out('  ping [site]          — ping a profile'),
+    _out('  top / htop / monitor — open system monitor'),
     _out(''),
     _out('  SYSTEM'),
     _out('  sudo apt update      — fetch portfolio data'),
@@ -249,6 +255,20 @@ class TerminalCommands {
           _out('  projects        — open Vault (Projects)'),
           _out('  education       — open Vault (Education)'),
           _out('  certifications  — open Vault (Certifications)'),
+        ];
+      case 'top':
+      case 'htop':
+      case 'monitor':
+        return [
+          _out('TOP / HTOP — System Monitor'),
+          _out(''),
+          _out('Usage: top'),
+          _out('       htop'),
+          _out('       monitor'),
+          _out('       open monitor'),
+          _out(''),
+          _out('Displays live resource usage, process list,'),
+          _out('and CPU history graph for the OS.'),
         ];
       default:
         return [_err('man: no manual entry for $command')];
@@ -364,6 +384,9 @@ class TerminalCommands {
       case 'browser':
         desktop.toggleWindow('browser');
         return [_out('Opening Browser...')];
+      case 'monitor':
+        desktop.toggleWindow('monitor');
+        return [_out('Opening System Monitor...')];
       default:
         return [
           _err('open: $app: Application not found'),
