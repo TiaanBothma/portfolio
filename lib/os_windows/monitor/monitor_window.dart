@@ -54,6 +54,8 @@ class MonitorWindow extends StatelessWidget {
                   children: [
                     _buildSystemInfo(settings),
                     const SizedBox(height: 16),
+                    _buildActivityPanel(settings, monitor),
+                    const SizedBox(height: 16),
                     _buildResourceBars(settings, monitor),
                     const SizedBox(height: 16),
                     _buildGraph(settings, monitor),
@@ -114,22 +116,38 @@ class MonitorWindow extends StatelessWidget {
 
   // ─── SYSTEM INFO ────────────────────────────────────────
   Widget _buildSystemInfo(SettingsController settings) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: settings.surface.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: settings.accentColor.withValues(alpha: 0.2)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: _infoItem('OS', 'Tiaan Bothma OS ${PortfolioData.version}'),
+    final monitor = Get.find<MonitorController>();
+
+    return Obx(
+      () => Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: settings.surface.withValues(alpha: 0.3),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.2),
           ),
-          Expanded(child: _infoItem('Developer', PortfolioData.name)),
-          Expanded(child: _infoItem('Stack', 'Flutter · Firebase · Dart')),
-          Expanded(child: _infoItem('Status', PortfolioData.status)),
-        ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: _infoItem(
+                'OS',
+                'Tiaan Bothma OS ${PortfolioData.version}',
+              ),
+            ),
+            Expanded(child: _infoItem('Developer', PortfolioData.name)),
+            Expanded(child: _infoItem('Stack', 'Flutter · Firebase · Dart')),
+            Expanded(
+              child: _infoItem(
+                'Web RAM',
+                monitor.webHeapSupported.value
+                    ? '${monitor.webHeapMb.value} / ${monitor.webHeapTotalMb.value} MB'
+                    : 'Browser hidden',
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -259,6 +277,70 @@ class MonitorWindow extends StatelessWidget {
     return const Color(0xFF00FF88);
   }
 
+  Widget _buildActivityPanel(
+    SettingsController settings,
+    MonitorController monitor,
+  ) {
+    return Obx(
+      () => Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: settings.surface.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.2),
+          ),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(
+                  PhosphorIconsRegular.pulse,
+                  color: settings.accentColor,
+                  size: 14,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    monitor.traceLog.value,
+                    style: AppTextStyles.label.copyWith(
+                      color: Colors.white70,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+                _MonitorButton(
+                  label: monitor.traceRunning.value ? 'Tracing' : 'Run Trace',
+                  icon: PhosphorIconsRegular.radioButton,
+                  accentColor: settings.accentColor,
+                  onTap: monitor.runTrace,
+                ),
+                const SizedBox(width: 8),
+                _MonitorButton(
+                  label: 'Restore',
+                  icon: PhosphorIconsRegular.arrowCounterClockwise,
+                  accentColor: settings.accentColor,
+                  onTap: monitor.restoreSession,
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(3),
+              child: LinearProgressIndicator(
+                value: monitor.traceProgress.value,
+                minHeight: 4,
+                backgroundColor: settings.surface.withValues(alpha: 0.5),
+                valueColor: AlwaysStoppedAnimation(settings.accentColor),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // ─── GRAPH ──────────────────────────────────────────────
   Widget _buildGraph(SettingsController settings, MonitorController monitor) {
     return Container(
@@ -357,6 +439,18 @@ class MonitorWindow extends StatelessWidget {
                     textAlign: TextAlign.right,
                   ),
                 ),
+                SizedBox(
+                  width: 74,
+                  child: Text(
+                    'ACTION',
+                    style: AppTextStyles.label.copyWith(
+                      color: Colors.white30,
+                      fontSize: 10,
+                      letterSpacing: 1.2,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
               ],
             ),
           ),
@@ -368,6 +462,7 @@ class MonitorWindow extends StatelessWidget {
                 final p = entry.value;
                 final cpu = ((p['cpu'] as double) * 100).toInt();
                 final isEven = i % 2 == 0;
+                final protected = p['protected'] == true;
 
                 return Container(
                   padding: const EdgeInsets.symmetric(
@@ -429,6 +524,17 @@ class MonitorWindow extends StatelessWidget {
                           textAlign: TextAlign.right,
                         ),
                       ),
+                      SizedBox(
+                        width: 74,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: _EndProcessButton(
+                            disabled: protected,
+                            accentColor: settings.accentColor,
+                            onTap: () => monitor.endProcess(p),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -442,6 +548,117 @@ class MonitorWindow extends StatelessWidget {
 }
 
 // ─── GRAPH PAINTER ──────────────────────────────────────────
+class _MonitorButton extends StatefulWidget {
+  final String label;
+  final IconData icon;
+  final Color accentColor;
+  final VoidCallback onTap;
+
+  const _MonitorButton({
+    required this.label,
+    required this.icon,
+    required this.accentColor,
+    required this.onTap,
+  });
+
+  @override
+  State<_MonitorButton> createState() => _MonitorButtonState();
+}
+
+class _MonitorButtonState extends State<_MonitorButton> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: _hovered
+                ? widget.accentColor.withValues(alpha: 0.2)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: widget.accentColor.withValues(alpha: _hovered ? 0.5 : 0.2),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(widget.icon, color: Colors.white70, size: 12),
+              const SizedBox(width: 6),
+              Text(
+                widget.label,
+                style: AppTextStyles.label.copyWith(
+                  color: Colors.white70,
+                  fontSize: 10,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _EndProcessButton extends StatefulWidget {
+  final bool disabled;
+  final Color accentColor;
+  final VoidCallback onTap;
+
+  const _EndProcessButton({
+    required this.disabled,
+    required this.accentColor,
+    required this.onTap,
+  });
+
+  @override
+  State<_EndProcessButton> createState() => _EndProcessButtonState();
+}
+
+class _EndProcessButtonState extends State<_EndProcessButton> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = widget.disabled
+        ? Colors.white24
+        : (_hovered ? Colors.redAccent : Colors.white54);
+
+    return MouseRegion(
+      cursor: widget.disabled
+          ? SystemMouseCursors.forbidden
+          : SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: widget.disabled ? null : widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: _hovered && !widget.disabled
+                ? Colors.redAccent.withValues(alpha: 0.14)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: color.withValues(alpha: 0.35)),
+          ),
+          child: Text(
+            widget.disabled ? 'Core' : 'End',
+            style: AppTextStyles.label.copyWith(color: color, fontSize: 10),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _GraphPainter extends CustomPainter {
   final List<double> values;
   final Color color;
