@@ -5,7 +5,9 @@
 
 =======
 Fixes:
-======
+=======
+!! image viewr: apply color palette theme change
+
 !! System Status Monitor:
 System status monitor processes and variables fix + more realistic
 System status monitor shows the real RAM that the website is currently using
@@ -14,9 +16,8 @@ User can end processess
 User can end process like for example status window which will hide it (like the setting but it will not save just for the current session)
 
 
-
 ================
 Version History:
 ================
 V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists, color settings added to more windows and UI improvements
-V4.0.0 -> System status monitor demo
+V4.0.0 -> System status monitor demo, UI improvements and changes

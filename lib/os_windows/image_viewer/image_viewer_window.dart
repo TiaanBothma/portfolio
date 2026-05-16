@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 
@@ -12,27 +12,33 @@ class ImageViewerWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: settings.background.withValues(
+            alpha: settings.windowTransparency.value,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          _buildTitleBar(),
-          Expanded(child: _buildContent()),
-        ],
+        child: Column(
+          children: [
+            _buildTitleBar(settings),
+            Expanded(child: _buildContent()),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
     final viewer = Get.find<ImageViewerController>();
 
@@ -42,10 +48,16 @@ class ImageViewerWindow extends StatelessWidget {
         () => Container(
           height: 32,
           decoration: BoxDecoration(
-            color: AppColors.deepBlue.withValues(alpha: 0.9),
+            color: settings.surface.withValues(alpha: 0.9),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
+            ),
+            border: Border(
+              bottom: BorderSide(
+                color: settings.accentColor.withValues(alpha: 0.3),
+                width: 1,
+              ),
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12),

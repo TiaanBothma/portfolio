@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
-import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/themes/text_style.dart';
 import 'package:portfolio/widgets/minimize_button.dart';
 import 'package:web/web.dart' as web;
@@ -13,31 +13,37 @@ class NotepadWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.92),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: AppColors.blue.withValues(alpha: 0.5),
-          width: 1,
+    final settings = Get.find<SettingsController>();
+
+    return Obx(
+      () => Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: settings.background.withValues(
+            alpha: settings.windowTransparency.value,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: settings.accentColor.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          _buildTitleBar(),
-          _buildMenuBar(context),
-          _buildFindBar(),
-          Expanded(child: _buildContent()),
-          _buildStatusBar(),
-        ],
+        child: Column(
+          children: [
+            _buildTitleBar(settings),
+            _buildMenuBar(context, settings),
+            _buildFindBar(settings),
+            Expanded(child: _buildContent(settings)),
+            _buildStatusBar(settings),
+          ],
+        ),
       ),
     );
   }
 
   // ─── TITLE BAR ──────────────────────────────────────────────
-  Widget _buildTitleBar() {
+  Widget _buildTitleBar(SettingsController settings) {
     final desktop = Get.find<DesktopController>();
     final notepad = Get.find<NotepadController>();
 
@@ -47,10 +53,16 @@ class NotepadWindow extends StatelessWidget {
         () => Container(
           height: 32,
           decoration: BoxDecoration(
-            color: AppColors.deepBlue.withValues(alpha: 0.9),
+            color: settings.surface.withValues(alpha: 0.9),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
+            ),
+            border: Border(
+              bottom: BorderSide(
+                color: settings.accentColor.withValues(alpha: 0.3),
+                width: 1,
+              ),
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -102,19 +114,19 @@ class NotepadWindow extends StatelessWidget {
   }
 
   // ─── MENU BAR ───────────────────────────────────────────────
-  Widget _buildMenuBar(BuildContext context) {
+  Widget _buildMenuBar(BuildContext context, SettingsController settings) {
     return Obx(() {
       final notepad = Get.find<NotepadController>();
 
       return Container(
         height: 28,
-        color: AppColors.deepBlue.withValues(alpha: 0.3),
+        color: settings.surface.withValues(alpha: 0.3),
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Row(
           children: [
-            _menuTrigger(context, 'File', notepad),
-            _menuTrigger(context, 'Edit', notepad),
-            _menuTrigger(context, 'View', notepad),
+            _menuTrigger(context, 'File', notepad, settings),
+            _menuTrigger(context, 'Edit', notepad, settings),
+            _menuTrigger(context, 'View', notepad, settings),
           ],
         ),
       );
@@ -125,6 +137,7 @@ class NotepadWindow extends StatelessWidget {
     BuildContext context,
     String label,
     NotepadController notepad,
+    SettingsController settings,
   ) {
     final isActive = notepad.activeMenu.value == label;
 
@@ -135,14 +148,14 @@ class NotepadWindow extends StatelessWidget {
         } else {
           notepad.closeMenu();
           notepad.toggleMenu(label);
-          _showMenuOverlay(context, label, notepad);
+          _showMenuOverlay(context, label, notepad, settings);
         }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: BoxDecoration(
           color: isActive
-              ? AppColors.blue.withValues(alpha: 0.2)
+              ? settings.accentColor.withValues(alpha: 0.2)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(4),
         ),
@@ -161,10 +174,11 @@ class NotepadWindow extends StatelessWidget {
     BuildContext context,
     String menu,
     NotepadController notepad,
+    SettingsController settings,
   ) {
     OverlayEntry? entry;
 
-    final items = _menuItems(menu, notepad, () => entry?.remove());
+    final items = _menuItems(menu, notepad, settings, () => entry?.remove());
 
     entry = OverlayEntry(
       builder: (_) => Stack(
@@ -189,10 +203,10 @@ class NotepadWindow extends StatelessWidget {
               child: Container(
                 width: 200,
                 decoration: BoxDecoration(
-                  color: AppColors.deepBlue.withValues(alpha: 0.97),
+                  color: settings.surface.withValues(alpha: 0.97),
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
-                    color: AppColors.blue.withValues(alpha: 0.4),
+                    color: settings.accentColor.withValues(alpha: 0.4),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -239,6 +253,7 @@ class NotepadWindow extends StatelessWidget {
   List<Widget> _menuItems(
     String menu,
     NotepadController notepad,
+    SettingsController settings,
     VoidCallback dismiss,
   ) {
     switch (menu) {
@@ -247,24 +262,27 @@ class NotepadWindow extends StatelessWidget {
           _menuItem(
             icon: PhosphorIconsRegular.arrowLeft,
             label: 'Back to Vault',
+            accentColor: settings.accentColor,
             onTap: () {
               dismiss();
               notepad.backToVault();
             },
           ),
-          _menuDivider(),
+          _menuDivider(settings),
           _menuItem(
             icon: PhosphorIconsRegular.printer,
             label: 'Print',
+            accentColor: settings.accentColor,
             onTap: () {
               dismiss();
               web.window.print();
             },
           ),
-          _menuDivider(),
+          _menuDivider(settings),
           _menuItem(
             icon: PhosphorIconsRegular.x,
             label: 'Close',
+            accentColor: settings.accentColor,
             onTap: () {
               dismiss();
               notepad.close();
@@ -277,16 +295,18 @@ class NotepadWindow extends StatelessWidget {
           _menuItem(
             icon: PhosphorIconsRegular.magnifyingGlass,
             label: 'Find',
+            accentColor: settings.accentColor,
 
             onTap: () {
               dismiss();
               notepad.toggleFind();
             },
           ),
-          _menuDivider(),
+          _menuDivider(settings),
           _menuItem(
             icon: PhosphorIconsRegular.copy,
             label: 'Copy All',
+            accentColor: settings.accentColor,
 
             onTap: () {
               dismiss();
@@ -300,20 +320,23 @@ class NotepadWindow extends StatelessWidget {
           _menuItem(
             icon: PhosphorIconsRegular.textAa,
             label: 'Font Size +',
+            accentColor: settings.accentColor,
             onTap: () => notepad.increaseFontSize(),
           ),
           _menuItem(
             icon: PhosphorIconsRegular.textAa,
             label: 'Font Size -',
+            accentColor: settings.accentColor,
             onTap: () => notepad.decreaseFontSize(),
           ),
-          _menuDivider(),
+          _menuDivider(settings),
           Obx(
             () => _menuItem(
               icon: notepad.wordWrap.value
                   ? PhosphorIconsRegular.checkSquare
                   : PhosphorIconsRegular.square,
               label: 'Word Wrap',
+              accentColor: settings.accentColor,
               onTap: () => notepad.toggleWordWrap(),
             ),
           ),
@@ -323,6 +346,7 @@ class NotepadWindow extends StatelessWidget {
                   ? PhosphorIconsRegular.checkSquare
                   : PhosphorIconsRegular.square,
               label: 'Line Numbers',
+              accentColor: settings.accentColor,
               onTap: () => notepad.toggleLineNumbers(),
             ),
           ),
@@ -336,21 +360,27 @@ class NotepadWindow extends StatelessWidget {
   Widget _menuItem({
     required IconData icon,
     required String label,
+    required Color accentColor,
     required VoidCallback onTap,
   }) {
-    return _NotepadMenuItem(icon: icon, label: label, onTap: onTap);
+    return _NotepadMenuItem(
+      icon: icon,
+      label: label,
+      accentColor: accentColor,
+      onTap: onTap,
+    );
   }
 
-  Widget _menuDivider() {
+  Widget _menuDivider(SettingsController settings) {
     return Divider(
       height: 1,
       thickness: 1,
-      color: AppColors.blue.withValues(alpha: 0.2),
+      color: settings.accentColor.withValues(alpha: 0.2),
     );
   }
 
   // ─── FIND BAR ───────────────────────────────────────────────
-  Widget _buildFindBar() {
+  Widget _buildFindBar(SettingsController settings) {
     final notepad = Get.find<NotepadController>();
 
     return Obx(() {
@@ -358,7 +388,7 @@ class NotepadWindow extends StatelessWidget {
 
       return Container(
         height: 36,
-        color: AppColors.deepBlue.withValues(alpha: 0.4),
+        color: settings.surface.withValues(alpha: 0.4),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Row(
           children: [
@@ -408,7 +438,7 @@ class NotepadWindow extends StatelessWidget {
   }
 
   // ─── CONTENT ────────────────────────────────────────────────
-  Widget _buildContent() {
+  Widget _buildContent(SettingsController settings) {
     final notepad = Get.find<NotepadController>();
 
     return Obx(() {
@@ -448,7 +478,9 @@ class NotepadWindow extends StatelessWidget {
             if (notepad.showLineNumbers.value)
               _buildLineNumbers(file.content, notepad),
             // Content
-            Expanded(child: _buildFormattedContent(file.content, notepad)),
+            Expanded(
+              child: _buildFormattedContent(file.content, notepad, settings),
+            ),
           ],
         ),
       );
@@ -477,17 +509,28 @@ class NotepadWindow extends StatelessWidget {
     );
   }
 
-  Widget _buildFormattedContent(String content, NotepadController notepad) {
+  Widget _buildFormattedContent(
+    String content,
+    NotepadController notepad,
+    SettingsController settings,
+  ) {
     final lines = content.split('\n');
     final query = notepad.findQuery.value.toLowerCase();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: lines.map((line) => _buildLine(line, notepad, query)).toList(),
+      children: lines
+          .map((line) => _buildLine(line, notepad, settings, query))
+          .toList(),
     );
   }
 
-  Widget _buildLine(String line, NotepadController notepad, String query) {
+  Widget _buildLine(
+    String line,
+    NotepadController notepad,
+    SettingsController settings,
+    String query,
+  ) {
     final fontSize = notepad.fontSize.value;
     final wordWrap = notepad.wordWrap.value;
 
@@ -513,7 +556,7 @@ class NotepadWindow extends StatelessWidget {
                 TextSpan(
                   text: beforeUrl,
                   style: AppTextStyles.terminal.copyWith(
-                    color: AppColors.blue.withValues(alpha: 0.9),
+                    color: settings.accentColor.withValues(alpha: 0.9),
                     fontSize: fontSize,
                     height: 1.6,
                     fontWeight: FontWeight.bold,
@@ -559,7 +602,7 @@ class NotepadWindow extends StatelessWidget {
         child: Divider(
           height: 1,
           thickness: 1,
-          color: AppColors.blue.withValues(alpha: 0.4),
+          color: settings.accentColor.withValues(alpha: 0.4),
         ),
       );
     }
@@ -597,7 +640,7 @@ class NotepadWindow extends StatelessWidget {
               TextSpan(
                 text: '$key:',
                 style: AppTextStyles.terminal.copyWith(
-                  color: AppColors.blue.withValues(alpha: 0.9),
+                  color: settings.accentColor.withValues(alpha: 0.9),
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
                   height: 1.6,
@@ -678,7 +721,7 @@ class NotepadWindow extends StatelessWidget {
   }
 
   // ─── STATUS BAR ─────────────────────────────────────────────
-  Widget _buildStatusBar() {
+  Widget _buildStatusBar(SettingsController settings) {
     final notepad = Get.find<NotepadController>();
 
     return Obx(() {
@@ -689,7 +732,7 @@ class NotepadWindow extends StatelessWidget {
 
       return Container(
         height: 24,
-        color: AppColors.deepBlue.withValues(alpha: 0.4),
+        color: settings.surface.withValues(alpha: 0.4),
         padding: const EdgeInsets.only(left: 12, right: 24),
         child: Row(
           children: [
@@ -730,11 +773,13 @@ class NotepadWindow extends StatelessWidget {
 class _NotepadMenuItem extends StatefulWidget {
   final IconData icon;
   final String label;
+  final Color accentColor;
   final VoidCallback onTap;
 
   const _NotepadMenuItem({
     required this.icon,
     required this.label,
+    required this.accentColor,
     required this.onTap,
   });
 
@@ -756,7 +801,7 @@ class _NotepadMenuItemState extends State<_NotepadMenuItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           color: _hovered
-              ? AppColors.blue.withValues(alpha: 0.2)
+              ? widget.accentColor.withValues(alpha: 0.2)
               : Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Row(

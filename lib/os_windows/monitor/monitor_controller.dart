@@ -23,16 +23,13 @@ class MonitorController extends GetxController {
   final Random _random = Random();
   Timer? _timer;
 
-  // Live fluctuating values
   final cpuValue = 0.94.obs;
   final memValue = 0.80.obs;
   final netValue = 0.70.obs;
   final dskValue = 0.60.obs;
 
-  // CPU history for graph — last 40 values
   final cpuHistory = <double>[].obs;
 
-  // Process list with live CPU values
   final RxList<Map<String, dynamic>> processes = <Map<String, dynamic>>[].obs;
 
   static const List<ProcessInfo> _baseProcesses = [
@@ -95,7 +92,6 @@ class MonitorController extends GetxController {
   }
 
   void _initHistory() {
-    // Pre-fill history with realistic values
     for (int i = 0; i < 40; i++) {
       cpuHistory.add(0.85 + _random.nextDouble() * 0.12);
     }
