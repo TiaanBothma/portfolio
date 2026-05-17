@@ -9,6 +9,7 @@ import 'package:portfolio/os_windows/monitor/monitor_window.dart';
 import 'package:portfolio/os_windows/notepad/notepad_window.dart';
 import 'package:portfolio/os_windows/settings_app/settings_window.dart';
 import 'package:portfolio/os_windows/terminal/terminal_window.dart';
+import 'package:portfolio/os_windows/timeline/timeline_window.dart';
 import 'package:portfolio/os_windows/vault/vault_window.dart';
 import 'package:portfolio/widgets/drag_resize_window.dart';
 import 'package:portfolio/widgets/dynamic_wallpaper.dart';
@@ -90,6 +91,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 360,
                 minHeight: 320,
                 child: EnvWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'timeline',
+                minWidth: 700,
+                minHeight: 400,
+                child: TimelineWindow(),
               ),
             ],
           ),

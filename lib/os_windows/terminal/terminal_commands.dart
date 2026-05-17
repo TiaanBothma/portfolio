@@ -115,6 +115,9 @@ class TerminalCommands {
       case 'monitor':
         Get.find<DesktopController>().toggleWindow('monitor');
         return [_out('Opening system monitor...'), _out('')];
+      case 'timeline':
+        Get.find<DesktopController>().toggleWindow('timeline');
+        return [_out('Opening Career Timeline...')];
       default:
         return [_err('command not found: $command — type "help" or "man -a"')];
     }
@@ -149,6 +152,7 @@ class TerminalCommands {
     _out('  skills -list         — skills with progress bars'),
     _out('  certifications -list — certifications'),
     _out('  contact              — contact info'),
+    _out('  timeline             — open career timeline window'),
     _out(''),
     _out('  FILE SYSTEM'),
     _out('  ls                   — list current directory'),
@@ -512,9 +516,7 @@ class TerminalCommands {
   ];
 
   static List<TerminalLine> _env() {
-    return EnvData.all
-        .map((env) => _out('${env.key}=${env.value}'))
-        .toList();
+    return EnvData.all.map((env) => _out('${env.key}=${env.value}')).toList();
   }
 
   static List<TerminalLine> _neofetch() {

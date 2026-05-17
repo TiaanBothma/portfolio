@@ -10,6 +10,7 @@ import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
 import 'package:portfolio/os_windows/monitor/monitor_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
+import 'package:portfolio/os_windows/timeline/timeline_controller.dart';
 import 'package:portfolio/os_windows/vault/vault_controller.dart';
 import 'package:portfolio/themes/colors.dart';
 import 'package:portfolio/widgets/device_guard.dart';
@@ -25,6 +26,7 @@ void main() {
   Get.put(NotepadController());
   Get.put(ImageViewerController());
   Get.put(MonitorController());
+  Get.put(TimelineController());
 
   runApp(const MyApp());
 }

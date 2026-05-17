@@ -476,36 +476,53 @@ CHANGELOG:
 
   v3.1.0 - Full Palette System
   ==============================
-  + Full OS color palette change
+  + Full OS color palette change (5 complete themes)
   + Live wallpaper updated with accent color reactivity
   + Live wallpaper visibility and dot size improved
   + Terminal CV commands fixed and improved
-  + CV page redesigned
+  + CV page redesigned with 3D holographic card effect
 
   v3.2.0 - Terminal and Settings Expansion
   ==========================================
-  + New terminal commands
-  + apt-get install command in the terminal
+  + New terminal commands (pwd, apt-get install)
+  + apt-get install opens OS windows with progress bar
   + CV page UI improvements
   + Dynamic palette applied to more windows
   + Settings app section and layout improvements
-  + More Settings in the Settings app
+  + More settings added (date toggle, status card toggle)
 
   v3.3.0 - Desktop and Terminal Customization
   =============================================
-  + Dock position setting
-  + Terminal font size slider
+  + Dock position setting (bottom or left)
+  + Terminal font size slider (10px to 16px)
   + Taskbar icon labels toggle
   + Terminal welcome message customization
+  + Terminal on-open options (message, neofetch, none)
   + Status card visibility toggle
   + Desktop UI improvements and polish
 
   v3.4.0 - Animations and GitHub UI
   ===================================
-  + Window open and close animations
-  + Animation speed setting added
+  + Window open and close animations (scale and fade)
+  + Animation speed setting (fast, normal, slow)
   + GitHub private repositories notice redesigned
   + Minor fixes across the OS
+
+  v3.5.0 - Stability and UI Improvements
+  ========================================
+  + Terminal welcome message now persists correctly after refresh
+  + Animation speed setting now saves and persists across sessions
+  + Dynamic color palette applied to more windows and UI elements
+  + General UI polish and consistency improvements
+
+  v4.0.0 - Major Feature Update
+  ==============================
+  + System Monitor application (top / htop / monitor)
+  + Live resource bars
+  + Case Study window for project details
+  + Career Timeline window for visual timeline from 2022 to present
+  + Environment Variables window and terminal command (env / printenv)
+  + UI improvements and changes across the OS
 
 =========================================
 Built with Flutter Web

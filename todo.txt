@@ -1,14 +1,26 @@
 !! Career Timeline window 
-!! Environment Variables: window + terminal command
 !! SSH home server simulation
 
 =======
 Fixes:
 =======
 !! Environment variable window: copy command does not let the user know that the env is copied, the button doesn't react on pressed
+!! Make extra / super slow settings option in the settings to make it like a gag in the os, it should be usable but it should be really slow animations
+!! Timeline window:
+Dots dont show up ontop of the line that comes out of the straight line / timeline line (if that even is a bug)
+Need a way to show timeslines overlapping because a lot of the stuff overlapping
+Grade 12 Best in IT is a certification (so also remove this we dont put in certifications)
+Where is my highschool in the timeline i want to include highschool in the timeline to show that i worked during highschool
+Hard to read make it easier to read and understand (need a new way to show the dates)
+Make window a bit more interesting right now its just a straight with some few features need to make more interesting
+
+!! Start menu
+redesign its getting a bit too crowded need a new smart and clean way to redesign and put the apps ontop of it and making it look a bit better would look nice
+
 
 ================
 Version History:
 ================
-V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists, color settings added to more windows and UI improvements
-V4.0.0 -> System status monitor demo, UI improvements and changes, system monitor app improved, Case Study window implemented and added, Career Timelien window added + implemented
+V4.0.0 -> System status monitor demo, UI improvements and changes, system monitor app improved
+Case Study window implemented and added
+Environment variable window added + implemented

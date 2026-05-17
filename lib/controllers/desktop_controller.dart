@@ -60,6 +60,10 @@ class DesktopController extends GetxController {
       'env',
       WindowState(offset: const Offset(300, 150), size: const Size(480, 420)),
     );
+    _registerWindow(
+      'timeline',
+      WindowState(offset: const Offset(80, 80), size: const Size(920, 520)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;
