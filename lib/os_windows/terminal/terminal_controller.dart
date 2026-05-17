@@ -279,7 +279,7 @@ class TerminalController extends GetxController {
     // Complete open
     if (firstWord == 'open' && parts.length >= 2) {
       final partial = parts.last.toLowerCase();
-      final openTargets = ['vault', 'browser', 'terminal', 'casestudy'];
+      final openTargets = ['vault', 'browser', 'terminal', 'casestudy', 'env'];
       final matches = openTargets.where((t) => t.startsWith(partial)).toList();
 
       if (matches.length == 1) {
@@ -306,6 +306,8 @@ class TerminalController extends GetxController {
       'contact',
       'casestudy',
       'cases',
+      'env',
+      'printenv',
       'ssh',
       'open',
       'ping',

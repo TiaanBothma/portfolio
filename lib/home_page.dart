@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_window.dart';
 import 'package:portfolio/os_windows/case_study/case_study_window.dart';
+import 'package:portfolio/os_windows/env/env_window.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_window.dart';
 import 'package:portfolio/os_windows/monitor/monitor_window.dart';
 import 'package:portfolio/os_windows/notepad/notepad_window.dart';
@@ -83,6 +84,12 @@ class HomePage extends StatelessWidget {
                 minWidth: 650,
                 minHeight: 440,
                 child: CaseStudyWindow(),
+              ),
+              const DraggableResizableWindow(
+                windowId: 'env',
+                minWidth: 360,
+                minHeight: 320,
+                child: EnvWindow(),
               ),
             ],
           ),

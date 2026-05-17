@@ -1,4 +1,3 @@
-!! Case Study window
 !! Career Timeline window 
 !! Environment Variables: window + terminal command
 !! SSH home server simulation
@@ -6,10 +5,10 @@
 =======
 Fixes:
 =======
-
+!! Environment variable window: copy command does not let the user know that the env is copied, the button doesn't react on pressed
 
 ================
 Version History:
 ================
 V3.5.0 -> Welcome message in terminal fixed, animation speed now saves and persists, color settings added to more windows and UI improvements
-V4.0.0 -> System status monitor demo, UI improvements and changes, system monitor app improved
+V4.0.0 -> System status monitor demo, UI improvements and changes, system monitor app improved, Case Study window implemented and added, Career Timelien window added + implemented

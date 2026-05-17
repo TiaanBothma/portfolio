@@ -1,4 +1,5 @@
 import 'package:portfolio/data/file_system_data.dart';
+import 'package:portfolio/data/env_data.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/case_study/case_study_controller.dart';
@@ -102,6 +103,9 @@ class TerminalCommands {
         return _skills();
       case 'certifications -list':
         return _certifications();
+      case 'env':
+      case 'printenv':
+        return _env();
       case 'neofetch':
         return _neofetch();
       case 'pwd':
@@ -408,10 +412,16 @@ class TerminalCommands {
       case 'cases':
         desktop.toggleWindow('casestudy');
         return [_out('Opening Case Studies...')];
+      case 'env':
+      case 'environment':
+        desktop.toggleWindow('env');
+        return [_out('Opening Environment Variables...')];
       default:
         return [
           _err('open: $app: Application not found'),
-          _out('Available: open vault | open browser | open monitor | open casestudy'),
+          _out(
+            'Available: open vault | open browser | open monitor | open casestudy | open env',
+          ),
         ];
     }
   }
@@ -500,6 +510,12 @@ class TerminalCommands {
     ..._certifications(),
     ..._contact(),
   ];
+
+  static List<TerminalLine> _env() {
+    return EnvData.all
+        .map((env) => _out('${env.key}=${env.value}'))
+        .toList();
+  }
 
   static List<TerminalLine> _neofetch() {
     const logo = [
