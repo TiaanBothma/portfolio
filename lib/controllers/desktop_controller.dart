@@ -52,6 +52,10 @@ class DesktopController extends GetxController {
       'monitor',
       WindowState(offset: const Offset(180, 80), size: const Size(580, 560)),
     );
+    _registerWindow(
+      'casestudy',
+      WindowState(offset: const Offset(120, 80), size: const Size(860, 580)),
+    );
   }
 
   Rx<WindowState> getWindowRx(String id) => _windows[id]!;

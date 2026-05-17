@@ -1,6 +1,7 @@
 import 'package:portfolio/data/file_system_data.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
+import 'package:portfolio/os_windows/case_study/case_study_controller.dart';
 import 'package:portfolio/os_windows/terminal/terminal_controller.dart';
 import 'package:get/get.dart';
 import 'package:web/web.dart' as web;
@@ -41,6 +42,22 @@ class TerminalCommands {
     // ── OPEN ──────────────────────────────────────────────
     if (lower.startsWith('open ')) {
       return _open(lower.substring(5).trim());
+    }
+
+    if (lower == 'casestudy' || lower == 'cases') {
+      Get.find<DesktopController>().toggleWindow('casestudy');
+      return [_out('Opening Case Studies...')];
+    }
+
+    if (lower.startsWith('casestudy --open ') ||
+        lower.startsWith('cases --open ')) {
+      final target = lower
+          .replaceFirst('casestudy --open ', '')
+          .replaceFirst('cases --open ', '')
+          .trim();
+      Get.find<CaseStudyController>().openProject(target);
+      Get.find<DesktopController>().toggleWindow('casestudy');
+      return [_out('Opening case study: $target')];
     }
 
     // ── MAN ───────────────────────────────────────────────
@@ -387,10 +404,14 @@ class TerminalCommands {
       case 'monitor':
         desktop.toggleWindow('monitor');
         return [_out('Opening System Monitor...')];
+      case 'casestudy':
+      case 'cases':
+        desktop.toggleWindow('casestudy');
+        return [_out('Opening Case Studies...')];
       default:
         return [
           _err('open: $app: Application not found'),
-          _out('Available: open vault | open browser'),
+          _out('Available: open vault | open browser | open monitor | open casestudy'),
         ];
     }
   }

@@ -5,6 +5,7 @@ import 'package:portfolio/controllers/settings_controller.dart';
 import 'package:portfolio/controllers/start_menu_controller.dart';
 import 'package:portfolio/controllers/desktop_controller.dart';
 import 'package:portfolio/os_windows/browser/browser_controller.dart';
+import 'package:portfolio/os_windows/case_study/case_study_controller.dart';
 import 'package:portfolio/os_windows/image_viewer/image_viewer_controller.dart';
 import 'package:portfolio/os_windows/monitor/monitor_controller.dart';
 import 'package:portfolio/os_windows/notepad/notepad_controller.dart';
@@ -18,6 +19,7 @@ void main() {
   Get.put(DesktopController());
   Get.put(TerminalController());
   Get.put(BrowserController());
+  Get.put(CaseStudyController());
   Get.put(StartMenuController());
   Get.put(VaultController());
   Get.put(NotepadController());
