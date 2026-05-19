@@ -138,7 +138,10 @@ class EnvWindow extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextSpan(text: '=', style: TextStyle(color: Colors.white)),
+            const TextSpan(
+              text: '=',
+              style: TextStyle(color: Colors.white),
+            ),
             TextSpan(
               text: env.value,
               style: const TextStyle(color: Color(0xFF00FF88)),
@@ -161,6 +164,14 @@ class _CopyEnvButton extends StatefulWidget {
 
 class _CopyEnvButtonState extends State<_CopyEnvButton> {
   bool _hovered = false;
+  bool _copied = false;
+
+  Future<void> _handleCopy() async {
+    await Clipboard.setData(ClipboardData(text: EnvData.asText()));
+    setState(() => _copied = true);
+    await Future.delayed(const Duration(seconds: 2));
+    if (mounted) setState(() => _copied = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,21 +180,53 @@ class _CopyEnvButtonState extends State<_CopyEnvButton> {
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
-        onTap: () => Clipboard.setData(ClipboardData(text: EnvData.asText())),
+        onTap: _copied ? null : _handleCopy,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
-          width: 24,
-          height: 24,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: _hovered
+            color: _copied
+                ? const Color(0xFF00FF88).withValues(alpha: 0.15)
+                : _hovered
                 ? widget.accentColor.withValues(alpha: 0.18)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: _copied
+                  ? const Color(0xFF00FF88).withValues(alpha: 0.4)
+                  : Colors.transparent,
+            ),
           ),
-          child: Icon(
-            PhosphorIconsRegular.copy,
-            color: _hovered ? Colors.white : Colors.white54,
-            size: 13,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                _copied
+                    ? PhosphorIconsRegular.checkCircle
+                    : PhosphorIconsRegular.copy,
+                color: _copied
+                    ? const Color(0xFF00FF88)
+                    : _hovered
+                    ? Colors.white
+                    : Colors.white54,
+                size: 13,
+              ),
+              AnimatedSize(
+                duration: const Duration(milliseconds: 150),
+                child: _copied
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Text(
+                          'Copied',
+                          style: AppTextStyles.label.copyWith(
+                            color: const Color(0xFF00FF88),
+                            fontSize: 11,
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ],
           ),
         ),
       ),
