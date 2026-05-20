@@ -131,9 +131,10 @@ class SettingsWindow extends StatelessWidget {
     final settings = Get.find<SettingsController>();
 
     final options = [
-      {'label': 'Fast', 'value': 0.5},
-      {'label': 'Normal', 'value': 1.0},
-      {'label': 'Slow', 'value': 2.0},
+      {'label': 'Fast', 'value': '0.5'},
+      {'label': 'Normal', 'value': '1.0'},
+      {'label': 'Slow', 'value': '2.0'},
+      {'label': 'Ultra Slow', 'value': '10.0'},
     ];
 
     return _settingsCard(
@@ -143,36 +144,62 @@ class SettingsWindow extends StatelessWidget {
         () => Row(
           children: options.map((o) {
             final isSelected =
-                settings.animationSpeed.value == o['value'] as double;
+                settings.animationSpeed.value == double.parse(o['value']!);
+            final isUltra = o['value'] == '10.0';
+
             return Padding(
               padding: const EdgeInsets.only(right: 12),
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
-                  onTap: () => settings.setAnimationSpeed(o['value'] as double),
+                  onTap: () =>
+                      settings.setAnimationSpeed(double.parse(o['value']!)),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 150),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
+                      horizontal: 16,
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? settings.accentColor.withValues(alpha: 0.2)
+                          ? isUltra
+                                ? Colors.orange.withValues(alpha: 0.2)
+                                : settings.accentColor.withValues(alpha: 0.2)
                           : settings.surface.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
                         color: isSelected
-                            ? settings.accentColor
+                            ? isUltra
+                                  ? Colors.orange
+                                  : settings.accentColor
                             : Colors.white24,
                       ),
                     ),
-                    child: Text(
-                      o['label'] as String,
-                      style: AppTextStyles.label.copyWith(
-                        color: isSelected ? Colors.white : Colors.white54,
-                        fontSize: 12,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          o['label']!,
+                          style: AppTextStyles.label.copyWith(
+                            color: isSelected
+                                ? isUltra
+                                      ? Colors.orange
+                                      : Colors.white
+                                : Colors.white54,
+                            fontSize: 12,
+                          ),
+                        ),
+                        if (isUltra) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            'not recommended',
+                            style: AppTextStyles.label.copyWith(
+                              color: Colors.orange.withValues(alpha: 0.6),
+                              fontSize: 9,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                 ),

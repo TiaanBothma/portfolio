@@ -3,8 +3,6 @@
 =======
 Fixes:
 =======
-!! Make extra / super slow settings option in the settings to make it like a gag in the os, it should be usable but it should be really slow animations
-
 !! Timeline window:
 Dots dont show up ontop of the line that comes out of the straight line / timeline line (if that even is a bug)
 Need a way to show timeslines overlapping because a lot of the stuff overlapping

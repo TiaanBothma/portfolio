@@ -139,8 +139,12 @@ class SettingsController extends GetxController {
     terminalFontSize.value = prefs.getDouble(_keyTerminalFontSize) ?? 13.0;
     showDockLabels.value = prefs.getBool(_keyShowDockLabels) ?? true;
     terminalWelcome.value = prefs.getString(_keyTerminalWelcome) ?? 'message';
-    animationSpeed.value =
-        double.tryParse(prefs.getString(_keyAnimationSpeed) ?? '1.0') ?? 1.0;
+
+    final validSpeeds = ['0.5', '1.0', '2.0', '8.0'];
+    final saved = prefs.getString(_keyAnimationSpeed) ?? '1.0';
+    animationSpeed.value = validSpeeds.contains(saved)
+        ? double.parse(saved)
+        : 1.0;
 
     final savedCursor = prefs.getString(_keyCursorStyle) ?? 'line';
     cursorStyle.value = ['line', 'block'].contains(savedCursor)
