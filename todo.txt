@@ -12,9 +12,6 @@ Hard to read make it easier to read and understand (need a new way to show the d
 Make window a bit more interesting right now its just a straight with some few features need to make more interesting
 General idea is there just redesign is necessary
 
-!! Start menu
-redesign its getting a bit too crowded need a new smart and clean way to redesign and put the apps ontop of it and making it look a bit better would look nice
-
 
 ================
 Version History:
@@ -23,3 +20,4 @@ V4.0.0 -> System status monitor demo, UI improvements and changes, system monito
 Case Study window implemented and added
 Environment variable window added + implemented
 Timeline window added
+Start menu redesign
