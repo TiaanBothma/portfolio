@@ -62,6 +62,17 @@ class TimelineData {
 
   static final List<TimelineEvent> events = [
     TimelineEvent(
+      date: 'Jan 2022',
+      sortDate: DateTime(2022, 1),
+      type: TimelineEventType.education,
+      title: 'High School',
+      company: 'Hoerskool Noordheuwel',
+      summary: 'Started Grade 10 while building toward IT',
+      detail:
+          'Started the high-school stretch where the software journey became serious. This context matters because the first freelance clients, hospitality work, and professional development roles all happened while still completing school.',
+      skills: const ['Information Technology', 'Discipline', 'Time Management'],
+    ),
+    TimelineEvent(
       date: 'Dec 2022',
       sortDate: DateTime(2022, 12),
       type: TimelineEventType.job,
@@ -184,14 +195,14 @@ class TimelineData {
       skills: const ['Flutter', 'Cloud Firestore', 'Firebase Auth', 'UI/UX'],
     ),
     TimelineEvent(
-      date: 'Oct 2025',
-      sortDate: DateTime(2025, 10),
+      date: 'Dec 2025',
+      sortDate: DateTime(2025, 12),
       type: TimelineEventType.education,
-      title: 'Grade 12: Best in IT',
-      company: 'Hoërskool Noordheuwel',
-      summary: '4 Distinctions - 82% average - Top IT student',
+      title: 'Matric Completed',
+      company: 'Hoerskool Noordheuwel',
+      summary: 'Finished school while already working professionally',
       detail:
-          'Completed National Senior Certificate with 4 Distinctions and an 82% average. Awarded Best in Information Technology for Grade 12. Achieved this while simultaneously working as a Software Engineer at 18INK Productions and a Waiter at Bergvallei Estates.',
+          'Completed the National Senior Certificate with 4 distinctions and an 82% average while balancing school, hospitality work, and professional software engineering responsibilities.',
       skills: const ['IT', 'Mathematics', 'Accounting', 'CAT'],
     ),
     TimelineEvent(
@@ -207,3 +218,4 @@ class TimelineData {
     ),
   ];
 }
+

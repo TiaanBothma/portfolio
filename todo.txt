@@ -1,16 +1,9 @@
 !! SSH home server simulation
+!! Snake game
 
 =======
 Fixes:
 =======
-!! Timeline window:
-Dots dont show up ontop of the line that comes out of the straight line / timeline line (if that even is a bug)
-Need a way to show timeslines overlapping because a lot of the stuff overlapping
-Grade 12 Best in IT is a certification (so also remove this we dont put in certifications)
-Where is my highschool in the timeline i want to include highschool in the timeline to show that i worked during highschool
-Hard to read make it easier to read and understand (need a new way to show the dates)
-Make window a bit more interesting right now its just a straight with some few features need to make more interesting
-General idea is there just redesign is necessary
 
 
 ================
@@ -21,3 +14,4 @@ Case Study window implemented and added
 Environment variable window added + implemented
 Timeline window added
 Start menu redesign
+Timeline window
